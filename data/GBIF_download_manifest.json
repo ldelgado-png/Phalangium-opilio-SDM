@@ -1,0 +1,18 @@
+{
+  "taxon": "Phalangium opilio (Linnaeus, 1758)",
+  "doi": "https://doi.org/10.15468/dl.9gn3qv",
+  "download_created": "2026-10-17 18:59:05 (timezone unspecified)",
+  "records": 63407,
+  "publishing_datasets": 506,
+  "reported_compressed_size": "7.8 MB",
+  "compressed_size_bytes_local": 7793071,
+  "source_format": "simple TSV (tab-separated values)",
+  "zip_member": "0032625-260928105237408.csv",
+  "original_archive_filename": "0032625-260928105237408 (1).zip",
+  "sha256_original_archive": "e70a54358230723888c787503e0415db822cbae1bebeea33f977b5dab2613fe8",
+  "filter": {
+    "TaxonKey": [
+      "is one of (Phalangium opilio [Catalogue of Life])"
+    ]
+  }
+}
