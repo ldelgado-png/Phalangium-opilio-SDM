@@ -18,14 +18,53 @@ zip_in <- file.choose()
 zip_in <- normalizePath(zip_in, winslash = "/", mustWork = TRUE)
 zip_members <- tryCatch(
   utils::unzip(zip_in, list = TRUE)$Name,
-  error = function(e) stop("The selected file is not a valid ZIP: ", conditionMessage(e))
+  error = function(e) stop("The selected file is not a valid ZIP: ",
+                           conditionMessage(e))
 )
-gbif_member <- zip_members[grepl("\\.csv$", zip_members, ignore.case = TRUE)]
-if (length(gbif_member) != 1L ||
-    basename(gbif_member) != "0032625-260928105237408.csv") {
-  stop("Please select the ORIGINAL GBIF ZIP containing ",
-       "'0032625-260928105237408.csv'. ",
-       "It is approximately 7.8 MB, not the full project ZIP.")
+
+# Accept both the original 7.8 MB GBIF ZIP and the complete project ZIP.
+# The latter contains a second, nested ZIP under 01_datos/.
+source_member <- "0032625-260928105237408.csv"
+if (length(zip_members) == 1L &&
+    basename(zip_members) == source_member) {
+  gbif_zip <- zip_in
+  message("Recognized the original GBIF ZIP.")
+} else {
+  nested <- zip_members[grepl(
+    "(^|/)01_datos/gbif_descarga_original\\.zip$", zip_members
+  )]
+  if (length(nested) != 1L) {
+    stop(
+      "This ZIP contains neither the original GBIF file nor the complete ",
+      "project archive. Select '0032625-260928105237408 (1).zip' ",
+      "(7.8 MB), or 'Phalangium_opilio_SDM_etapa_02.zip' ",
+      "(the complete project package)."
+    )
+  }
+  message("Recognized the complete project ZIP; extracting only ",
+          "the embedded original GBIF ZIP...")
+  tmp_extract <- tempfile(pattern = "gbif_input_")
+  dir.create(tmp_extract)
+  utils::unzip(zip_in, files = nested, exdir = tmp_extract,
+               junkpaths = TRUE, overwrite = TRUE)
+  gbif_zip <- file.path(tmp_extract, "gbif_descarga_original.zip")
+  if (!file.exists(gbif_zip)) {
+    stop("Could not extract the embedded original GBIF ZIP.")
+  }
+  inner_members <- tryCatch(
+    utils::unzip(gbif_zip, list = TRUE)$Name,
+    error = function(e) stop("The embedded GBIF ZIP is invalid: ",
+                             conditionMessage(e))
+  )
+  if (length(inner_members) != 1L ||
+      basename(inner_members) != source_member) {
+    stop("The embedded ZIP does not contain the expected GBIF TSV.")
+  }
+}
+size_bytes <- file.info(gbif_zip)$size
+if (!is.na(size_bytes) && size_bytes != 7793071) {
+  warning("The ZIP differs in size from the archived GBIF download. ",
+          "Confirm that it corresponds to DOI 10.15468/dl.9gn3qv.")
 }
 
 current_dir <- normalizePath(getwd(), winslash = "/", mustWork = TRUE)
@@ -38,8 +77,8 @@ dir.create(file.path(project_dir, "01_datos"), recursive = TRUE, showWarnings = 
 dir.create(file.path(project_dir, "R"), recursive = TRUE, showWarnings = FALSE)
 
 raw_target <- file.path(project_dir, "01_datos", "gbif_descarga_original.zip")
-if (zip_in != normalizePath(raw_target, winslash = "/", mustWork = FALSE)) {
-  if (!file.copy(zip_in, raw_target, overwrite = TRUE)) {
+if (gbif_zip != normalizePath(raw_target, winslash = "/", mustWork = FALSE)) {
+  if (!file.copy(gbif_zip, raw_target, overwrite = TRUE)) {
     stop("Could not copy the original GBIF ZIP into ", raw_target)
   }
 }
