@@ -118,7 +118,16 @@ test_results <- CoordinateCleaner::clean_coordinates(
 stopifnot(".summary" %in% names(test_results))
 stopifnot(nrow(test_results) == nrow(unique_candidates))
 
-test_columns <- grep("^\\.", names(test_results), value = TRUE)
+# Only CoordinateCleaner-generated test columns are valid quality flags.
+# Source metadata fields also begin with '.' and must NOT be interpreted as tests.
+expected_cc_tests <- c(".val", ".equ", ".zer", ".cap", ".cen",
+                       ".sea", ".gbf", ".inst")
+missing_cc_tests <- setdiff(expected_cc_tests, names(test_results))
+if (length(missing_cc_tests)) {
+  stop("Expected CoordinateCleaner columns missing: ",
+       paste(missing_cc_tests, collapse = ", "))
+}
+test_columns <- c(".summary", expected_cc_tests)
 pair_map <- match(position_key(candidates),
                   position_key(unique_candidates))
 stopifnot(!anyNA(pair_map))
