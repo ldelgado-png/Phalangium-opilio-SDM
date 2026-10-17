@@ -1,0 +1,18 @@
+# GBIF raw source and intermediate occurrence tables
+01_datos/gbif_descarga_original.zip
+01_datos/coordinatecleaner/*.csv
+01_datos/ocurrencias_*.csv
+# Climatic predictors and model products
+clima_WorldClim_2_1/
+04_resultados_modelo/
+*.tif
+*.tiff
+*.rds
+*.RData
+# Local and unpublished material
+*.docx
+*.pdf
+.Rhistory
+.Rproj.user/
+__pycache__/
+.DS_Store
