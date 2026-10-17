@@ -40,7 +40,7 @@ Our initial screening used R 4.6.1 and `CoordinateCleaner` 3.0.1. We applied tax
 
 These statistics describe occurrence screening and raster-cell thinning rather than ecological niche model performance. Coordinate warnings are retained at record level, and we distinguish geographic-quality screening from sampling-effort bias and from biogeographic accessibility.
 
-We identify and preserve each screened record by its original GBIF identifier and download-row provenance. Provenance is reconstructed by matching `gbifID` to the archived source TSV, and source-level coordinate-uncertainty information is revalidated independently of spatial-test flags. Among the **56,524** candidates, **12,898** records have no reported coordinate uncertainty. The reconstruction is implemented in `R/03_restore_GBIF_record_provenance.R`, which updates derived reporting tables without rerunning the CoordinateCleaner tests.
+We identify and preserve each screened record by its original GBIF identifier and download-row provenance. Provenance is reconstructed by matching `gbifID` to the archived source TSV, and source-level coordinate-uncertainty information is revalidated independently of spatial-test flags. Among the **56,524** candidates, **12,898** records have no reported coordinate uncertainty. Matching the 63,407-row source TSV by `gbifID` restored original row identifiers for **18,280** candidate records and corrected **541** missing-uncertainty indicators. The corrected tally of 12,898 records without declared uncertainty is based on source values rather than inherited flags from shared coordinates. The reconstruction is implemented in `R/03_restore_GBIF_record_provenance.R`, which updates derived reporting tables without rerunning the CoordinateCleaner tests.
 
 ## Modelling framework
 
@@ -56,6 +56,7 @@ We treat extrapolation beyond calibration environments explicitly when interpret
 | `R/01_coordinate_quality_GBIF.R` | Reproducible coordinate-quality screening and record-level flags |
 | `R/02_rebuild_coordinate_quality_report.R` | Regenerates screening reports from stored per-record test flags |
 | `R/03_restore_GBIF_record_provenance.R` | Verifies record identifiers against the GBIF source and reconstructs provenance fields and screening tables |
+| `R/04_geographic_quality_audit.R` | Summarizes coordinate-quality alerts by country and compares conservative and urban-review sensitivity scenarios |
 | `data/README.md` | GBIF DOI, download metadata, source archive SHA-256, import specification |
 | `docs/methodological_framework.md` | Calibration, transfer, field evidence, and evaluation principles |
 | `.gitignore` | Excludes raw archives, provisional occurrence tables, raster products and local files |
