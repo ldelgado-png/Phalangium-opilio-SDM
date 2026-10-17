@@ -16,6 +16,18 @@ We use a GBIF taxon-filtered occurrence download for *Phalangium opilio*, compri
 
 The downloaded archive contains a tab-separated file with a `.csv` extension; scripts therefore read it using tab delimiters rather than comma delimiters. The source data are versioned by a cryptographic checksum and the DOI, rather than reproduced as an unattributed occurrence compilation.
 
+## Running the coordinate-quality workflow
+
+We provide a one-command interactive entry point for RStudio on Windows, macOS, and Linux:
+
+```r
+source("https://raw.githubusercontent.com/ldelgado-png/Phalangium-opilio-SDM/main/R/00_start_coordinatecleaner.R")
+```
+
+After starting the script, select the **original GBIF occurrence ZIP** corresponding to [doi:10.15468/dl.9gn3qv](https://doi.org/10.15468/dl.9gn3qv). The entry point creates a local project folder, stores the unchanged source ZIP, installs CoordinateCleaner when required, retrieves the audit script and writes per-record flags and tabulated summaries. It does not automatically exclude records flagged by CoordinateCleaner.
+
+The console prints the output directory containing `06_coordinate_quality_summary.csv` and `03_records_for_review.csv`. These files document coordinate-quality tests and can be used to audit the eventual calibration dataset.
+
 ## Data screening and spatial quality
 
 We use explicit record-level criteria to screen taxonomic assignments, occurrence status, coordinate completeness and plausibility, and reported coordinate uncertainty. Our coordinate-quality workflow is implemented in `CoordinateCleaner` and maintains individual test flags for inspection. Flags denote possible georeferencing problems; they are not interpreted as definitive errors without further examination.
@@ -32,6 +44,7 @@ We treat extrapolation beyond calibration environments explicitly when interpret
 
 | Path | Contents |
 | --- | --- |
+| `R/00_start_coordinatecleaner.R` | Interactive RStudio entry point for the GBIF coordinate audit |
 | `R/01_coordinate_quality_GBIF.R` | Reproducible coordinate-quality screening and record-level flags |
 | `data/README.md` | GBIF DOI, download metadata, source archive SHA-256, import specification |
 | `docs/methodological_framework.md` | Calibration, transfer, field evidence, and evaluation principles |
