@@ -44,6 +44,10 @@ We identify and preserve each screened record by its original GBIF identifier an
 
 ## Modelling framework
 
+We assess candidate calibration regions using descriptive occurrence coverage across alternative Western Eurasian windows before defining a biogeographically defensible accessible area (M). Such geographic bounding boxes are diagnostic rather than model-training boundaries. Our audit also compares screening based on all selected CoordinateCleaner flags against an exploratory scenario retaining records with only urban-proximity alerts for review. These sensitivity scenarios do not automatically establish occurrence validity.
+
+
+
 We structure the ecological niche modelling workflow in R using `terra`, `ENMeval`, and `maxnet`. The environmental framework draws on WorldClim 2.1 climatologies (1970–2000), considering annual mean temperature (BIO1), temperature seasonality (BIO4), annual precipitation (BIO12), and precipitation seasonality (BIO15). Spatially structured evaluation and model-complexity comparisons support parameter selection. Predictions for South America are interpreted as **relative climatic suitability**, not as observed occupancy or a calibrated probability of invasion.
 
 We treat extrapolation beyond calibration environments explicitly when interpreting projections. Landscape disturbance, propagule pressure, dispersal, habitat availability, and biotic interactions may influence establishment independently of climatic suitability.
@@ -57,6 +61,7 @@ We treat extrapolation beyond calibration environments explicitly when interpret
 | `R/02_rebuild_coordinate_quality_report.R` | Regenerates screening reports from stored per-record test flags |
 | `R/03_restore_GBIF_record_provenance.R` | Verifies record identifiers against the GBIF source and reconstructs provenance fields and screening tables |
 | `R/04_geographic_quality_audit.R` | Summarizes coordinate-quality alerts by country and compares conservative and urban-review sensitivity scenarios |
+| `R/05_calibration_region_diagnostics.R` | Contrasts exploratory Western Eurasian calibration windows and the representation of occurrence records |
 | `data/README.md` | GBIF DOI, download metadata, source archive SHA-256, import specification |
 | `docs/methodological_framework.md` | Calibration, transfer, field evidence, and evaluation principles |
 | `.gitignore` | Excludes raw archives, provisional occurrence tables, raster products and local files |
