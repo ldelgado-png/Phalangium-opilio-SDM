@@ -10,9 +10,9 @@ if (!interactive()) {
 }
 
 message("\nPHALANGIUM OPILIO | GBIF coordinate screening\n",
-        "Select the original GBIF download (the ZIP containing ",
-        "0032625-260928105237408.csv).\n",
-        "Do not select the larger project archive.")
+        "Choose either the original GBIF ZIP (7.8 MB) or ",
+        "the complete project ZIP (Phalangium_opilio_SDM_etapa_02.zip).\n",
+        "The correct GBIF download will be identified automatically.")
 
 zip_in <- file.choose()
 zip_in <- normalizePath(zip_in, winslash = "/", mustWork = TRUE)
