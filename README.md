@@ -40,6 +40,8 @@ Our initial screening used R 4.6.1 and `CoordinateCleaner` 3.0.1. We applied tax
 
 These statistics describe occurrence screening and raster-cell thinning rather than ecological niche model performance. Coordinate warnings are retained at record level, and we distinguish geographic-quality screening from sampling-effort bias and from biogeographic accessibility.
 
+We identify and preserve each screened record by its original GBIF identifier and download-row provenance. Provenance is reconstructed by matching `gbifID` to the archived source TSV, and source-level coordinate-uncertainty information is revalidated independently of spatial-test flags. Among the **56,524** candidates, **12,898** records have no reported coordinate uncertainty. The reconstruction is implemented in `R/03_restore_GBIF_record_provenance.R`, which updates derived reporting tables without rerunning the CoordinateCleaner tests.
+
 ## Modelling framework
 
 We structure the ecological niche modelling workflow in R using `terra`, `ENMeval`, and `maxnet`. The environmental framework draws on WorldClim 2.1 climatologies (1970–2000), considering annual mean temperature (BIO1), temperature seasonality (BIO4), annual precipitation (BIO12), and precipitation seasonality (BIO15). Spatially structured evaluation and model-complexity comparisons support parameter selection. Predictions for South America are interpreted as **relative climatic suitability**, not as observed occupancy or a calibrated probability of invasion.
@@ -53,6 +55,7 @@ We treat extrapolation beyond calibration environments explicitly when interpret
 | `R/00_start_coordinatecleaner.R` | Interactive RStudio entry point for the GBIF coordinate audit |
 | `R/01_coordinate_quality_GBIF.R` | Reproducible coordinate-quality screening and record-level flags |
 | `R/02_rebuild_coordinate_quality_report.R` | Regenerates screening reports from stored per-record test flags |
+| `R/03_restore_GBIF_record_provenance.R` | Verifies record identifiers against the GBIF source and reconstructs provenance fields and screening tables |
 | `data/README.md` | GBIF DOI, download metadata, source archive SHA-256, import specification |
 | `docs/methodological_framework.md` | Calibration, transfer, field evidence, and evaluation principles |
 | `.gitignore` | Excludes raw archives, provisional occurrence tables, raster products and local files |
