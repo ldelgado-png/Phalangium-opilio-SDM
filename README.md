@@ -34,6 +34,12 @@ We use explicit record-level criteria to screen taxonomic assignments, occurrenc
 
 We keep records associated with the Venezuelan manuscript separate from the GBIF calibration records and avoid using the same field observations both for model fitting and for purportedly independent evaluation. Occurrence thinning at the environmental-raster resolution is used to address multiple records within the same climatic grid cell; this does not, by itself, correct uneven collection effort.
 
+## Occurrence-quality screening
+
+Our initial screening used R 4.6.1 and `CoordinateCleaner` 3.0.1. We applied taxonomic, occurrence-status, coordinate, and reported-uncertainty criteria to the 63,407 GBIF records. Initial filters excluded **6,883** records, leaving **56,524** candidates encompassing **38,244 distinct coordinate pairs**. CoordinateCleaner flagged **6,121 occurrence records** (3,778 distinct tested positions); **50,403** occurrence records passed the selected coordinate tests. Retaining at most one occurrence per 5-arcminute grid cell produced **14,065** exploratory cells.
+
+These statistics describe occurrence screening and raster-cell thinning rather than ecological niche model performance. Coordinate warnings are retained at record level, and we distinguish geographic-quality screening from sampling-effort bias and from biogeographic accessibility.
+
 ## Modelling framework
 
 We structure the ecological niche modelling workflow in R using `terra`, `ENMeval`, and `maxnet`. The environmental framework draws on WorldClim 2.1 climatologies (1970–2000), considering annual mean temperature (BIO1), temperature seasonality (BIO4), annual precipitation (BIO12), and precipitation seasonality (BIO15). Spatially structured evaluation and model-complexity comparisons support parameter selection. Predictions for South America are interpreted as **relative climatic suitability**, not as observed occupancy or a calibrated probability of invasion.
@@ -46,6 +52,7 @@ We treat extrapolation beyond calibration environments explicitly when interpret
 | --- | --- |
 | `R/00_start_coordinatecleaner.R` | Interactive RStudio entry point for the GBIF coordinate audit |
 | `R/01_coordinate_quality_GBIF.R` | Reproducible coordinate-quality screening and record-level flags |
+| `R/02_rebuild_coordinate_quality_report.R` | Regenerates screening reports from stored per-record test flags |
 | `data/README.md` | GBIF DOI, download metadata, source archive SHA-256, import specification |
 | `docs/methodological_framework.md` | Calibration, transfer, field evidence, and evaluation principles |
 | `.gitignore` | Excludes raw archives, provisional occurrence tables, raster products and local files |
