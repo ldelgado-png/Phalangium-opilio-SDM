@@ -129,6 +129,7 @@ get_gbif_count <- function(key, bounds) {
   query <- list(
     taxonKey = as.character(key),
     hasCoordinate = TRUE,
+    occurrenceStatus = "PRESENT",
     year = "1980,2025",
     geometry = bbox_as_wkt(bounds),
     limit = 0L
@@ -187,7 +188,7 @@ writeLines(c(
   paste("rgbif version:", as.character(utils::packageVersion("rgbif"))),
   paste("Order key:", order_key),
   paste("Focal key:", focal_key),
-  "Search filter: coordinates TRUE; event years 1980-2025.",
+  "Search filter: coordinates TRUE; occurrenceStatus PRESENT; event years 1980-2025.",
   "Geography: rectangle lon -12 to 60, lat 30 to 72; four saved pilot bands.",
   "GBIF geometry serialized as one counter-clockwise WKT POLYGON per domain.",
   "Count method: rgbif::occ_search(limit=0)$meta$count; no records downloaded.",
