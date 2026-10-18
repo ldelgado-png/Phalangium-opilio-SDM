@@ -16,3 +16,9 @@ clima_WorldClim_2_1/
 .Rproj.user/
 __pycache__/
 .DS_Store
+
+# Keep location-sensitive independent field observations and local climate extracts private
+01_datos/coordinatecleaner/
+01_datos/climate_diagnostics/
+01_datos/clima_WorldClim_2_1/
+01_datos/**/00_registros_Venezuela_manuscrito.csv
