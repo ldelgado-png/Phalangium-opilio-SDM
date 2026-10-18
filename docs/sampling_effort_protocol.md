@@ -72,6 +72,12 @@ A replacement manual query is provided in `docs/GBIF_corrected_target_group_pred
 
 The subsequent `R/21_audit_manual_GBIF_target_group.R` first-pass workflow also recognizes the interpreted taxonomic order name when the output schema uses Catalogue of Life rather than the original numeric GBIF Backbone key. This does not waive later taxonomic validation or biogeographical M justification. The Venezuelan field records remain completely withheld.
 
+## GBIF website verification of corrected manual predicates (18 October 2026)
+
+A user-supplied screenshot of GBIF's **Create → Filter** editor confirms that the scoped predicate is correctly rendered as `AND` with **positive scientific name Opiliones** (GBIF Backbone Taxonomy), `NOT` **scientific name Phalangium opilio** (same checklist), `PRESENT`, coordinates available, `YEAR ≥ 1980`, `YEAR ≤ 2025`, and `WITHIN POLYGON((-12 30,60 30,60 72,-12 72,-12 30))`. This validates the **visual web form**, not any subsequently submitted request. The user should proceed through Format → Configure → Terms, select `SIMPLE_CSV`, and retain the new GBIF download key *before transferring the archive*.
+
+The new `R/24_verify_new_GBIF_target_group_download.R` script requires an explicitly supplied, new GBIF key and retrieves **only its public metadata JSON**. It independently tests the actual submitted predicate for positive Opiliones and negated `P. opilio`, matched GBIF Backbone checklist keys, year bounds, occurrence status, coordinate availability and intended polygon. It reports archive completion state, row count, compressed size, format and DOI, and enforces a conservative 1-GiB/one-million-record gate before suggesting further processing. The unsuitable old key is rejected. A `SUCCEEDED` download passing the checks would still require occurrence-level screening and an independently defended accessible area (M). The seven Venezuelan field records are excluded from all preparatory work.
+
 ## Bias-aware modelling comparisons
 
 The methodological comparison is designed to distinguish three concepts:
