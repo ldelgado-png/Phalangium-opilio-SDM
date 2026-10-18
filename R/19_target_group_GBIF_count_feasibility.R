@@ -96,12 +96,32 @@ bands <- data.frame(
   maxlat = c(72, cutoffs, 72),
   stringsAsFactors = FALSE
 )
+# occ_count() (rgbif >= 3.7.6) requires ONE WKT geometry string:
+# a numeric c(west, south, east, north) is interpreted as multiple filters
+# and triggers the error "Multiple values ... are not supported".
+# Vertices must be longitude-latitude pairs in counter-clockwise order.
+bbox_as_wkt <- function(bounds) {
+  b <- as.numeric(bounds)
+  if (length(b) != 4L || any(!is.finite(b)) ||
+      b[1] >= b[3] || b[2] >= b[4] ||
+      b[1] < -180 || b[3] > 180 ||
+      b[2] < -90 || b[4] > 90) {
+    stop("Invalid west, south, east, north bounding box.")
+  }
+  sprintf(
+    paste0("POLYGON((", 
+           "%.9f %.9f,%.9f %.9f,%.9f %.9f,",
+           "%.9f %.9f,%.9f %.9f))"),
+    b[1], b[2], b[3], b[2], b[3], b[4],
+    b[1], b[4], b[1], b[2]
+  )
+}
 get_gbif_count <- function(key, bounds) {
   count <- rgbif::occ_count(
     taxonKey = key,
     hasCoordinate = TRUE,
     year = "1980,2025",
-    geometry = unname(as.numeric(bounds))
+    geometry = bbox_as_wkt(bounds)
   )
   if (length(count) != 1L || !is.finite(count) ||
       count < 0 || count != floor(count)) {
@@ -153,6 +173,7 @@ writeLines(c(
   paste("Focal key:", focal_key),
   "Search filter: coordinates TRUE; event years 1980-2025.",
   "Geography: rectangle lon -12 to 60, lat 30 to 72; four saved pilot bands.",
+  "GBIF geometry serialized as one counter-clockwise WKT POLYGON per domain.",
   "This rectangle is NOT the species' accessible calibration region M.",
   "Counts are live GBIF records, not counts in the 2026 GBIF DOI snapshot.",
   "Counts do not equal independent sampling visits, species richness,",
