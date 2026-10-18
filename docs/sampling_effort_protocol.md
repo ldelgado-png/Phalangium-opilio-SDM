@@ -52,6 +52,10 @@ The `R/19_target_group_GBIF_count_feasibility.R` preflight was completed using l
 
 The exploratory rectangle is **not** an independently justified accessible area (M). Sampling effort can be taxonomically and spatially heterogeneous even after exclusion of the focal species. `R/20_prepare_target_group_download.R` constructs and saves a traceable GBIF download predicate combining Opiliones and explicit exclusion of the focal species under the GBIF Backbone checklist. The default is a **dry run** with no automatic data retrieval. A request for the separately citable occurrence download requires a deliberate local opt-in; credentials should be handled through the user's local environment. The acquired data, if requested, still require independent quality control, verification of comparable collection processes, duplicate and climatic-cell screening, and restriction to a justified M. No modelling or independent Venezuelan evaluation follows automatically from this availability result.
 
+### Verified candidate download predicate (dry run)
+
+The R/20 run completed and printed the expected single Opiliones order predicate (`TAXON_KEY = 907`), explicit focal exclusion (`NOT TAXON_KEY = 5776654`), presence status, nonmissing coordinates, year bounds 1980–2025, and a counter-clockwise WKT polygon spanning the original exploratory rectangle. The saved predicate can support a separately citable GBIF occurrence download after user-authorized local submission, but **no download has yet been requested**. Consequently, 270,072 is only the earlier count-based estimate; we cannot yet report independent target-group events, unique WorldClim cells, a GBIF download DOI, or any background/model comparisons.
+
 ## Bias-aware modelling comparisons
 
 The methodological comparison is designed to distinguish three concepts:
