@@ -49,12 +49,12 @@ if (length(missing_inputs)) {
 out <- file.path(root, "04_resultados_modelo",
                  "pilot_western_palaearctic")
 dir.create(out, recursive = TRUE, showWarnings = FALSE)
+dir.create(file.path(out, "terra_temporary"),
+           recursive = TRUE, showWarnings = FALSE)
 terra::terraOptions(
   tempdir = file.path(out, "terra_temporary"),
   memfrac = 0.6, progress = 1
 )
-dir.create(file.path(out, "terra_temporary"),
-           recursive = TRUE, showWarnings = FALSE)
 
 message("Loading corrected GBIF candidates and WorldClim raster...")
 x <- utils::read.csv(candidate_file, check.names = FALSE,
