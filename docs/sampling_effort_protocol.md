@@ -64,6 +64,14 @@ The reproducible `R/21_audit_manual_GBIF_target_group.R` workflow first download
 
 This initial screen **does not** certify taxonomic or geographic quality, observer-process comparability, a biogeographically justified M, independent spatial validation or final target-group background samples. Further CoordinateCleaner assessment, uncertainty thresholds, dataset- and observer-level bias assessment, and taxonomy verification remain pending. Venezuelan field records are not read.
 
+## Corrected manual download after discovery of missing positive taxonomy filter
+
+The researcher's metadata-only execution of `R/22v3_GBIF_metadata_without_ZIP.R` identified that the large manual GBIF download `0033385-260928105237408` (`10.15468/dl.tn6jvu`) had already completed with **1,249,731,175 records** in **127.392 GiB** of compressed `SIMPLE_CSV`. Although it included the 1980–2025 time window and provisional western Palaearctic WKT, it contained **no positive Opiliones predicate** and also omitted the `PRESENT` and `HAS_COORDINATE` filters. Its only taxonomic predicate was a negative taxon filter using identifier `7WCJP` under the Catalogue of Life eXtended checklist (`7ddf754f-d193-4cc9-b351-99906754a03b`). This download is therefore *not* the nonfocal Opiliones candidate pool and must not be imported into the modelling pipeline. The original count preflight of 270,072 nonfocal records derives from a different, properly scoped live GBIF search query.
+
+A replacement manual query is provided in `docs/GBIF_corrected_target_group_predicate.json` and `R/23_prepare_corrected_manual_GBIF_link.R`. It includes positive Opiliones membership (GBIF Backbone `TAXON_KEY = 907`), explicit `NOT TAXON_KEY = 5776654` for `P. opilio`, coordinates, status PRESENT, years 1980–2025, and the same preliminary geographic rectangle. Both taxon predicates specify the same GBIF Backbone checklist (`d7dddbf4-2cf0-4f39-9b2a-bb099caae36c`) to avoid mismatched taxonomy keys. The user must confirm that the GBIF website actually preserves the positive taxon predicate before submitting a new `SIMPLE_CSV` download and check the proposed occurrence count. No replacement archive or DOI has been obtained.
+
+The subsequent `R/21_audit_manual_GBIF_target_group.R` first-pass workflow also recognizes the interpreted taxonomic order name when the output schema uses Catalogue of Life rather than the original numeric GBIF Backbone key. This does not waive later taxonomic validation or biogeographical M justification. The Venezuelan field records remain completely withheld.
+
 ## Bias-aware modelling comparisons
 
 The methodological comparison is designed to distinguish three concepts:
