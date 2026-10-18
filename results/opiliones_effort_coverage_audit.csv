@@ -1,0 +1,8 @@
+metric,count
+climate_land_cells,292489
+cells_with_positive_Opiliones_effort,24343
+cells_missing_effort_raster_values,0
+pilot_presence_cells,10426
+presence_cells_at_positive_effort,9693
+presence_cells_at_zero_effort,733
+presence_cells_at_missing_effort,0
