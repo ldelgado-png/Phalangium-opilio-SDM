@@ -28,6 +28,14 @@ We formulate the R workflow using `terra`, `ENMeval`, and `maxnet`. Our baseline
 
 We distinguish the biogeographically justified accessible area used for calibration from the South American projection region. Spatially structured evaluation and model-complexity selection provide a basis for comparing candidate configurations. We interpret climatic extrapolation and nonanalog environments explicitly when assessing transfers outside the calibration region.
 
+## First spatial-block model assessment
+
+We completed an initial, exploratory calibration with `ENMeval` 2.0.5 and `maxnet` 0.1.4, using 10,426 screened presence cells and 10,000 background cells from the Western Palaearctic reference rectangle. Candidate settings combined feature classes L, LQ, and LQH with regularization multipliers of 1 or 2 (six configurations), evaluated under four spatial blocks (`lat_lat` orientation). `validation.bg = "partition"` was used to compare withheld presences against each spatial fold's background. We calculated validation AUC, CBI, tenth-percentile omission, AICc, and the number of nonzero model coefficients.
+
+The lowest AICc occurred for LQH/RM 1 (33 coefficients, mean validation AUC 0.661, mean CBI 0.490, omission 0.110), while LQH/RM 2 yielded the highest mean CBI (0.542; 21 coefficients), and LQ/RM 2 had the lowest tenth-percentile omission (0.084; 4 coefficients). For the LQH/RM 1 configuration, validation AUC standard deviation across folds was 0.228 and validation CBI standard deviation was 0.576. We interpret the marked fold-to-fold variation as evidence of spatial instability in model evaluation, without assigning a unique causal explanation before inspecting block-level results. All summary statistics are traceable to the raw `results/initial_spatial_block_ENMeval.csv`.
+
+A South American exploratory suitability raster was produced from an a priori LQ/RM 2 configuration with clamped predictors. We do not use its visual agreement or disagreement with the known Venezuelan sites for model development: the field occurrences are reserved exclusively for independent transfer assessment. Moreover, the pilot rectangle is not a biogeographically defended accessible area (M); the full model strategy will distinguish calibration-area definition and background-sampling decisions from the fitting algorithm.
+
 ## Interpretation and reproducibility
 
 We express model output as **relative climatic suitability**, not calibrated occurrence probability or a forecast of realized geographical spread. We report quantitative model performance and mapped predictions only when they are supported by completed, reproducible analyses with traceable input data and evaluation settings.
