@@ -45,6 +45,24 @@ if (nrow(xy) != 10426L || any(!is.finite(xy))) {
   stop("The original pilot presences do not match the validated input.")
 }
 
+aligned_file <- file.path(
+  out_dir, "opiliones_nobs_5km_mean_on_worldclim_5arcmin.tif"
+)
+source_label <- NA_character_
+if (file.exists(aligned_file)) {
+  message("Resuming from the already-aligned Opiliones effort raster...")
+  effort_mean <- terra::rast(aligned_file)
+  if (terra::nlyr(effort_mean) != 1L ||
+      !identical(names(effort_mean),
+                 "mean_Opiliones_observations_in_source_cells") ||
+      !isTRUE(terra::compareGeom(effort_mean, bio[[1]],
+                                stopOnError = FALSE))) {
+    stop("Cached aligned effort raster does not match the pilot ",
+         "WorldClim grid. Verify the file before rerunning.")
+  }
+  source_label <- paste("Cached aligned raster:",
+                        normalizePath(aligned_file, winslash = "/"))
+} else {
 message("Retrieving El-Gabbas (2026) Opiliones observation effort ",
         "(cumulative 1980-2025, native ~5 km grid).")
 effort_meta <- ecokit::get_sampling_effort(
@@ -92,17 +110,33 @@ names(effort_mean) <- "mean_Opiliones_observations_in_source_cells"
 climate_mask <- !is.na(bio[[1]])
 effort_mean <- terra::mask(effort_mean, climate_mask, maskvalues = 0)
 
-aligned_file <- file.path(
-  out_dir, "opiliones_nobs_5km_mean_on_worldclim_5arcmin.tif"
-)
 terra::writeRaster(
   effort_mean, aligned_file, overwrite = TRUE,
   gdal = "COMPRESS=LZW"
 )
+source_label <- paste("Original downloaded effort raster:",
+                      normalizePath(effort_path, winslash = "/"))
 
 presence_counts <- as.numeric(
-  terra::extract(effort_mean, xy)[, 2]
+  terra::extract(effort_mean, xy)[[names(effort_mean)[1]]]
 )
+}
+# terra::extract with an (x,y) coordinate matrix yields raster-value columns
+# without the implicit ID field returned for vector geometries. The aligned
+# raster is single-layer, so select its only value column by NAME.
+extracted <- terra::extract(effort_mean, xy)
+expected_value_column <- names(effort_mean)[1]
+if (!is.data.frame(extracted) ||
+    !(expected_value_column %in% names(extracted)) ||
+    nrow(extracted) != nrow(presence)) {
+  stop("Unexpected terra::extract output: ",
+       paste(names(extracted), collapse = ", "),
+       " (", nrow(extracted), " rows).")
+}
+presence_counts <- suppressWarnings(
+  as.numeric(extracted[[expected_value_column]])
+)
+
 if (length(presence_counts) != nrow(presence)) {
   stop("Mismatch between presence cells and extracted effort values.")
 }
@@ -138,7 +172,7 @@ utils::write.csv(report, file.path(out_dir,
 writeLines(c(
   "El-Gabbas (2026) global GBIF sampling effort",
   "https://doi.org/10.1111/ddi.70205",
-  paste("Downloaded source:", normalizePath(effort_path, winslash = "/")),
+  source_label,
   paste("ecokit:", as.character(utils::packageVersion("ecokit"))),
   paste("terra:", as.character(utils::packageVersion("terra"))),
   "Taxon: Arachnida -> Opiliones",
@@ -154,7 +188,7 @@ writeLines(c(
 
 cat("\nOPILIONES | SAMPLING-EFFORT COVERAGE AUDIT\n")
 print(report, row.names = FALSE)
-cat("\nDownloaded raster:", normalizePath(effort_path, winslash = "/"))
+cat("\nSource:", source_label)
 cat("\nDiagnostic aligned raster:",
     normalizePath(aligned_file, winslash = "/"), "\n")
 cat("No model fitted, no final background selected, ",
