@@ -56,6 +56,14 @@ The exploratory rectangle is **not** an independently justified accessible area 
 
 The R/20 run completed and printed the expected single Opiliones order predicate (`TAXON_KEY = 907`), explicit focal exclusion (`NOT TAXON_KEY = 5776654`), presence status, nonmissing coordinates, year bounds 1980–2025, and a counter-clockwise WKT polygon spanning the original exploratory rectangle. The saved predicate can support a separately citable GBIF occurrence download after user-authorized local submission, but **no download has yet been requested**. Consequently, 270,072 is only the earlier count-based estimate; we cannot yet report independent target-group events, unique WorldClim cells, a GBIF download DOI, or any background/model comparisons.
 
+## Manual GBIF archive: pending occurrence-level verification
+
+A user-provided public GBIF archive has download key `0033385-260928105237408` and URL `https://api.gbif.org/v1/occurrence/download/request/0033385-260928105237408.zip`. This is a new source distinct from the **count-only** R/19 preflight. Its own predicate, download DOI, taxonomic coverage, and number of records cannot be assumed without inspecting the metadata and archive. The archive could not be fetched in the assistant's execution environment; **no observed record-level results are reported from it at this stage**.
+
+The reproducible `R/21_audit_manual_GBIF_target_group.R` workflow first downloads or reuses this ZIP locally, identifies its tabular occurrence member, requests available public download metadata, and verifies whether the data contain the fields required for a defensible first-pass audit. It independently retains order Opiliones and excludes `P. opilio` (including species-level GBIF taxon keys when supplied), filters by declared occurrence status, years, coordinates, WorldClim predictor support and major GBIF coordinate issues, removes records occupying original calibration-presence cells, and summarizes one provisional record per 5-arcminute cell across the original four folds. Records with coordinate uncertainty above 10 km are **reported but not automatically discarded**. The source ZIP and occurrence-level candidate records remain local and are not uploaded into the public repository.
+
+This initial screen **does not** certify taxonomic or geographic quality, observer-process comparability, a biogeographically justified M, independent spatial validation or final target-group background samples. Further CoordinateCleaner assessment, uncertainty thresholds, dataset- and observer-level bias assessment, and taxonomy verification remain pending. Venezuelan field records are not read.
+
 ## Bias-aware modelling comparisons
 
 The methodological comparison is designed to distinguish three concepts:
