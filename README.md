@@ -193,7 +193,7 @@ We treat extrapolation beyond calibration environments explicitly when interpret
 | `R/19_target_group_GBIF_count_feasibility.R` | Checks current GBIF Opiliones and focal-species record counts in the original exploratory calibration region, without downloading occurrences |
 | `R/20_prepare_target_group_download.R` | Prepares a reviewed, species-excluded Opiliones GBIF occurrence download predicate; submitting requires explicit local opt-in and credentials |
 | `R/21_audit_manual_GBIF_target_group.R` | Inspects the user-provided GBIF ZIP, audits non-focal Opiliones records and calculates provisional climate-cell support without model fitting |
-| `R/22_check_GBIF_download_metadata.R` | Retrieves only public metadata for the manual GBIF download, displaying request filters, ZIP size, record count and DOI without downloading occurrence files |
+| `R/22v3_GBIF_metadata_without_ZIP.R` | Current cache-independent GBIF metadata preflight; prints download filters, format, count, ZIP size and DOI without downloading occurrence files |
 | `results/initial_spatial_block_ENMeval.csv` | Complete observed six-configuration ENMeval summary statistics |
 | `results/background_extent_fold_comparison.csv` | Observed fold-level background composition for three exploratory sampling extents |
 | `results/opiliones_effort_coverage_audit.csv` | Observed cumulative Opiliones sampling-effort coverage of climate and occurrence cells |
