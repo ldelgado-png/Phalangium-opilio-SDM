@@ -176,10 +176,17 @@ get_col <- function(n, default = NA_character_) {
   if (n %in% names(D)) as.character(D[[n]])
   else rep(default, n_original)
 }
-has_order <- if ("orderKey" %in% names(D)) {
-  get_col("orderKey") == "907"
-} else {
-  trimws(get_col("order")) == "Opiliones"
+# GBIF downloads can encode taxonomy in GBIF Backbone (numeric keys)
+# or Catalogue of Life eXtended (alphanumeric keys).  Prefer the
+# INTERPRETED order NAME as an additional check, not solely key 907.
+has_order <- rep(FALSE, n_original)
+if ("orderKey" %in% names(D)) {
+  has_order <- has_order | (get_col("orderKey") == "907")
+}
+if ("order" %in% names(D)) {
+  has_order <- has_order | (
+    tolower(trimws(get_col("order"))) == "opiliones"
+  )
 }
 has_order[is.na(has_order)] <- FALSE
 
