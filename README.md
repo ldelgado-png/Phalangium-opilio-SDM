@@ -139,6 +139,8 @@ The completed `R/16_effort_weighting_feasibility.R` audit provides an independen
 
 We examine these contrasts further by original validation fold and climate variable in `R/18_effort_spatial_climatic_support.R` without refitting a model. The observed R/16 outputs are archived as [pilot-sample support](results/effort_support_pilot_samples.csv), [candidate weight concentration](results/effort_weighting_concentration.csv), and [fold-specific weight mass](results/effort_weight_mass_by_fold.csv) tables.
 
+The completed `R/18_effort_spatial_climatic_support.R` audit found positive Opiliones effort in 92.67–93.44% of pilot presence cells across the original four validation folds but in only 2.91–10.83% of eligible background cells in the exploratory rectangle. Relative to the full candidate background, the effort-positive subset omitted 4.40% of cells outside its BIO1 range, 2.81% outside BIO4, 8.31% outside BIO12, and 0.14% outside BIO15. All 10,426 calibration presences nevertheless fell within those univariate ranges. These observations do not establish multivariate coverage or a defensible accessible area. Tables: [`results/effort_presence_by_fold.csv`](results/effort_presence_by_fold.csv), [`results/effort_spatial_support_by_fold.csv`](results/effort_spatial_support_by_fold.csv), and [`results/effort_climate_range_audit.csv`](results/effort_climate_range_audit.csv).
+
 We structure the scientific record according to **ODMAP: Overview, Data, Model, Assessment, Prediction**. The respective documentation is provided in [`docs/ODMAP_reporting_framework.md`](docs/ODMAP_reporting_framework.md) and [`docs/sampling_effort_protocol.md`](docs/sampling_effort_protocol.md). This documentation distinguishes observed model results from the analytical designs used for model development. The known Venezuelan occurrences remain withheld from calibration, background selection, tuning, and threshold choice.
 
 ## Reproducible suitability figure
@@ -178,12 +180,16 @@ We treat extrapolation beyond calibration environments explicitly when interpret
 | `R/16_effort_weighting_feasibility.R` | Examines observation-effort support, candidate weight concentration and spatial-fold allocation across sensitivity domains |
 | `R/17_south_america_suitability_figure.R` | Reproduces the cartographic South American pilot map directly from the archived model GeoTIFF, exporting PNG/PDF/TIFF at 600 dpi |
 | `R/18_effort_spatial_climatic_support.R` | Audits positive Opiliones sampling-effort support by original spatial fold and climate predictor without refitting |
+| `R/19_target_group_GBIF_count_feasibility.R` | Checks current GBIF Opiliones and focal-species record counts in the original exploratory calibration region, without downloading occurrences |
 | `results/initial_spatial_block_ENMeval.csv` | Complete observed six-configuration ENMeval summary statistics |
 | `results/background_extent_fold_comparison.csv` | Observed fold-level background composition for three exploratory sampling extents |
 | `results/opiliones_effort_coverage_audit.csv` | Observed cumulative Opiliones sampling-effort coverage of climate and occurrence cells |
 | `results/effort_support_pilot_samples.csv` | Observed order-level effort support of pilot presence and uniform background samples |
 | `results/effort_weighting_concentration.csv` | Measured candidate weight concentration under five effort transforms across three exploratory domains |
 | `results/effort_weight_mass_by_fold.csv` | Observed candidate probability mass across the original four spatial blocks |
+| `results/effort_presence_by_fold.csv` | Order-level effort coverage among calibration presences in the four spatial folds |
+| `results/effort_spatial_support_by_fold.csv` | Effort-positive candidate background cells by domain and spatial fold |
+| `results/effort_climate_range_audit.csv` | Univariate climate range differences between full and effort-positive candidate backgrounds |
 | `data/README.md` | GBIF DOI, download metadata, source archive SHA-256, import specification |
 | `docs/methodological_framework.md` | Calibration, transfer, field evidence, and evaluation principles |
 | `docs/sampling_effort_protocol.md` | Taxon-specific GBIF observation-effort proxies and bias-aware background design |
