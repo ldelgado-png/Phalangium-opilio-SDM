@@ -52,7 +52,7 @@ The independent observations do not provide a representative sample of the entir
 
 We quantified occurrence coverage within two exploratory geographical windows. Temperate Europe (12°W–35°E, 35°–72°N) contained **38,347 records** passing the selected CoordinateCleaner tests, representing **10,099 unique 5-arcminute cells**. A broader Western Palaearctic window (12°W–60°E, 30°–72°N) contained **39,493 records** representing **10,427 cells**. The expansion added **1,146 records and 328 cells**. These windows describe the geographical sampling domain and are not treated as established biogeographical accessibility boundaries.
 
-North American occurrences were evaluated separately as a non-native comparison dataset (**9,909 screened records; 3,266 cells**). The contrast between native-range and introduced-range calibration is conceptually distinct from the transfer projection over South America.
+North American occurrences were evaluated separately as a biogeographically distinct comparison dataset (**9,909 screened records; 3,266 cells**). Their origin is considered likely introduced but not conclusively resolved in the literature (Shear, 2016). We do not presume that every North American record represents an unambiguously introduced population. The contrast among Eurasian and North American calibration scenarios is conceptually distinct from transferring predictions to South America.
 
 ### Environmental coverage workflow
 
@@ -63,6 +63,10 @@ To reproduce these environmental coverage diagnostics in RStudio:
 ```r
 source("https://raw.githubusercontent.com/ldelgado-png/Phalangium-opilio-SDM/main/R/06_prepare_climate_and_transfer_diagnostics.R")
 ```
+
+## Eastward Eurasian occurrence coverage
+
+We distinguish the historical Eurasian distribution from the **exploratory Western Palaearctic rectangle** used for the initial climate-range diagnostic. Because available distribution accounts extend to northern and central Asia, a longitude limit of 60°E cannot be assumed to delimit the full native or accessible range. We inspect occurrence density and country composition across additional longitude bands with `R/08_eurasian_eastward_coverage.R`. These descriptive checks precede, but do not themselves constitute, an independently justified accessible-area (M) definition (Barve et al., 2011).
 
 ## Environmental diagnostic results
 
@@ -94,6 +98,7 @@ We treat extrapolation beyond calibration environments explicitly when interpret
 | `R/05_calibration_region_diagnostics.R` | Contrasts exploratory Western Eurasian calibration windows and the representation of occurrence records |
 | `R/06_prepare_climate_and_transfer_diagnostics.R` | Prepares WorldClim variables, masks the South American projection region and audits environmental coverage |
 | `R/07_full_grid_transfer_range_audit.R` | Calculates full-grid univariate environmental range exceedance, direction of BIO1 extrapolation, and sampled-reference VIF |
+| `R/08_eurasian_eastward_coverage.R` | Documents screened occurrences and cell coverage across eastern Eurasian longitude bands |
 | `data/README.md` | GBIF DOI, download metadata, source archive SHA-256, import specification |
 | `docs/methodological_framework.md` | Calibration, transfer, field evidence, and evaluation principles |
 | `.gitignore` | Excludes raw archives, provisional occurrence tables, raster products and local files |
@@ -106,5 +111,7 @@ The original GBIF download, intermediate tables, unpublished field material, and
 - Zizka, A. et al. (2019). CoordinateCleaner: standardized cleaning of occurrence records from biological collection databases. *Methods in Ecology and Evolution*, 10, 744–751. https://doi.org/10.1111/2041-210X.13152
 - Fick, S. E. & Hijmans, R. J. (2017). WorldClim 2: new 1-km spatial resolution climate surfaces for global land areas. *International Journal of Climatology*, 37, 4302–4315. https://doi.org/10.1002/joc.5086
 - Kass, J. M. et al. (2021). ENMeval 2.0: redesigned for customizable and reproducible modeling of species’ niches and distributions. *Methods in Ecology and Evolution*, 12, 1602–1608. https://doi.org/10.1111/2041-210X.13628
+- Barve, N. et al. (2011). The crucial role of the accessible area in ecological niche modeling and species distribution modeling. *Ecological Modelling*, 222, 1810–1819. https://doi.org/10.1016/j.ecolmodel.2011.02.011
+- Shear, W. A. (2016). New Canadian records of *Nemastoma bimaculatum* (Fabricius), and a brief summary of introduced Eurasian harvestmen in North America (Arachnida, Opiliones). *Zootaxa*, 4088, 139–140. https://doi.org/10.11646/zootaxa.4088.1.7
 
 The associated field manuscript is maintained separately as a working document and is not reproduced here.
