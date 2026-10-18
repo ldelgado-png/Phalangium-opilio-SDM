@@ -76,6 +76,20 @@ Across a random sample of South American land cells, **16.15%** fell outside the
 
 These results indicate candidate environmental novelty, not failed prediction, unsuitability, or projected occupancy. The full-grid comparison implemented in `R/07_full_grid_transfer_range_audit.R` distinguishes lower and upper exceedance of reference climatic ranges, rather than relying only on the sampled percentage. The analysis deliberately does not inspect held-out Venezuelan sites when developing the model framework.
 
+## Model fitting and spatial cross-validation
+
+We implement a reproducible first-pass `maxnet` calibration in `R/11_pilot_ENMeval_maxnet.R` using `ENMeval`, the four WorldClim predictors, and one screened occurrence per environmental raster cell. We compare six combinations of linear (L), linear–quadratic (LQ) and linear–quadratic–hinge (LQH) features with regularization multipliers 1 and 2. Spatial block cross-validation uses the `lat_lat` orientation and a 10,000-cell random background sample when enough valid cells are available. Model-complexity diagnostics include cross-validated AUC, 10th-percentile omission, CBI and AICc.
+
+For an initial computational benchmark, background is drawn from the climate-valid pixels in the previously documented Western Palaearctic rectangle. We explicitly distinguish this provisional geographical domain from a biogeographically justified accessible calibration area (M). A fixed-a-priori LQ model with regularization multiplier 2 produces exploratory geographic predictions; this visualization is not selected using independent Venezuelan occurrences, which remain withheld from all fitting and tuning.
+
+Run this stage in RStudio after the coordinate audit and WorldClim scripts:
+
+```r
+source("https://raw.githubusercontent.com/ldelgado-png/Phalangium-opilio-SDM/main/R/11_pilot_ENMeval_maxnet.R")
+```
+
+We retain model-evaluation tables, fitted-model objects, source-presence and background tables, and raster previews locally, with numerical performance statements added only after the analysis has executed successfully.
+
 ## Modelling framework
 
 We assess candidate calibration regions using descriptive occurrence coverage across alternative Western Eurasian windows before defining a biogeographically defensible accessible area (M). Such geographic bounding boxes are diagnostic rather than model-training boundaries. Our audit also compares screening based on all selected CoordinateCleaner flags against an exploratory scenario retaining records with only urban-proximity alerts for review. These sensitivity scenarios do not automatically establish occurrence validity.
@@ -101,6 +115,7 @@ We treat extrapolation beyond calibration environments explicitly when interpret
 | `R/08_eurasian_eastward_coverage.R` | Documents screened occurrences and cell coverage across eastern Eurasian longitude bands |
 | `R/09_eastern_eurasia_climatic_coverage.R` | Compares eastern Eurasian climatic cells against Western Palaearctic environmental ranges |
 | `R/10_eastern_outlier_source_review.R` | Reconstructs the source-record metadata of BIO4 outliers from the archived GBIF download |
+| `R/11_pilot_ENMeval_maxnet.R` | Performs initial maxnet tuning with spatial-block cross-validation and saves baseline suitability raster previews |
 | `data/README.md` | GBIF DOI, download metadata, source archive SHA-256, import specification |
 | `docs/methodological_framework.md` | Calibration, transfer, field evidence, and evaluation principles |
 | `.gitignore` | Excludes raw archives, provisional occurrence tables, raster products and local files |
