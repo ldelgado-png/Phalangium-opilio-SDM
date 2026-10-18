@@ -137,6 +137,10 @@ The observed audit is archived in [`results/opiliones_effort_coverage_audit.csv`
 
 We structure the scientific record according to **ODMAP: Overview, Data, Model, Assessment, Prediction**. The respective documentation is provided in [`docs/ODMAP_reporting_framework.md`](docs/ODMAP_reporting_framework.md) and [`docs/sampling_effort_protocol.md`](docs/sampling_effort_protocol.md). This documentation distinguishes observed model results from the analytical designs used for model development. The known Venezuelan occurrences remain withheld from calibration, background selection, tuning, and threshold choice.
 
+## Reproducible suitability figure
+
+We reproduce the South American geographic visualisation directly from the original model-derived GeoTIFF rather than redrawing or inferring raster values from an illustrative image. The script `R/17_south_america_suitability_figure.R` exports a publication-style PNG, a 600-dpi LZW-compressed TIFF, and a vector PDF while preserving the underlying suitability values and recording source provenance. The displayed map still represents the original **LQ/RM 2 exploratory pilot**, not a selected or independently validated final SDM.
+
 ## Modelling framework
 
 We assess candidate calibration regions using descriptive occurrence coverage across alternative Western Eurasian windows before defining a biogeographically defensible accessible area (M). Such geographic bounding boxes are diagnostic rather than model-training boundaries. Our audit also compares screening based on all selected CoordinateCleaner flags against an exploratory scenario retaining records with only urban-proximity alerts for review. These sensitivity scenarios do not automatically establish occurrence validity.
@@ -168,6 +172,7 @@ We treat extrapolation beyond calibration environments explicitly when interpret
 | `R/14_candidate_background_extent_diagnostics.R` | Tests hypothetical presence-neighbourhood background masks and fold-level environmental coverage without refitting |
 | `R/15_prepare_opiliones_effort.R` | Retrieves and audits the cumulative GBIF Opiliones sampling-effort raster without refitting models |
 | `R/16_effort_weighting_feasibility.R` | Examines observation-effort support, candidate weight concentration and spatial-fold allocation across sensitivity domains |
+| `R/17_south_america_suitability_figure.R` | Reproduces the cartographic South American pilot map directly from the archived model GeoTIFF, exporting PNG/PDF/TIFF at 600 dpi |
 | `results/initial_spatial_block_ENMeval.csv` | Complete observed six-configuration ENMeval summary statistics |
 | `results/background_extent_fold_comparison.csv` | Observed fold-level background composition for three exploratory sampling extents |
 | `results/opiliones_effort_coverage_audit.csv` | Observed cumulative Opiliones sampling-effort coverage of climate and occurrence cells |
