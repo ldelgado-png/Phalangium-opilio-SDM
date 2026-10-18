@@ -1,0 +1,44 @@
+{
+  "type": "and",
+  "predicates": [
+    {
+      "type": "equals",
+      "key": "TAXON_KEY",
+      "value": "907",
+      "checklistKey": "d7dddbf4-2cf0-4f39-9b2a-bb099caae36c"
+    },
+    {
+      "type": "not",
+      "predicate": {
+        "type": "equals",
+        "key": "TAXON_KEY",
+        "value": "5776654",
+        "checklistKey": "d7dddbf4-2cf0-4f39-9b2a-bb099caae36c"
+      }
+    },
+    {
+      "type": "equals",
+      "key": "OCCURRENCE_STATUS",
+      "value": "PRESENT"
+    },
+    {
+      "type": "equals",
+      "key": "HAS_COORDINATE",
+      "value": "true"
+    },
+    {
+      "type": "greaterThanOrEquals",
+      "key": "YEAR",
+      "value": "1980"
+    },
+    {
+      "type": "lessThanOrEquals",
+      "key": "YEAR",
+      "value": "2025"
+    },
+    {
+      "type": "within",
+      "geometry": "POLYGON((-12 30,60 30,60 72,-12 72,-12 30))"
+    }
+  ]
+}
