@@ -61,7 +61,7 @@ jsonlite::write_json(query, predicate_path, auto_unbox = TRUE,
                      pretty = TRUE)
 compact <- jsonlite::toJSON(query, auto_unbox = TRUE, pretty = FALSE)
 url <- paste0(
-  "https://www.gbif.org/occurrence/download/request/about?predicate=",
+  "https://www.gbif.org/occurrence/download/request?predicate=",
   utils::URLencode(as.character(compact), reserved = TRUE)
 )
 writeLines(url, file.path(outdir, "31_corrected_manual_GBIF_link.txt"))
@@ -80,6 +80,7 @@ cat("search-API estimate, NOT a guarantee of the new download count.\n")
 cat("The GBIF interface may use Catalogue of Life instead of the older\n")
 cat("GBIF Backbone; use the actual order NAME and verify the positive\n")
 cat("taxon filter if the browser remaps taxon identifiers.\n")
-cat("\nOpen or paste this GBIF download form URL in a browser:\n", url, "\n")
+cat("\nOpen this link to the CREATE tab of the GBIF download form:\n", url, "\n")
+cat("Note: GBIF may require an active signed-in user session.\n")
 cat("\nSaved local JSON: ", predicate_path, "\n", sep = "")
 cat("NO occurrence download requested. NO field data loaded.\n")
