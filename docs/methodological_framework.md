@@ -36,6 +36,12 @@ The lowest AICc occurred for LQH/RM 1 (33 coefficients, mean validation AUC 0.66
 
 A South American exploratory suitability raster was produced from an a priori LQ/RM 2 configuration with clamped predictors. We do not use its visual agreement or disagreement with the known Venezuelan sites for model development: the field occurrences are reserved exclusively for independent transfer assessment. Moreover, the pilot rectangle is not a biogeographically defended accessible area (M); the full model strategy will distinguish calibration-area definition and background-sampling decisions from the fitting algorithm.
 
+## Diagnostic of fold-specific predictive performance
+
+The initial four spatial partitions each held out approximately 2,606 presence cells (2,607, 2,606, 2,607, 2,606), but the validation background counts were 4,947, 1,309, 828 and 2,916. For LQH/RM 1, withheld AUC across folds was 0.9067, 0.4695, 0.4633 and 0.8025; the corresponding CBI scores were 0.996, 0.061, −0.075 and 0.976. Fold 4 had high tenth-percentile omission (0.3104). All six parameter settings showed AUC below 0.5 in folds 2 and 3. This variation is robust to the limited feature-class and regularization settings we evaluated.
+
+The original `block` algorithm builds spatial groups from presence-derived coordinate cutoffs and allocates background cells spatially; equal numbers of presences therefore do not imply balanced numbers of background cells. As evaluation used `validation.bg = "partition"`, discrimination statistics depend on each fold's own geographic and environmental background. We examine the geography and climate of these partitions with `R/13_diagnose_spatial_cv_domains.R` before interpreting these results as poor transfer, calibration-area mismatch, sampling bias, or overfitting. The exploratory background rectangle remains distinct from a defended accessible calibration area (M).
+
 ## Interpretation and reproducibility
 
 We express model output as **relative climatic suitability**, not calibrated occurrence probability or a forecast of realized geographical spread. We report quantitative model performance and mapped predictions only when they are supported by completed, reproducible analyses with traceable input data and evaluation settings.
