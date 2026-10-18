@@ -1,0 +1,13 @@
+scenario,fold,n_eligible_background_cells,n_positive_effort_cells,n_zero_effort_cells,percent_background_positive_effort,percent_presence_positive_effort,percentage_point_difference
+original_rectangle,1,110931,3232,107699,2.91,92.87,89.96
+original_rectangle,2,35037,2993,32044,8.54,92.9,84.36
+original_rectangle,3,24881,2694,22187,10.83,92.67,81.84
+original_rectangle,4,111214,5731,105483,5.15,93.44,88.29
+within_250km,1,33387,3079,30308,9.22,92.87,83.65
+within_250km,2,24308,2993,21315,12.31,92.9,80.59
+within_250km,3,23315,2693,20622,11.55,92.67,81.12
+within_250km,4,88104,5660,82444,6.42,93.44,87.02
+within_500km,1,54767,3210,51557,5.86,92.87,87.01
+within_500km,2,29854,2993,26861,10.03,92.9,82.87
+within_500km,3,24881,2694,22187,10.83,92.67,81.84
+within_500km,4,103232,5729,97503,5.55,93.44,87.89
