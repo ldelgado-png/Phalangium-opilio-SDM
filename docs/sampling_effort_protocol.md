@@ -46,6 +46,12 @@ Using the original four spatial blocks, we found positive Opiliones effort at **
 
 We use `R/19_target_group_GBIF_count_feasibility.R` only to assess the availability of live GBIF Opiliones records besides the focal species in the exploratory geographical window and its four original spatial blocks. Current GBIF counts differ in provenance and filtering from the El-Gabbas effort raster and do not constitute a verified target-group background. Any actual target-group background will require a separately citable GBIF download, removal of `P. opilio`, taxonomic and coordinate screening, spatial thinning, and a biogeographically justified common M.
 
+## Observed availability of independent target-group records
+
+The `R/19_target_group_GBIF_count_feasibility.R` preflight was completed using live GBIF occurrence counts (1980–2025, coordinates available and occurrence status present) in the historical western Palaearctic exploratory rectangle. Of **313,521 Opiliones records**, **43,449 (13.858%)** were attributed to `Phalangium opilio`; a preliminary **270,072-record difference** concerns other taxa. The four latitudinal folds had **33,565**, **33,720**, **117,055**, and **85,732** non-focal records, respectively. The complete output is archived in `results/gbif_target_group_count_feasibility.csv`. This count difference establishes that the order-level data pool is sizeable, but it does not quantify independent collection effort, valid target-group taxa, vetted background localities, or unique predictor-grid cells.
+
+The exploratory rectangle is **not** an independently justified accessible area (M). Sampling effort can be taxonomically and spatially heterogeneous even after exclusion of the focal species. `R/20_prepare_target_group_download.R` constructs and saves a traceable GBIF download predicate combining Opiliones and explicit exclusion of the focal species under the GBIF Backbone checklist. The default is a **dry run** with no automatic data retrieval. A request for the separately citable occurrence download requires a deliberate local opt-in; credentials should be handled through the user's local environment. The acquired data, if requested, still require independent quality control, verification of comparable collection processes, duplicate and climatic-cell screening, and restriction to a justified M. No modelling or independent Venezuelan evaluation follows automatically from this availability result.
+
 ## Bias-aware modelling comparisons
 
 The methodological comparison is designed to distinguish three concepts:
