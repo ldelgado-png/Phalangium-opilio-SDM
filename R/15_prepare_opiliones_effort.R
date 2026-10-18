@@ -54,13 +54,14 @@ if (file.exists(aligned_file)) {
   message("Resuming from the already-aligned Opiliones effort raster...")
   effort_mean <- terra::rast(aligned_file)
   if (terra::nlyr(effort_mean) != 1L ||
-      !identical(names(effort_mean),
-                 "mean_Opiliones_observations_in_source_cells") ||
       !isTRUE(terra::compareGeom(effort_mean, bio[[1]],
                                 stopOnError = FALSE))) {
     stop("Cached aligned effort raster does not match the pilot ",
          "WorldClim grid. Verify the file before rerunning.")
   }
+  # Band descriptions can be rewritten by GeoTIFF drivers; the one-layer
+  # file name and grid alignment are the reliable resume checks.
+  names(effort_mean) <- "mean_Opiliones_observations_in_source_cells"
   source_label <- paste("Cached aligned raster:",
                         normalizePath(aligned_file, winslash = "/"))
 } else {
