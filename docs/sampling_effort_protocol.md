@@ -34,6 +34,12 @@ These observed figures demonstrate that the GBIF Opiliones record layer provides
 
 We use `R/16_effort_weighting_feasibility.R` to assess candidate weighting concentration, effective candidate-cell support and latitude-fold allocation for the exploratory rectangular, 250-km and 500-km background domains. These alternative domains are geographical sensitivity analyses, not M definitions. No weighted ENMeval models or validated performance improvements are reported on the basis of this preparation stage.
 
+## Observed feasibility of alternative effort weights
+
+The completed `R/16_effort_weighting_feasibility.R` audit provides an independent check of weighting concentration using the original screened presences and climatic background. Only **506 of the 10,000 uniformly sampled pilot background cells (5.06%)** had positive Opiliones effort. In the exploratory rectangular domain, after excluding the 10,426 presence pixels, **14,650 of 282,063 candidate background cells (5.19%)** had positive effort. Under weights proportional to untransformed `n_obs`, Kish's effective candidate-cell count was **631.6 (0.22%)**, with **74.27%** of weight mass carried by the top 1% of cells. The square-root and `log1p(n_obs)` transformations increased effective counts to **8,398.5 (2.98%)** and **7,567.9 (2.68%)**, respectively; `1 + log1p(n_obs)` retained **273,854.1 effective cells (97.09%)** and moved closer to uniform weights. The untransformed weights shifted the four-fold background mass from **39.33, 12.42, 8.82 and 39.43%** (uniform) to **11.86, 13.74, 26.02 and 48.38%**, respectively. These statistics describe candidate probability distributions, not sampled background realizations or model performance. The 250-km and 500-km domains remain geographic sensitivity masks rather than accessible-area definitions.
+
+We use `R/18_effort_spatial_climatic_support.R` to characterize the observational support and univariate climatic representation of cells with positive Opiliones counts across the pre-existing latitude folds and the same three geographic sensitivity domains. Because the underlying GBIF product can contain `P. opilio` observations, the contrast between focal presences and available effort is not an estimate of detection probability or an independent bias-correction assessment.
+
 ## Bias-aware modelling comparisons
 
 The methodological comparison is designed to distinguish three concepts:
