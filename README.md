@@ -109,6 +109,14 @@ For transparent reproducibility, the original 19-column evaluation table is prov
 
 Our first South American visualization uses the **predeclared LQ/RM 2 configuration** with clamping enabled. It illustrates relative climatic suitability only, not occurrence probability, establishment, or an independently validated projection. Notably, the apparent suitability of portions of southern South America may reflect climatic similarity to the calibration domain; interpretation also requires accessible-area, sampling-bias, extrapolation, and dispersal considerations. Venezuelan field observations were not accessed for training, parameter selection, or model evaluation.
 
+### Geographic consistency across validation folds
+
+We examined the 24 fold-specific evaluations obtained from the completed four-block pilot. Every setting attained validation AUC below 0.5 in folds 2 and 3, while folds 1 and 4 performed more favorably. Under LQH/RM 1, the four validation AUC values were **0.907, 0.470, 0.463, and 0.803**, with corresponding CBI values **0.996, 0.061, −0.075, and 0.976**. Tenth-percentile omission ranged from **0.036** in fold 3 to **0.310** in fold 4. The six configurations exhibited a similarly structured pattern rather than a difference restricted to one feature-class setting.
+
+The four held-out folds contained 2,607, 2,606, 2,607, and 2,606 occurrence cells but their validation backgrounds consisted of 4,947, 1,309, 828, and 2,916 cells, respectively. ENMeval's `block` method partitions presence coordinates approximately evenly and assigns background cells according to their geographical positions relative to the occurrence-derived cutoffs. Furthermore, the pilot specified `other.settings$validation.bg = "partition"`, so spatial validation scores compare held-out presences to geographically corresponding held-out background cells, not all background cells. Background extent and predictor distributions may therefore affect the apparent discrimination of individual blocks.
+
+We evaluate the geographical ranges and climatic environments represented by each fold with `R/13_diagnose_spatial_cv_domains.R`, using the saved ENMeval evaluation object and WorldClim rasters. We do not infer that the spatial variation uniquely demonstrates model overfitting; model complexity, unequal environmental coverage, and geographically biased sampling all remain relevant. No Venezuelan field evidence informed any of these comparisons.
+
 ## Modelling framework
 
 We assess candidate calibration regions using descriptive occurrence coverage across alternative Western Eurasian windows before defining a biogeographically defensible accessible area (M). Such geographic bounding boxes are diagnostic rather than model-training boundaries. Our audit also compares screening based on all selected CoordinateCleaner flags against an exploratory scenario retaining records with only urban-proximity alerts for review. These sensitivity scenarios do not automatically establish occurrence validity.
@@ -136,6 +144,7 @@ We treat extrapolation beyond calibration environments explicitly when interpret
 | `R/10_eastern_outlier_source_review.R` | Reconstructs the source-record metadata of BIO4 outliers from the archived GBIF download |
 | `R/11_pilot_ENMeval_maxnet.R` | Performs initial maxnet tuning with spatial-block cross-validation and saves baseline suitability raster previews |
 | `R/12_review_pilot_block_cv.R` | Extracts per-fold validation metrics and calibration/background group counts from the saved evaluation object |
+| `R/13_diagnose_spatial_cv_domains.R` | Compares geographic extent, environmental distributions and reference-climate coverage among validation folds |
 | `results/initial_spatial_block_ENMeval.csv` | Complete observed six-configuration ENMeval summary statistics |
 | `data/README.md` | GBIF DOI, download metadata, source archive SHA-256, import specification |
 | `docs/methodological_framework.md` | Calibration, transfer, field evidence, and evaluation principles |
