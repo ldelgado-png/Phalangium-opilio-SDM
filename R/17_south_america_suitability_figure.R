@@ -82,17 +82,22 @@ figure <- ggplot2::ggplot() +
     name = "Climatic\nsuitability",
     guide = ggplot2::guide_colorbar(
       title.position = "top",
-      barheight = grid::unit(13, "cm"),
-      barwidth = grid::unit(0.65, "cm"),
+      barheight = grid::unit(9.0, "cm"),
+      barwidth = grid::unit(0.55, "cm"),
       frame.colour = "#242424",
       ticks.colour = "#242424"
     )
   ) +
   ggplot2::scale_x_continuous(
-    breaks = seq(-80, -40, by = 10)
+    breaks = seq(-80, -40, by = 10),
+    labels = function(z) paste0(abs(z), "°W")
   ) +
   ggplot2::scale_y_continuous(
-    breaks = seq(-50, 10, by = 10)
+    breaks = seq(-50, 10, by = 10),
+    labels = function(z) {
+      ifelse(z > 0, paste0(z, "°N"),
+             ifelse(z < 0, paste0(abs(z), "°S"), "0°"))
+    }
   ) +
   ggplot2::coord_sf(
     crs = sf::st_crs(4326),
@@ -102,17 +107,19 @@ figure <- ggplot2::ggplot() +
     datum = sf::st_crs(4326)
   ) +
   ggplot2::labs(
-    title = expression(
-      italic("Phalangium opilio") ~ "|" ~
-        "Climatic suitability in South America"
-    ),
-    x = "Longitude (°)",
-    y = "Latitude (°)"
+    title = expression(italic("Phalangium opilio")),
+    subtitle = "Climatic suitability in South America",
+    x = "Longitude",
+    y = "Latitude"
   ) +
-  ggplot2::theme_classic(base_family = "serif", base_size = 12) +
+  ggplot2::theme_classic(base_family = "serif", base_size = 11) +
   ggplot2::theme(
     plot.title = ggplot2::element_text(
-      hjust = 0.5, size = 17, face = "plain",
+      hjust = 0.5, size = 16,
+      margin = ggplot2::margin(b = 2)
+    ),
+    plot.subtitle = ggplot2::element_text(
+      hjust = 0.5, size = 12,
       margin = ggplot2::margin(b = 12)
     ),
     plot.background = ggplot2::element_rect(
@@ -125,14 +132,18 @@ figure <- ggplot2::ggplot() +
       fill = NA, colour = "#333333", linewidth = 0.35
     ),
     axis.line = ggplot2::element_blank(),
-    axis.text = ggplot2::element_text(colour = "#222222", size = 11),
-    axis.title = ggplot2::element_text(size = 13),
-    legend.title = ggplot2::element_text(
-      size = 12, lineheight = 1.0, hjust = 0
+    axis.text = ggplot2::element_text(colour = "#222222", size = 9),
+    axis.text.x = ggplot2::element_text(
+      margin = ggplot2::margin(t = 4)
     ),
-    legend.text = ggplot2::element_text(size = 11),
+    axis.title = ggplot2::element_text(size = 11),
+    legend.title = ggplot2::element_text(
+      size = 10, lineheight = 1.0, hjust = 0.5
+    ),
+    legend.text = ggplot2::element_text(size = 9),
     legend.position = "right",
-    plot.margin = ggplot2::margin(15, 18, 15, 18)
+    legend.box.spacing = grid::unit(0.25, "cm"),
+    plot.margin = ggplot2::margin(10, 12, 10, 12)
   )
 
 # Keep publication-style figure files separate from model outputs.
@@ -144,17 +155,17 @@ pdf_file <- file.path(out, "Phalangium_opilio_South_America.pdf")
 
 ggplot2::ggsave(
   png_file, plot = figure,
-  width = 11, height = 8.25, units = "in",
+  width = 8, height = 10.5, units = "in",
   dpi = 600, bg = "white"
 )
 ggplot2::ggsave(
   tiff_file, plot = figure,
-  width = 11, height = 8.25, units = "in",
+  width = 8, height = 10.5, units = "in",
   dpi = 600, compression = "lzw", bg = "white"
 )
 ggplot2::ggsave(
   pdf_file, plot = figure,
-  width = 11, height = 8.25, units = "in",
+  width = 8, height = 10.5, units = "in",
   device = "pdf", bg = "white"
 )
 writeLines(c(
@@ -163,11 +174,16 @@ writeLines(c(
   "Climatic suitability, cloglog scale with clamping enabled.",
   "Figure: South America, WGS84, Natural Earth country union coastline.",
   "Colour scale: relative suitability from 0 to 1.",
+  "Publication-style portrait layout: 8 x 10.5 inches, exported at 600 dpi.",
   "The appearance is publication-style; the model is NOT final or validated.",
   "Venezuelan independent observations are not loaded or plotted."
 ), file.path(out, "figure_provenance.txt"))
 
+# The narrow RStudio Plots pane can compress the aspect ratio visually.
+# Open the exported PNG/PDF at full size to judge figure proportions.
 print(figure)
+message("If the RStudio preview looks cramped, open the exported PNG ",
+        "at 100% zoom; the saved figure uses a fixed portrait page.")
 cat("\nMap outputs (original raster values preserved):\n")
 cat(normalizePath(png_file, winslash = "/"), "\n")
 cat(normalizePath(tiff_file, winslash = "/"), "\n")
