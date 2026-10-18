@@ -3,6 +3,9 @@
 # Run from the project root in RStudio:
 # source("https://raw.githubusercontent.com/ldelgado-png/Phalangium-opilio-SDM/main/R/19_target_group_GBIF_count_feasibility.R")
 #
+# Revision v3 replaces the occ_count() wrapper with an equivalent
+# zero-record occ_search(limit=0) metadata query to avoid the repeated
+# client-side multi-value validation exception.
 # This preflight retrieves only LIVE GBIF occurrence COUNTS (not records)
 # for Opiliones and Phalangium opilio using matching search filters.
 # It does not produce a target-group background or define an accessible M.
@@ -12,6 +15,7 @@
 # occurrence searches, for subsequent research-grade target-group data.
 # https://docs.ropensci.org/rgbif/articles/getting_occurrence_data.html
 
+message("[R19 v3] GBIF target-group count feasibility using occ_search(limit=0)")
 for (pkg in c("rgbif", "ENMeval")) {
   if (!requireNamespace(pkg, quietly = TRUE)) {
     stop("Install missing package: install.packages('", pkg, "')")
@@ -117,12 +121,24 @@ bbox_as_wkt <- function(bounds) {
   )
 }
 get_gbif_count <- function(key, bounds) {
-  count <- rgbif::occ_count(
-    taxonKey = key,
+  # Get only occurrence-count metadata; no records are downloaded.
+  # The occ_count() wrapper rejects multi-valued arguments before sending
+  # a request, and an identical runtime error persisted on this workflow
+  # despite passing only one WKT string. Calling the documented equivalent
+  # occ_search(limit = 0)$meta$count avoids that wrapper-level check.
+  query <- list(
+    taxonKey = as.character(key),
     hasCoordinate = TRUE,
     year = "1980,2025",
-    geometry = bbox_as_wkt(bounds)
+    geometry = bbox_as_wkt(bounds),
+    limit = 0L
   )
+  lengths <- vapply(query, length, integer(1))
+  if (any(lengths != 1L)) {
+    stop("GBIF count query must have scalar arguments: ",
+         paste(names(lengths), lengths, collapse = "; "))
+  }
+  count <- do.call(rgbif::occ_search, query)$meta$count
   if (length(count) != 1L || !is.finite(count) ||
       count < 0 || count != floor(count)) {
     stop("Unexpected live GBIF count for taxon key ", key)
@@ -174,6 +190,7 @@ writeLines(c(
   "Search filter: coordinates TRUE; event years 1980-2025.",
   "Geography: rectangle lon -12 to 60, lat 30 to 72; four saved pilot bands.",
   "GBIF geometry serialized as one counter-clockwise WKT POLYGON per domain.",
+  "Count method: rgbif::occ_search(limit=0)$meta$count; no records downloaded.",
   "This rectangle is NOT the species' accessible calibration region M.",
   "Counts are live GBIF records, not counts in the 2026 GBIF DOI snapshot.",
   "Counts do not equal independent sampling visits, species richness,",
