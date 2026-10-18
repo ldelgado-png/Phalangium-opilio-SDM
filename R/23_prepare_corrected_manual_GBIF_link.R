@@ -32,8 +32,26 @@ query <- list(
   )
 )
 
+# The request URL is independent of the working directory, but
+# reproducibility artifacts should be stored under the project root.
+# Warn rather than abort because the GBIF browser link itself is valid.
+project_root <- normalizePath(getwd(), winslash = "/", mustWork = TRUE)
+project_marker <- file.path(
+  project_root, "04_resultados_modelo",
+  "pilot_western_palaearctic",
+  "07_ENMeval_pilot_evaluation.rds"
+)
+if (!file.exists(project_marker)) {
+  warning(
+    "[R23] Working directory is not the Phalangium_opilio_SDM project root. ",
+    "The JSON will be saved under getwd()/01_datos. This does not affect ",
+    "the GBIF browser URL. Use RStudio's Set As Working Directory ",
+    "in the project folder before later modelling steps.",
+    call. = FALSE
+  )
+}
 outdir <- file.path(
-  normalizePath(getwd(), winslash = "/", mustWork = TRUE),
+  project_root,
   "01_datos", "sampling_effort", "target_group_preparation"
 )
 dir.create(outdir, recursive = TRUE, showWarnings = FALSE)
