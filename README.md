@@ -90,6 +90,25 @@ source("https://raw.githubusercontent.com/ldelgado-png/Phalangium-opilio-SDM/mai
 
 We retain model-evaluation tables, fitted-model objects, source-presence and background tables, and raster previews locally, with numerical performance statements added only after the analysis has executed successfully.
 
+## Initial spatial-block model evaluation
+
+Our first completed `ENMeval` 2.0.5 / `maxnet` 0.1.4 analysis evaluated **six feature-class/regularization combinations** using **10,426** climate-cell occurrences and **10,000** background cells from the exploratory Western Palaearctic domain. We used four spatial blocks (`lat_lat` orientation) and evaluated validation AUC and continuous Boyce index (CBI), tenth-percentile omission, and AICc. The completed analysis took approximately 82 minutes.
+
+| Configuration | Validation AUC (mean ± SD) | Validation CBI (mean ± SD) | Tenth-percentile omission | Delta AICc | Coefficients |
+| :-- | --: | --: | --: | --: | --: |
+| L, RM 1 | 0.622 ± 0.180 | 0.172 ± 0.813 | 0.090 | 5,213.6 | 4 |
+| LQ, RM 1 | 0.652 ± 0.221 | 0.395 ± 0.672 | 0.088 | 2,731.9 | 7 |
+| LQH, RM 1 | 0.661 ± 0.228 | 0.490 ± 0.576 | 0.110 | 0.0 | 33 |
+| L, RM 2 | 0.622 ± 0.180 | 0.198 ± 0.796 | 0.092 | 5,306.4 | 4 |
+| LQ, RM 2 | 0.648 ± 0.215 | 0.419 ± 0.637 | 0.084 | 3,856.4 | 4 |
+| LQH, RM 2 | 0.654 ± 0.222 | 0.542 ± 0.544 | 0.103 | 571.9 | 21 |
+
+The lowest AICc and highest mean validation AUC occurred for LQH/RM 1, whereas LQH/RM 2 attained the highest mean validation CBI and LQ/RM 2 the lowest tenth-percentile omission. We therefore distinguish information-criterion support from spatial predictive performance rather than treating one metric as a definitive ranking. Mean training–validation AUC differences ranged from 0.245 to 0.269, and substantial variation among spatial folds warrants fold-level interpretation.
+
+For transparent reproducibility, the original 19-column evaluation table is provided at [`results/initial_spatial_block_ENMeval.csv`](results/initial_spatial_block_ENMeval.csv); `R/12_review_pilot_block_cv.R` extracts individual-fold scores and partition sample sizes directly from the locally preserved ENMeval evaluation object, without refitting.
+
+Our first South American visualization uses the **predeclared LQ/RM 2 configuration** with clamping enabled. It illustrates relative climatic suitability only, not occurrence probability, establishment, or an independently validated projection. Notably, the apparent suitability of portions of southern South America may reflect climatic similarity to the calibration domain; interpretation also requires accessible-area, sampling-bias, extrapolation, and dispersal considerations. Venezuelan field observations were not accessed for training, parameter selection, or model evaluation.
+
 ## Modelling framework
 
 We assess candidate calibration regions using descriptive occurrence coverage across alternative Western Eurasian windows before defining a biogeographically defensible accessible area (M). Such geographic bounding boxes are diagnostic rather than model-training boundaries. Our audit also compares screening based on all selected CoordinateCleaner flags against an exploratory scenario retaining records with only urban-proximity alerts for review. These sensitivity scenarios do not automatically establish occurrence validity.
@@ -116,6 +135,8 @@ We treat extrapolation beyond calibration environments explicitly when interpret
 | `R/09_eastern_eurasia_climatic_coverage.R` | Compares eastern Eurasian climatic cells against Western Palaearctic environmental ranges |
 | `R/10_eastern_outlier_source_review.R` | Reconstructs the source-record metadata of BIO4 outliers from the archived GBIF download |
 | `R/11_pilot_ENMeval_maxnet.R` | Performs initial maxnet tuning with spatial-block cross-validation and saves baseline suitability raster previews |
+| `R/12_review_pilot_block_cv.R` | Extracts per-fold validation metrics and calibration/background group counts from the saved evaluation object |
+| `results/initial_spatial_block_ENMeval.csv` | Complete observed six-configuration ENMeval summary statistics |
 | `data/README.md` | GBIF DOI, download metadata, source archive SHA-256, import specification |
 | `docs/methodological_framework.md` | Calibration, transfer, field evidence, and evaluation principles |
 | `.gitignore` | Excludes raw archives, provisional occurrence tables, raster products and local files |
