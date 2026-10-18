@@ -211,26 +211,94 @@ write.csv(
 )
 pct_any <- 100 * mean(rowSums(outside) > 0)
 
-# Optional independent field observations, which must never be silently
-# merged into the model-fitting calibration occurrences.
+# The Venezuelan field observations are STRICTLY HELD OUT of calibration.
+# They are used here to extract baseline environmental conditions only.
+# No field locality contributes to tuning, variable selection, or training.
 field_path <- file.path(data_dir, "coordinatecleaner",
                         "00_registros_Venezuela_manuscrito.csv")
 if (file.exists(field_path)) {
-  field <- utils::read.csv(field_path, stringsAsFactors = FALSE)
-  if (all(c("decimalLongitude", "decimalLatitude") %in% names(field))) {
-    extracted <- terra::extract(
-      sa_clim,
-      cbind(as.numeric(field$decimalLongitude),
-            as.numeric(field$decimalLatitude))
-    )
-    if (all(names(bio) %in% names(extracted))) {
-      field <- cbind(field, extracted[, names(bio), drop = FALSE])
-      write.csv(
-        field, file.path(output_dir, "22_venezuelan_field_climate_private.csv"),
-        row.names = FALSE, na = ""
-      )
-    }
+  field <- utils::read.csv(
+    field_path, stringsAsFactors = FALSE, check.names = FALSE
+  )
+  mandatory <- c("voucher", "eventDate", "locality", "status",
+                 "decimalLongitude", "decimalLatitude")
+  if (!all(mandatory %in% names(field))) {
+    stop("The independent Venezuelan CSV is missing: ",
+         paste(setdiff(mandatory, names(field)), collapse = ", "))
   }
+  field_xy <- cbind(
+    suppressWarnings(as.numeric(field$decimalLongitude)),
+    suppressWarnings(as.numeric(field$decimalLatitude))
+  )
+  if (any(!is.finite(field_xy))) {
+    stop("Non-finite Venezuelan field coordinates.")
+  }
+  field_values <- terra::extract(sa_clim, field_xy)
+  if (!all(names(bio) %in% names(field_values))) {
+    stop("Failed to extract all four predictors at Venezuelan field sites.")
+  }
+  field_clim <- field_values[, names(bio), drop = FALSE]
+  field$climate_raster_cell <- terra::cellFromXY(sa_clim[[1]], field_xy)
+  field$assessment_role <- ifelse(
+    !is.na(field$status) & field$status == "confirmed",
+    "held_out_confirmed",
+    "pending_documentation"
+  )
+  field$climate_values_available <- stats::complete.cases(field_clim)
+  field$within_western_window_variable_ranges <- NA
+  if (any(field$climate_values_available)) {
+    valid <- which(field$climate_values_available)
+    fm <- as.matrix(field_clim[valid, , drop = FALSE])
+    within <- sweep(fm, 2, as.numeric(minimum), ">=") &
+              sweep(fm, 2, as.numeric(maximum), "<=")
+    field$within_western_window_variable_ranges[valid] <-
+      rowSums(within) == length(names(bio))
+  }
+  field <- cbind(field, field_clim)
+  private_file <- file.path(
+    output_dir, "22_venezuelan_field_climate_private.csv"
+  )
+  utils::write.csv(field, private_file, row.names = FALSE, na = "")
+
+  confirmed <- field[
+    field$assessment_role == "held_out_confirmed" &
+    field$climate_values_available &
+    !is.na(field$climate_raster_cell), , drop = FALSE
+  ]
+  # Events in the same cell are not spatially independent test cases.
+  cells <- sort(unique(confirmed$climate_raster_cell))
+  summary <- data.frame(
+    climate_raster_cell = cells,
+    n_confirmed_events = vapply(
+      cells, function(i) sum(confirmed$climate_raster_cell == i),
+      integer(1)
+    ),
+    within_western_window_variable_ranges = vapply(
+      cells,
+      function(i) all(confirmed$within_western_window_variable_ranges[
+        confirmed$climate_raster_cell == i
+      ]),
+      logical(1)
+    )
+  )
+  utils::write.csv(
+    summary,
+    file.path(output_dir,
+              "24_venezuelan_held_out_cells_private.csv"),
+    row.names = FALSE
+  )
+  message("\nIndependent Venezuelan observations retained: ",
+          nrow(field), " events; confirmed events: ",
+          sum(field$assessment_role == "held_out_confirmed"),
+          "; distinct confirmed climatic cells: ", nrow(summary), ".")
+  message("Field events were NOT included in calibration inputs.")
+  if (any(!field$climate_values_available)) {
+    warning("Some Venezuelan localities lack extracted climate values; ",
+            "inspect the private field CSV and mask.")
+  }
+} else {
+  message("No Venezuelan field CSV was found. This does not affect ",
+          "the calibration-region diagnostics.")
 }
 
 metadata <- c(
