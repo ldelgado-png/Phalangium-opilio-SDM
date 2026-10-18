@@ -139,7 +139,7 @@ We structure the scientific record according to **ODMAP: Overview, Data, Model, 
 
 ## Reproducible suitability figure
 
-We reproduce the South American geographic visualisation directly from the original model-derived GeoTIFF rather than redrawing or inferring raster values from an illustrative image. The script `R/17_south_america_suitability_figure.R` exports a publication-style PNG, a 600-dpi LZW-compressed TIFF, and a vector PDF while preserving the underlying suitability values and recording source provenance. The displayed map still represents the original **LQ/RM 2 exploratory pilot**, not a selected or independently validated final SDM.
+We reproduce the South American geographic visualisation directly from the original model-derived GeoTIFF rather than redrawing or inferring raster values from an illustrative image. The script `R/17_south_america_suitability_figure.R` exports a portrait-layout (8 × 10.5 inches) publication-style PNG, a 600-dpi LZW-compressed TIFF, and a PDF while preserving the underlying suitability values and recording source provenance. The split title and compact color bar improve readability; exported files should be inspected at their native dimensions rather than judged from a small RStudio preview. The displayed map still represents the original **LQ/RM 2 exploratory pilot**, not a selected or independently validated final SDM.
 
 ## Modelling framework
 
