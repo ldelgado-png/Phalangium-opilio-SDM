@@ -64,6 +64,14 @@ To reproduce these environmental coverage diagnostics in RStudio:
 source("https://raw.githubusercontent.com/ldelgado-png/Phalangium-opilio-SDM/main/R/06_prepare_climate_and_transfer_diagnostics.R")
 ```
 
+## Environmental diagnostic results
+
+WorldClim v2.1 provided BIO1, BIO4, BIO12 and BIO15 at 5-arcminute resolution. Raster-aligned screening retained **10,098** occupied climatic cells in the temperate European diagnostic window and **10,426** in the wider Western Palaearctic diagnostic window. We retain these windows as descriptive geographic references rather than established accessible-area boundaries.
+
+Across a random sample of South American land cells, **16.15%** fell outside the minimum–maximum range of at least one predictor in the exploratory Western Palaearctic reference window. Univariate exceedance was greatest for BIO1 (13.13% of the sample), followed by BIO12 (1.86%) and BIO15 (1.34%); BIO4 showed 0.00% in this sampled comparison. Pairwise Pearson correlations between the four predictors had maximum absolute magnitude |r| = 0.642 (BIO1–BIO15). Variance inflation factors derived from the sampled reference correlation matrix ranged from approximately 1.77 to 2.59.
+
+These results indicate candidate environmental novelty, not failed prediction, unsuitability, or projected occupancy. The full-grid comparison implemented in `R/07_full_grid_transfer_range_audit.R` distinguishes lower and upper exceedance of reference climatic ranges, rather than relying only on the sampled percentage. The analysis deliberately does not inspect held-out Venezuelan sites when developing the model framework.
+
 ## Modelling framework
 
 We assess candidate calibration regions using descriptive occurrence coverage across alternative Western Eurasian windows before defining a biogeographically defensible accessible area (M). Such geographic bounding boxes are diagnostic rather than model-training boundaries. Our audit also compares screening based on all selected CoordinateCleaner flags against an exploratory scenario retaining records with only urban-proximity alerts for review. These sensitivity scenarios do not automatically establish occurrence validity.
@@ -85,6 +93,7 @@ We treat extrapolation beyond calibration environments explicitly when interpret
 | `R/04_geographic_quality_audit.R` | Summarizes coordinate-quality alerts by country and compares conservative and urban-review sensitivity scenarios |
 | `R/05_calibration_region_diagnostics.R` | Contrasts exploratory Western Eurasian calibration windows and the representation of occurrence records |
 | `R/06_prepare_climate_and_transfer_diagnostics.R` | Prepares WorldClim variables, masks the South American projection region and audits environmental coverage |
+| `R/07_full_grid_transfer_range_audit.R` | Calculates full-grid univariate environmental range exceedance, direction of BIO1 extrapolation, and sampled-reference VIF |
 | `data/README.md` | GBIF DOI, download metadata, source archive SHA-256, import specification |
 | `docs/methodological_framework.md` | Calibration, transfer, field evidence, and evaluation principles |
 | `.gitignore` | Excludes raw archives, provisional occurrence tables, raster products and local files |
