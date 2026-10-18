@@ -16,6 +16,12 @@ We screen species assignments, occurrence status, coordinate plausibility, repor
 
 We treat cell-level spatial thinning and sampling-bias correction as distinct operations. In particular, retaining one occurrence per environmental cell does not resolve uneven sampling effort across geographical space.
 
+## Eastward environmental coverage
+
+We contrasted the climatic characteristics of records east of 60°E with the minimum–maximum ranges calculated over the complete environmental raster of the exploratory Western Palaearctic window. We retained 95 screened occurrences in 68 unique 5-arcminute climatic cells (Russia: 60 cells; Japan: 6; Kazakhstan: 2). Three Russian cells (4.41% of eastern cells) exceeded the upper range of BIO4; none exceeded the univariate ranges of BIO1, BIO12, or BIO15. The Western Palaearctic raster-wide BIO4 maximum was 1,488.34 and the eastern-record maximum was 1,875.19 (native WorldClim scale). 
+
+We interpret these univariate comparisons as descriptive range diagnostics rather than evidence of environmental equivalence. The absence of single-variable range exceedance does not rule out novel combinations of predictors. We maintain separate analytical treatment of eastern Eurasian records until geographic provenance, historical range evidence, and the accessible calibration area are evaluated. Field observations from Venezuela are excluded from calibration, tuning, and scenario selection.
+
 ## Climate variables and model evaluation
 
 We formulate the R workflow using `terra`, `ENMeval`, and `maxnet`. Our baseline climatic predictors are WorldClim 2.1 BIO1 (annual mean temperature), BIO4 (temperature seasonality), BIO12 (annual precipitation), and BIO15 (precipitation seasonality), at 5-arcminute resolution.
