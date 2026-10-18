@@ -40,6 +40,12 @@ The completed `R/16_effort_weighting_feasibility.R` audit provides an independen
 
 We use `R/18_effort_spatial_climatic_support.R` to characterize the observational support and univariate climatic representation of cells with positive Opiliones counts across the pre-existing latitude folds and the same three geographic sensitivity domains. Because the underlying GBIF product can contain `P. opilio` observations, the contrast between focal presences and available effort is not an estimate of detection probability or an independent bias-correction assessment.
 
+## Observed spatial and environmental support
+
+Using the original four spatial blocks, we found positive Opiliones effort at **92.87%, 92.90%, 92.67%, and 93.44%** of pilot presences, respectively, but only **2.91%, 8.54%, 10.83%, and 5.15%** of eligible candidate background cells in the initial exploratory rectangle (`R/18_effort_spatial_climatic_support.R`). Among all candidate background cells, **4.40%** fell outside the BIO1 range of the effort-positive subset, **2.81%** outside BIO4, **8.31%** outside BIO12, and **0.14%** outside BIO15. All 10,426 calibration presences remained within those separate univariate ranges. These are descriptive coverage diagnostics; they cannot establish multivariate environmental representativeness or whether a bias correction improves model transfer.
+
+We use `R/19_target_group_GBIF_count_feasibility.R` only to assess the availability of live GBIF Opiliones records besides the focal species in the exploratory geographical window and its four original spatial blocks. Current GBIF counts differ in provenance and filtering from the El-Gabbas effort raster and do not constitute a verified target-group background. Any actual target-group background will require a separately citable GBIF download, removal of `P. opilio`, taxonomic and coordinate screening, spatial thinning, and a biogeographically justified common M.
+
 ## Bias-aware modelling comparisons
 
 The methodological comparison is designed to distinguish three concepts:
