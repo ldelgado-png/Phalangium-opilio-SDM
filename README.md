@@ -42,6 +42,12 @@ These statistics describe occurrence screening and raster-cell thinning rather t
 
 We identify and preserve each screened record by its original GBIF identifier and download-row provenance. Provenance is reconstructed by matching `gbifID` to the archived source TSV, and source-level coordinate-uncertainty information is revalidated independently of spatial-test flags. Among the **56,524** candidates, **12,898** records have no reported coordinate uncertainty. Matching the 63,407-row source TSV by `gbifID` restored original row identifiers for **18,280** candidate records and corrected **541** missing-uncertainty indicators. The corrected tally of 12,898 records without declared uncertainty is based on source values rather than inherited flags from shared coordinates. The reconstruction is implemented in `R/03_restore_GBIF_record_provenance.R`, which updates derived reporting tables without rerunning the CoordinateCleaner tests.
 
+## Independent transfer assessment
+
+We reserve the Venezuelan field observations as an **independent, spatially clustered assessment set**. Field observations are excluded from calibration, feature selection, regularization tuning, model comparison, and the choice of prediction thresholds. We assess transfer by extracting the final South American prediction at confirmed field localities, inspecting continuous suitability values and a pre-specified training-derived threshold. We treat distinct environmental raster cells, rather than multiple collection events in the same cell, as the spatial units for descriptive evaluation.
+
+The independent observations do not provide a representative sample of the entire South American projection region, nor can occurrence-only field confirmations establish regional specificity, general discrimination, or realized colonization risk. We examine whether the Venezuelan environments fall within the calibration domain before interpreting their predictions. Field-level coordinates and unpublished specimen metadata remain outside this public repository. Climate predictors describe the 1970–2000 baseline and are not event-year weather observations.
+
 ## Calibration-region occurrence coverage
 
 We quantified occurrence coverage within two exploratory geographical windows. Temperate Europe (12°W–35°E, 35°–72°N) contained **38,347 records** passing the selected CoordinateCleaner tests, representing **10,099 unique 5-arcminute cells**. A broader Western Palaearctic window (12°W–60°E, 30°–72°N) contained **39,493 records** representing **10,427 cells**. The expansion added **1,146 records and 328 cells**. These windows describe the geographical sampling domain and are not treated as established biogeographical accessibility boundaries.
@@ -50,7 +56,7 @@ North American occurrences were evaluated separately as a non-native comparison 
 
 ### Environmental coverage workflow
 
-The `R/06_prepare_climate_and_transfer_diagnostics.R` workflow obtains WorldClim 2.1 BIO1, BIO4, BIO12, and BIO15 at 5-arcminute resolution using `geodata` and `terra`. We align occurrences to climate raster cells, calculate correlation diagnostics, and create a polygon-masked South American environmental layer using Natural Earth country boundaries. A preliminary variable-range comparison is used only to identify environmental conditions requiring careful extrapolation assessment; it is not a fitted model, MESS, or MOP.
+The `R/06_prepare_climate_and_transfer_diagnostics.R` workflow obtains WorldClim 2.1 BIO1, BIO4, BIO12, and BIO15 at 5-arcminute resolution using `geodata` and `terra`. We align occurrences to climate raster cells, calculate correlation diagnostics, and create a polygon-masked South American environmental layer using Natural Earth country boundaries. A preliminary variable-range comparison is used only to identify environmental conditions requiring careful extrapolation assessment; it is not a fitted model, MESS, or MOP. We also extract the four climatic variables at independent Venezuelan field localities and report the number of distinct confirmed raster cells. These private summaries are kept separate from candidate training data.
 
 To reproduce these environmental coverage diagnostics in RStudio:
 
