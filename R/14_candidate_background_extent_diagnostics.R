@@ -54,9 +54,8 @@ message("Calculating geographic distances to calibration presences...")
 distance_km <- terra::distance(
   presence_raster, unit = "km", method = "cosine"
 )
-distance_at_presences <- terra::extract(
-  distance_km, as.matrix(xy)
-)[, 2]
+distance_values <- terra::extract(distance_km, as.matrix(xy))
+distance_at_presences <- as.numeric(distance_values[[ncol(distance_values)]])
 if (any(!is.finite(distance_at_presences)) ||
     max(distance_at_presences) > 1) {
   stop("Distance-to-presence raster is misaligned with the input points.")
@@ -151,13 +150,28 @@ assign_folds <- function(ys) {
   fold_range$fold[match]
 }
 saved_bg_grp <- as.character(ENMeval::eval.bg.grp(saved))
-expected <- assign_folds(orig_xy$latitude)
+saved_bg <- as.data.frame(ENMeval::eval.bg(saved))
+saved_bg_xy <- data.frame(
+  longitude = as.numeric(saved_bg[[1]]),
+  latitude = as.numeric(saved_bg[[2]])
+)
+if (nrow(saved_bg_xy) != 10000L) {
+  stop("The saved background dataset is not the expected 10,000 cells.")
+}
+pilot_occ_grp_check <- assign_folds(as.numeric(pil_occs[[2]]))
+if (!identical(pilot_occ_grp_check, pil_grps)) {
+  stop("Latitude interval assignment does not reproduce the original ",
+       "presence fold assignment.")
+}
+expected <- assign_folds(saved_bg_xy$latitude)
 matches <- sum(expected == saved_bg_grp)
 if (matches != length(expected)) {
   stop("Latitudinal group boundaries do not reproduce the original ",
        "background fold assignments (", matches, "/", length(expected),
        "). Inspect partition geometry before comparing scenarios.")
 }
+# Use the actual background stored inside ENMeval for the baseline.
+all_bg$original_rectangle <- saved_bg_xy
 
 by_scenario <- do.call(rbind, lapply(names(all_bg), function(label) {
   bg_xy <- all_bg[[label]]
