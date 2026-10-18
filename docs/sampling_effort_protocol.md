@@ -26,6 +26,14 @@ terra::rast(effort$local_path[1])
 
 The original output grid is geographic WGS84 and stores raw counts. Its nominal ~5-km grain differs from WorldClim's 5-arcminute climate grid: direct cell-for-cell indexing would therefore be incorrect. The effort layer must be checked for spatial reference system, actual cell geometry, temporal coverage, missing values and zero-count cells before any area or grid transformation. Latitude-dependent pixel areas also affect interpretation of raw observation counts.
 
+## Observed order-level effort coverage
+
+We aligned the cumulative Opiliones observation-count product from El-Gabbas (2026) to the original 5-arcminute Western Palaearctic climate grid for a descriptive coverage assessment. Positive values appeared in **24,343 of 292,489 (8.32%)** climate-valid grid cells, and **9,693 of 10,426 (92.97%)** screened calibration-presence cells. Another **733** presence cells had zero values. No cells had missing effort values after alignment.
+
+These observed figures demonstrate that the GBIF Opiliones record layer provides strongly heterogeneous spatial coverage. They do not establish the actual sampling effort at every location, identify true absences, or determine whether the focal species contributes disproportionately to the order-level dataset. Strict positive-count weighting would entirely exclude more than 90% of climate-valid reference cells from the background proposal, including climatic cells containing 733 accepted focal-species presences. The suitability of a bias-weighted background therefore depends on a justified calibration domain (M), treatment of zero-count cells, spatially explicit support, and the concentration of sampling probabilities.
+
+We use `R/16_effort_weighting_feasibility.R` to assess candidate weighting concentration, effective candidate-cell support and latitude-fold allocation for the exploratory rectangular, 250-km and 500-km background domains. These alternative domains are geographical sensitivity analyses, not M definitions. No weighted ENMeval models or validated performance improvements are reported on the basis of this preparation stage.
+
 ## Bias-aware modelling comparisons
 
 The methodological comparison is designed to distinguish three concepts:
