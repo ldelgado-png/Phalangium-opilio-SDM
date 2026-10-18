@@ -135,6 +135,10 @@ Our analytical framework distinguishes a geographically uniform background from 
 
 The observed audit is archived in [`results/opiliones_effort_coverage_audit.csv`](results/opiliones_effort_coverage_audit.csv). We analyse the effective sampling support, weight concentration and allocation across existing spatial folds for several descriptive positive/zero handling transformations and the earlier background-extent sensitivity masks in `R/16_effort_weighting_feasibility.R`. This diagnostic does not estimate any new model scores, choose a weighting scheme, or assert a defended accessible area M.
 
+The completed `R/16_effort_weighting_feasibility.R` audit provides an independent check of weighting concentration using the original screened presences and climatic background. Only **506 of the 10,000 uniformly sampled pilot background cells (5.06%)** had positive Opiliones effort. In the exploratory rectangular domain, after excluding the 10,426 presence pixels, **14,650 of 282,063 candidate background cells (5.19%)** had positive effort. Under weights proportional to untransformed `n_obs`, Kish's effective candidate-cell count was **631.6 (0.22%)**, with **74.27%** of weight mass carried by the top 1% of cells. The square-root and `log1p(n_obs)` transformations increased effective counts to **8,398.5 (2.98%)** and **7,567.9 (2.68%)**, respectively; `1 + log1p(n_obs)` retained **273,854.1 effective cells (97.09%)** and moved closer to uniform weights. The untransformed weights shifted the four-fold background mass from **39.33, 12.42, 8.82 and 39.43%** (uniform) to **11.86, 13.74, 26.02 and 48.38%**, respectively. These statistics describe candidate probability distributions, not sampled background realizations or model performance. The 250-km and 500-km domains remain geographic sensitivity masks rather than accessible-area definitions.
+
+We examine these contrasts further by original validation fold and climate variable in `R/18_effort_spatial_climatic_support.R` without refitting a model. The observed R/16 outputs are archived as [pilot-sample support](results/effort_support_pilot_samples.csv), [candidate weight concentration](results/effort_weighting_concentration.csv), and [fold-specific weight mass](results/effort_weight_mass_by_fold.csv) tables.
+
 We structure the scientific record according to **ODMAP: Overview, Data, Model, Assessment, Prediction**. The respective documentation is provided in [`docs/ODMAP_reporting_framework.md`](docs/ODMAP_reporting_framework.md) and [`docs/sampling_effort_protocol.md`](docs/sampling_effort_protocol.md). This documentation distinguishes observed model results from the analytical designs used for model development. The known Venezuelan occurrences remain withheld from calibration, background selection, tuning, and threshold choice.
 
 ## Reproducible suitability figure
@@ -173,9 +177,13 @@ We treat extrapolation beyond calibration environments explicitly when interpret
 | `R/15_prepare_opiliones_effort.R` | Retrieves and audits the cumulative GBIF Opiliones sampling-effort raster without refitting models |
 | `R/16_effort_weighting_feasibility.R` | Examines observation-effort support, candidate weight concentration and spatial-fold allocation across sensitivity domains |
 | `R/17_south_america_suitability_figure.R` | Reproduces the cartographic South American pilot map directly from the archived model GeoTIFF, exporting PNG/PDF/TIFF at 600 dpi |
+| `R/18_effort_spatial_climatic_support.R` | Audits positive Opiliones sampling-effort support by original spatial fold and climate predictor without refitting |
 | `results/initial_spatial_block_ENMeval.csv` | Complete observed six-configuration ENMeval summary statistics |
 | `results/background_extent_fold_comparison.csv` | Observed fold-level background composition for three exploratory sampling extents |
 | `results/opiliones_effort_coverage_audit.csv` | Observed cumulative Opiliones sampling-effort coverage of climate and occurrence cells |
+| `results/effort_support_pilot_samples.csv` | Observed order-level effort support of pilot presence and uniform background samples |
+| `results/effort_weighting_concentration.csv` | Measured candidate weight concentration under five effort transforms across three exploratory domains |
+| `results/effort_weight_mass_by_fold.csv` | Observed candidate probability mass across the original four spatial blocks |
 | `data/README.md` | GBIF DOI, download metadata, source archive SHA-256, import specification |
 | `docs/methodological_framework.md` | Calibration, transfer, field evidence, and evaluation principles |
 | `docs/sampling_effort_protocol.md` | Taxon-specific GBIF observation-effort proxies and bias-aware background design |
