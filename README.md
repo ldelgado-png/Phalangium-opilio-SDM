@@ -66,7 +66,7 @@ source("https://raw.githubusercontent.com/ldelgado-png/Phalangium-opilio-SDM/mai
 
 ## Eastward Eurasian occurrence coverage
 
-We distinguish the historical Eurasian distribution from the **exploratory Western Palaearctic rectangle** used for the initial climate-range diagnostic. Because available distribution accounts extend to northern and central Asia, a longitude limit of 60°E cannot be assumed to delimit the full native or accessible range. We inspect occurrence density and country composition across additional longitude bands with `R/08_eurasian_eastward_coverage.R`. These descriptive checks precede, but do not themselves constitute, an independently justified accessible-area (M) definition (Barve et al., 2011).
+We distinguish the historical Eurasian distribution from the **exploratory Western Palaearctic rectangle** used for the initial climate-range diagnostic. Because available distribution accounts extend to northern and central Asia, a longitude limit of 60°E cannot be assumed to delimit the full native or accessible range. We inspected occurrence density and country composition across additional longitude bands with `R/08_eurasian_eastward_coverage.R`. Within the exploratory 30–72°N Eurasian transect, **39,493 screened occurrences (10,427 cells)** fell west of 60°E; **95 occurrences (68 cells)** fell farther east. Eastern records comprised Russia (87), Japan (6), and Kazakhstan (2). The sparsity of GBIF records in eastern Eurasia does not establish absence or inaccessibility. In particular, Suzuki and Tsurusaki (1983) regarded a recent human-mediated introduction as plausible for the Hokkaido population but did not settle its origin, so Japanese occurrences warrant separate biogeographical assessment. Our `R/09_eastern_eurasia_climatic_coverage.R` workflow quantifies how much additional climatic coverage screened eastern records contribute beyond the exploratory Western Palaearctic reference. These descriptive checks precede, but do not themselves constitute, an independently justified accessible-area (M) definition (Barve et al., 2011).
 
 ## Environmental diagnostic results
 
@@ -99,6 +99,7 @@ We treat extrapolation beyond calibration environments explicitly when interpret
 | `R/06_prepare_climate_and_transfer_diagnostics.R` | Prepares WorldClim variables, masks the South American projection region and audits environmental coverage |
 | `R/07_full_grid_transfer_range_audit.R` | Calculates full-grid univariate environmental range exceedance, direction of BIO1 extrapolation, and sampled-reference VIF |
 | `R/08_eurasian_eastward_coverage.R` | Documents screened occurrences and cell coverage across eastern Eurasian longitude bands |
+| `R/09_eastern_eurasia_climatic_coverage.R` | Compares eastern Eurasian climatic cells against Western Palaearctic environmental ranges |
 | `data/README.md` | GBIF DOI, download metadata, source archive SHA-256, import specification |
 | `docs/methodological_framework.md` | Calibration, transfer, field evidence, and evaluation principles |
 | `.gitignore` | Excludes raw archives, provisional occurrence tables, raster products and local files |
@@ -113,5 +114,6 @@ The original GBIF download, intermediate tables, unpublished field material, and
 - Kass, J. M. et al. (2021). ENMeval 2.0: redesigned for customizable and reproducible modeling of species’ niches and distributions. *Methods in Ecology and Evolution*, 12, 1602–1608. https://doi.org/10.1111/2041-210X.13628
 - Barve, N. et al. (2011). The crucial role of the accessible area in ecological niche modeling and species distribution modeling. *Ecological Modelling*, 222, 1810–1819. https://doi.org/10.1016/j.ecolmodel.2011.02.011
 - Shear, W. A. (2016). New Canadian records of *Nemastoma bimaculatum* (Fabricius), and a brief summary of introduced Eurasian harvestmen in North America (Arachnida, Opiliones). *Zootaxa*, 4088, 139–140. https://doi.org/10.11646/zootaxa.4088.1.7
+- Suzuki, S. & Tsurusaki, N. (1983). Opilionid fauna of Hokkaido and its adjacent areas. *Journal of the Faculty of Science, Hokkaido University, Series VI Zoology*, 23(2), 195–243. http://hdl.handle.net/2115/27679
 
 The associated field manuscript is maintained separately as a working document and is not reproduced here.
