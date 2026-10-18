@@ -119,6 +119,14 @@ We quantified each fold's geography and climatic coverage from the original ENMe
 
 We quantify the effects of alternative background extents with `R/14_candidate_background_extent_diagnostics.R`, which contrasts the original rectangular background with **hypothetical** 250 and 500 km neighbourhoods of the screened occurrence cells. The resulting masks and background samples are geographical sensitivity scenarios only, not independently justified accessible areas (M), and no new AUCs can be inferred without refitting and evaluating the models. We do not infer that the spatial variation uniquely demonstrates model overfitting; model complexity, unequal environmental coverage, and geographically biased sampling all remain relevant. No Venezuelan field evidence informed any of these comparisons.
 
+## Sampling-effort bias and transparent reporting
+
+We follow the taxon-specific sampling-effort framework of El-Gabbas (2026) and the ODMAP reporting standard of Zurell et al. (2020). The El-Gabbas dataset provides observation-count and recorded-richness rasters for **Opiliones**, enabling a more taxonomically appropriate assessment than an undifferentiated biodiversity effort surface. We use the cumulative observation-count product (1980–2025, approximately 5-km resolution) as the primary proxy for the spatial intensity of GBIF reporting in the focal order, while recognising that the observations may include records of the focal species itself.
+
+Our analytical framework distinguishes a geographically uniform background from effort-weighted and independently assembled target-group backgrounds within a common, biogeographically justified calibration area. We retain the original unweighted ENMeval fit as a documented benchmark, rather than treating its spatial variation as a reason to select a more complex model. We also differentiate **5-km effort data** from **5-arcminute WorldClim predictors** and document all alignment and weighting choices, zero-count interpretation and temporal mismatches. The preparatory diagnostic in `R/15_prepare_opiliones_effort.R` retrieves the author-archived `n_obs` product and audits its coverage before any weighted model fit.
+
+We structure the scientific record according to **ODMAP: Overview, Data, Model, Assessment, Prediction**. The respective documentation is provided in [`docs/ODMAP_reporting_framework.md`](docs/ODMAP_reporting_framework.md) and [`docs/sampling_effort_protocol.md`](docs/sampling_effort_protocol.md). This documentation distinguishes observed model results from the analytical designs used for model development. The known Venezuelan occurrences remain withheld from calibration, background selection, tuning, and threshold choice.
+
 ## Modelling framework
 
 We assess candidate calibration regions using descriptive occurrence coverage across alternative Western Eurasian windows before defining a biogeographically defensible accessible area (M). Such geographic bounding boxes are diagnostic rather than model-training boundaries. Our audit also compares screening based on all selected CoordinateCleaner flags against an exploratory scenario retaining records with only urban-proximity alerts for review. These sensitivity scenarios do not automatically establish occurrence validity.
@@ -148,9 +156,12 @@ We treat extrapolation beyond calibration environments explicitly when interpret
 | `R/12_review_pilot_block_cv.R` | Extracts per-fold validation metrics and calibration/background group counts from the saved evaluation object |
 | `R/13_diagnose_spatial_cv_domains.R` | Compares geographic extent, environmental distributions and reference-climate coverage among validation folds |
 | `R/14_candidate_background_extent_diagnostics.R` | Tests hypothetical presence-neighbourhood background masks and fold-level environmental coverage without refitting |
+| `R/15_prepare_opiliones_effort.R` | Retrieves and audits the cumulative GBIF Opiliones sampling-effort raster without refitting models |
 | `results/initial_spatial_block_ENMeval.csv` | Complete observed six-configuration ENMeval summary statistics |
 | `data/README.md` | GBIF DOI, download metadata, source archive SHA-256, import specification |
 | `docs/methodological_framework.md` | Calibration, transfer, field evidence, and evaluation principles |
+| `docs/sampling_effort_protocol.md` | Taxon-specific GBIF observation-effort proxies and bias-aware background design |
+| `docs/ODMAP_reporting_framework.md` | Overview, Data, Model, Assessment and Prediction reporting framework |
 | `.gitignore` | Excludes raw archives, provisional occurrence tables, raster products and local files |
 
 The original GBIF download, intermediate tables, unpublished field material, and generated raster outputs are managed independently of this repository. The complete download is citable via its GBIF DOI; source-file licensing remains governed by the contributing datasets.
@@ -162,6 +173,8 @@ The original GBIF download, intermediate tables, unpublished field material, and
 - Fick, S. E. & Hijmans, R. J. (2017). WorldClim 2: new 1-km spatial resolution climate surfaces for global land areas. *International Journal of Climatology*, 37, 4302–4315. https://doi.org/10.1002/joc.5086
 - Kass, J. M. et al. (2021). ENMeval 2.0: redesigned for customizable and reproducible modeling of species’ niches and distributions. *Methods in Ecology and Evolution*, 12, 1602–1608. https://doi.org/10.1111/2041-210X.13628
 - Barve, N. et al. (2011). The crucial role of the accessible area in ecological niche modeling and species distribution modeling. *Ecological Modelling*, 222, 1810–1819. https://doi.org/10.1016/j.ecolmodel.2011.02.011
+- El-Gabbas, A. (2026). A global, taxon-stratified, high-resolution sampling-effort dataset from GBIF for bias-aware ecological modelling. *Diversity and Distributions*, 32, e70205. https://doi.org/10.1111/ddi.70205
+- Zurell, D. et al. (2020). A standard protocol for reporting species distribution models. *Ecography*, 43, 1261–1277. https://doi.org/10.1111/ecog.04960
 - Shear, W. A. (2016). New Canadian records of *Nemastoma bimaculatum* (Fabricius), and a brief summary of introduced Eurasian harvestmen in North America (Arachnida, Opiliones). *Zootaxa*, 4088, 139–140. https://doi.org/10.11646/zootaxa.4088.1.7
 - Suzuki, S. & Tsurusaki, N. (1983). Opilionid fauna of Hokkaido and its adjacent areas. *Journal of the Faculty of Science, Hokkaido University, Series VI Zoology*, 23(2), 195–243. http://hdl.handle.net/2115/27679
 
