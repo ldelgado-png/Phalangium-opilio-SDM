@@ -57,6 +57,40 @@ if (!is.null(meta)) {
   }
   message("GBIF metadata: status=", status, "; DOI=", doi)
 }
+# IMPORTANT: protect local storage/RAM. Do not automatically retrieve
+# unusually large GBIF ZIPs, and never treat an incomplete ZIP as usable.
+# Run R/22 metadata-only preflight first to check original download filters.
+max_zip_bytes <- 1024^3    # conservative 1 GiB zipped
+max_records <- 1e6         # conservative record-processing limit
+if (is.null(meta) ||
+    is.null(meta$size) || is.null(meta$totalRecords) ||
+    !is.finite(suppressWarnings(as.numeric(meta$size))) ||
+    !is.finite(suppressWarnings(as.numeric(meta$totalRecords)))) {
+  stop("Cannot verify ZIP size and record count from public GBIF metadata. ",
+       "Do NOT download the archive blindly. Run R/22 first.")
+}
+declared_size <- as.numeric(meta$size)
+declared_records <- as.numeric(meta$totalRecords)
+message("[R21] GBIF archive metadata: ",
+        round(declared_size / 1024^3, 3), " GiB zipped; ",
+        format(declared_records, big.mark = ",", scientific = FALSE),
+        " records.")
+if (declared_size > max_zip_bytes || declared_records > max_records) {
+  stop("GBIF ZIP exceeds the safe automated R/21 limit (1 GiB or 1 million ",
+       "records). Do NOT download or process it in this script. ",
+       "Review GBIF download predicates and prefer a smaller SIMPLE_CSV.")
+}
+if (file.exists(zip_path) && file.info(zip_path)$size > max_zip_bytes) {
+  stop("Local ZIP is already larger than 1 GiB. It is likely not the ",
+       "intended compact Opiliones data set. Run R/22 to inspect metadata.")
+}
+if (file.exists(zip_path) &&
+    is.finite(file.info(zip_path)$size) &&
+    file.info(zip_path)$size > 1000 &&
+    file.info(zip_path)$size < declared_size * 0.99) {
+  stop("Locally cached ZIP is shorter than the declared GBIF archive size ",
+       "(probably an incomplete download). Do not unzip it.")
+}
 if (!file.exists(zip_path) ||
     is.na(file.info(zip_path)$size) ||
     file.info(zip_path)$size < 1000) {
