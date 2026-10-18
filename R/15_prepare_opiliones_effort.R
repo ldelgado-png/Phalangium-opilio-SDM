@@ -49,6 +49,7 @@ aligned_file <- file.path(
   out_dir, "opiliones_nobs_5km_mean_on_worldclim_5arcmin.tif"
 )
 source_label <- NA_character_
+climate_mask <- !is.na(bio[[1]])
 if (file.exists(aligned_file)) {
   message("Resuming from the already-aligned Opiliones effort raster...")
   effort_mean <- terra::rast(aligned_file)
@@ -107,7 +108,6 @@ effort_mean <- terra::resample(
 # Do not interpret these means as total GBIF observation counts
 # in the destination cells. This grid is descriptive only.
 names(effort_mean) <- "mean_Opiliones_observations_in_source_cells"
-climate_mask <- !is.na(bio[[1]])
 effort_mean <- terra::mask(effort_mean, climate_mask, maskvalues = 0)
 
 terra::writeRaster(
@@ -117,9 +117,6 @@ terra::writeRaster(
 source_label <- paste("Original downloaded effort raster:",
                       normalizePath(effort_path, winslash = "/"))
 
-presence_counts <- as.numeric(
-  terra::extract(effort_mean, xy)[[names(effort_mean)[1]]]
-)
 }
 # terra::extract with an (x,y) coordinate matrix yields raster-value columns
 # without the implicit ID field returned for vector geometries. The aligned
