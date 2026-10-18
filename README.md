@@ -109,6 +109,14 @@ For transparent reproducibility, the original 19-column evaluation table is prov
 
 Our first South American visualization uses the **predeclared LQ/RM 2 configuration** with clamping enabled. It illustrates relative climatic suitability only, not occurrence probability, establishment, or an independently validated projection. Notably, the apparent suitability of portions of southern South America may reflect climatic similarity to the calibration domain; interpretation also requires accessible-area, sampling-bias, extrapolation, and dispersal considerations. Venezuelan field observations were not accessed for training, parameter selection, or model evaluation.
 
+### Sensitivity of the background geographical domain
+
+We compared the pilot rectangular background with two hypothetical spatial neighbourhoods (250 and 500 km around screened presence cells), holding the original 10,426 presence cells and 10,000 background samples per scenario constant. Under the original rectangular background, the percentages of background samples assigned to folds 1–4 were **49.47%, 13.09%, 8.28%, and 29.16%**. These changed to **24.66%, 16.09%, 14.62%, and 44.63%** under the 250-km neighbourhood, and **33.05%, 15.22%, 12.77%, and 38.96%** under the 500-km neighbourhood.
+
+The 250-km setting increased fold 3's background size from 828 to 1,462 cells, although it concentrated almost 45% of background samples in fold 4. In fold 2, the median BIO4 value of background cells declined from 928.8 in the rectangle to 785.8 at 250 km, compared with a presence median of approximately 646.3. These changes demonstrate **strong dependence of available calibration environments on background extent**; they do not demonstrate an improvement in model discrimination or establish either buffer as the true accessible area (M).
+
+The complete twelve-row aggregate diagnostic is archived in [`results/background_extent_fold_comparison.csv`](results/background_extent_fold_comparison.csv). The analysis is reproduced in `R/14_candidate_background_extent_diagnostics.R`. The subsequent taxon-specific effort assessment is formulated independently, prior to any effort-weighted fit.
+
 ### Geographic consistency across validation folds
 
 We examined the 24 fold-specific evaluations obtained from the completed four-block pilot. Every setting attained validation AUC below 0.5 in folds 2 and 3, while folds 1 and 4 performed more favorably. Under LQH/RM 1, the four validation AUC values were **0.907, 0.470, 0.463, and 0.803**, with corresponding CBI values **0.996, 0.061, −0.075, and 0.976**. Tenth-percentile omission ranged from **0.036** in fold 3 to **0.310** in fold 4. The six configurations exhibited a similarly structured pattern rather than a difference restricted to one feature-class setting.
@@ -158,6 +166,7 @@ We treat extrapolation beyond calibration environments explicitly when interpret
 | `R/14_candidate_background_extent_diagnostics.R` | Tests hypothetical presence-neighbourhood background masks and fold-level environmental coverage without refitting |
 | `R/15_prepare_opiliones_effort.R` | Retrieves and audits the cumulative GBIF Opiliones sampling-effort raster without refitting models |
 | `results/initial_spatial_block_ENMeval.csv` | Complete observed six-configuration ENMeval summary statistics |
+| `results/background_extent_fold_comparison.csv` | Observed fold-level background composition for three exploratory sampling extents |
 | `data/README.md` | GBIF DOI, download metadata, source archive SHA-256, import specification |
 | `docs/methodological_framework.md` | Calibration, transfer, field evidence, and evaluation principles |
 | `docs/sampling_effort_protocol.md` | Taxon-specific GBIF observation-effort proxies and bias-aware background design |
