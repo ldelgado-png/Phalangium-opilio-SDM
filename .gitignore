@@ -22,3 +22,6 @@ __pycache__/
 01_datos/climate_diagnostics/
 01_datos/clima_WorldClim_2_1/
 01_datos/**/00_registros_Venezuela_manuscrito.csv
+
+# Published source rasters and locally generated sampling-effort summaries
+01_datos/sampling_effort/
