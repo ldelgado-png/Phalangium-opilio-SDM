@@ -29,7 +29,24 @@ if (!all(file.exists(c(clim_path, eval_path, presence_path)))) {
   stop("Open the original Phalangium_opilio_SDM project folder in RStudio. ",
        "Required prior WorldClim and ENMeval files were not found.")
 }
-key <- "0033385-260928105237408"
+# The original download 0033385-260928105237408 is known INVALID:
+# it contains >1.2 billion records without a positive Opiliones filter.
+# NEVER read or automatically retrieve it for this analysis.
+# Supply the future correctly scoped GBIF download key explicitly:
+# options(phalangium.target_group_download_key = "NEW_GBIF_DOWNLOAD_KEY")
+key <- getOption("phalangium.target_group_download_key", "")
+if (length(key) != 1L || !is.character(key) ||
+    !grepl("^[0-9]{6,8}-[0-9]{15}$", key)) {
+  stop("R21 requires the NEW, correctly scoped GBIF download key. ",
+       "First submit the positive Opiliones predicate from R/23, ",
+       "verify its GBIF metadata with the NEW key, and then set ",
+       "options(phalangium.target_group_download_key = 'NEW_KEY') ",
+       "before running R21.")
+}
+if (identical(key, "0033385-260928105237408")) {
+  stop("REFUSED: GBIF download 0033385-260928105237408 is the ",
+       "127.392 GiB unfiltered archive, NOT the Opiliones data set.")
+}
 base_url <- "https://api.gbif.org/v1/occurrence/download/"
 download_url <- paste0(base_url, "request/", key, ".zip")
 outdir <- file.path(data_dir, "sampling_effort", "target_group_preparation")
