@@ -1,0 +1,16 @@
+scenario,weighting_formula,eligible_background_cells,positive_effort_cells,percent_positive_effort_cells,percent_zero_effort_cells,percent_zero_weight_cells,effective_candidate_cells,effective_percent_of_candidate_cells,percent_weight_mass_top_one_pct_cells
+original_rectangle,uniform,282063,14650,5.19,94.81,0.00,282063.0,100.00,1.00
+original_rectangle,raw_positive_only,282063,14650,5.19,94.81,94.81,631.6,0.22,74.27
+original_rectangle,sqrt_positive_only,282063,14650,5.19,94.81,94.81,8398.5,2.98,42.23
+original_rectangle,log_positive_only,282063,14650,5.19,94.81,94.81,7567.9,2.68,49.82
+original_rectangle,one_plus_log_effort,282063,14650,5.19,94.81,0.00,273854.1,97.09,2.40
+within_250km,uniform,169114,14425,8.53,91.47,0.00,169114.0,100.00,1.00
+within_250km,raw_positive_only,169114,14425,8.53,91.47,91.47,623.5,0.37,65.40
+within_250km,sqrt_positive_only,169114,14425,8.53,91.47,91.47,8256.5,4.88,31.47
+within_250km,log_positive_only,169114,14425,8.53,91.47,91.47,7455.7,4.41,36.89
+within_250km,one_plus_log_effort,169114,14425,8.53,91.47,0.00,161519.8,95.51,2.67
+within_500km,uniform,212734,14626,6.88,93.12,0.00,212734.0,100.00,1.00
+within_500km,raw_positive_only,212734,14626,6.88,93.12,93.12,630.7,0.30,69.23
+within_500km,sqrt_positive_only,212734,14626,6.88,93.12,93.12,8384.3,3.94,35.81
+within_500km,log_positive_only,212734,14626,6.88,93.12,93.12,7557.3,3.55,42.24
+within_500km,one_plus_log_effort,212734,14626,6.88,93.12,0.00,204820.6,96.28,2.56
