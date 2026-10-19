@@ -1,6 +1,6 @@
 # Protocol: transfer novelty (MESS/MOP) and independent Venezuelan assessment
 
-**Status:** methodological plan; **not executed**. **No final calibration area (M) has yet been defended, and no final model is frozen.** The existing Western Palaearctic rectangular window and LQ/RM2 South America prediction are **exploratory**. This protocol must not be read as new modelling results.
+**Status:** user-approved, FIXED OPERATIONAL STUDY DOMAIN (12°W–60°E, 30°–72°N); calculations **not executed** and fitted SDM **not yet frozen**. This fixed rectangle is a reproducible methodological boundary, **not a biogeographically demonstrated accessible area (M)**. The LQ/RM2 South America pilot remains exploratory. No environmental-novelty results should be claimed until R25 has been executed and checked. See [domain decision](fixed_calibration_domain_decision.md).
 
 ## Scientific aim and manuscript figure
 
@@ -15,7 +15,7 @@ The manuscript's **Figure 2** is a photographic plate depicting habitats in Mér
 
 ## Existing project inputs (climate only)
 
-- `01_datos/climate_diagnostics/16_worldclim_western_window_5m.tif`: exploratory western Palaearctic **rectangle**, not a validated M.
+- `01_datos/climate_diagnostics/16_worldclim_western_window_5m.tif`: **fixed operational western Palaearctic rectangle** for this study; not a validated M.
 - `01_datos/climate_diagnostics/17_worldclim_south_america_5m.tif`: South American projection predictors.
 - Both use WorldClim 2.1 at 5 arcminutes; aligned predictor names `BIO1`, `BIO4`, `BIO12`, `BIO15`, native units and the same raster layers.
 - `04_resultados_modelo/pilot_western_palaearctic/09_pilot_south_america_LQ_rm2_cloglog_NOT_FINAL.tif`: pilot visualization only, **not** the frozen model.
@@ -32,11 +32,11 @@ The prior `R/07_full_grid_transfer_range_audit.R` calculated a predictor-wise ra
 - Outputs are stored locally under `04_resultados_modelo/pilot_western_palaearctic/transfer_novelty_EXPLORATORY_NOT_FINAL/`, with GeoTIFFs, PNG preview, sampled-reference statistics, version numbers, provenance and a simple count of extrapolative land cells. These **cell percentages are not area-corrected** because geographic rasters have unequal cell areas by latitude.
 - All run outputs are **pending**; nothing in this protocol implies that the user's RStudio executed it. No calibration or model-selection change has occurred.
 
-The script requires locally installed `terra`, `predicts`, `mop`, and `FNN`, and checks them before doing any work. In a later sensitivity assessment, repeat with several reference sample sizes/seeds and finally with a defended M; keep all map legends explicitly labelled **EXPLORATORY**.
+The script requires locally installed `terra`, `predicts`, `mop`, and `FNN`, and checks them before doing any work. In sensitivity work, repeat with several reference sample sizes/seeds while keeping the adopted fixed rectangle unchanged; do not imply its identity with a defended accessible M. Until checked, label MESS/MOP outputs **EXPLORATORY**.
 
 ## Stage A — environmental transfer diagnostics (without Venezuelan sites)
 
-1. Defend and freeze the calibration area **M** using biogeographical evidence and accessible-area sensitivity analysis, **never referencing Venezuelan sites**. If preliminary diagnostics are performed using the current rectangle, label all maps `EXPLORATORY / NOT M`.
+1. Use the **fixed operational domain** (12°W–60°E, 30°–72°N) selected for this manuscript; **do not revise it in response to Venezuelan sites**. Note explicitly that its historical accessibility and eastward environmental completeness are unproven. Describe any resulting novelty maps as `FIXED OPERATIONAL DOMAIN; NOT DEMONSTRATED M`.
 2. Harmonize the four bioclimatic layers across reference and projected regions; verify CRS, native WorldClim units, cell dimensions, layer ordering, NA masks, and comparable predictor definitions.
 3. Define reference environments using **available environmental cells throughout M**, not only occupied points. Do not infer M from environmental similarity to the held-out sites.
 4. Calculate **MESS** (identify negative values and contributing variables for strict one-variable extrapolation) and **MOP** (quantify multivariate environmental analogy and map strict extrapolation according to the selected documented implementation).
@@ -45,7 +45,7 @@ The script requires locally installed `terra`, `predicts`, `mop`, and `FNN`, and
 
 ## Stage B — frozen model and final independent transfer report
 
-1. Finalize and **freeze** the biogeographically justified M, sampling-bias correction/background, predictors, spatial-block partitions, model settings, fitted-model object, output scale (e.g. cloglog), clamping/extrapolation behavior, suitability raster and any classification threshold **without using the Venezuelan records**. Archive a unique script/version, a model-object hash and selection rationale.
+1. Maintain the already **fixed operational calibration rectangle**. Before consulting Venezuelan sites, **freeze** the background/effort treatment, predictors, spatial-block partitions, model settings, fitted-model object, output scale (e.g. cloglog), clamping/extrapolation behavior, suitability raster and any threshold, recording a unique script/version, object hash and explicit rationale. Do not describe the rectangle as a proven M.
 2. **Only after freezing:** open the withheld Venezuelan field-event table and extract predicted climatic suitability, MESS, MOP and environmental-variable values at each **unique** geographic coordinate from the frozen rasters using `terra::extract` with an explicitly documented nearest-cell policy. If a site is near a grid boundary, assess positional uncertainty separately and **do not retune models or thresholds**.
 3. Record event-to-coordinate and coordinate-to-raster-cell duplicates; the draft manuscript reports **seven field events, six coordinate pairs and approximately three distinct 5-arcminute predictor cells**. Therefore, compute summaries at **unique climate-cell level** as well as event level and avoid treating seven events as statistically independent suitability tests.
 4. Report the site's coordinate/cell identifier, raw `cloglog` suitability (0–1), MESS score and the variable determining the minimum MESS score, MOP (including strict-extrapolation flag), and a straightforward interpretation of environmental analogy. Preserve each event in the private audit table; publish coordinates only in accordance with the manuscript's existing specimen data policy.
@@ -60,7 +60,7 @@ The script requires locally installed `terra`, `predicts`, `mop`, and `FNN`, and
 
 ## Pending tasks (Spanish)
 
-- **Pendiente 1:** delimitar y justificar M independientemente de las localidades venezolanas; resolver alternativas de fondo (uniforme, superficie de esfuerzo de Opiliones, grupo objetivo).
+- **Dominio acordado:** rectángulo paleártico occidental fijado operativamente para el manuscrito (12°O–60°E, 30°–72°N), sin afirmar que represente M biogeográficamente demostrada. **Pendiente 1:** mantener ese límite sin ajustes post hoc y reconocer sus limitaciones; cerrar el tratamiento del fondo de calibración (uniforme frente a alternativas de sensibilidad).
 - **Pendiente 2:** congelar el modelo, variables, clamping y umbrales antes de explorar las localidades venezolanas.
 - **Pendiente 3:** ejecutar MESS y MOP sobre matrices/rásteres comparables, con parámetros y versiones registrados; la primera ejecución en la ventana rectangular solo podrá ser exploratoria.
 - **Pendiente 4:** una vez congelado el modelo, extraer valores de idoneidad/MESS/MOP por sitio y por celda climática única; interpretar la baja independencia espacial.
