@@ -32,3 +32,9 @@ source("R/01_coordinate_quality_GBIF.R")
 ```
 
 The script writes individual flags and screening summaries to `01_datos/coordinatecleaner/`. We cite the DOI and preserve a source checksum rather than bundling heterogeneous GBIF source datasets under a single redistribution license.
+
+## Venezuelan site-level transfer diagnostics
+
+The author-supplied [26_venezuela_site_transfer_values.csv](../results/26_venezuela_site_transfer_values.csv) contains seven collection-event rows. Its original columns are `site_id`, `longitude`, `latitude`, `suitability_cloglog`, `MESS`, `MOP_distance`, `MESS_limiting_variable`, `univariate_extrapolation` and `environmental_context`. These records were withheld from model calibration and tuning. Repeated diagnostic profiles describe shared climatic conditions rather than independent environmental tests.
+
+The file is preserved byte for byte (SHA-256 `dfc66ddb8fe93b6ffd01ab2ea89b9317cfb5499e0d6d3501f529fec3bca8fa2a`). The ranges summarized directly from it are **cloglog 0.558–0.617**, **MESS −18.727 to −18.375** and **MOP 2.028–2.458**. See [the analysis record](../docs/manuscript_transfer_status_2026-10-19.md) for reference scaling, point extraction, locality values and manuscript interpretation.

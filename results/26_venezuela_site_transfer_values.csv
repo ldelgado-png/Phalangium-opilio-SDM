@@ -1,0 +1,8 @@
+"site_id","longitude","latitude","suitability_cloglog","MESS","MOP_distance","MESS_limiting_variable","univariate_extrapolation","environmental_context"
+"Escaguey, carretera Escaguey-Mucuruba",-70.98472222,8.69333333,0.616830050945282,-18.3751945495605,2.02827668190002,"BIO4",TRUE,"univariate_novelty"
+"Moconoque, finca Monocoque",-70.94794444,8.73605556,0.616830050945282,-18.3751945495605,2.02827668190002,"BIO4",TRUE,"univariate_novelty"
+"Moconoque, finca Monocoque.1",-70.94833333,8.73583333,0.616830050945282,-18.3751945495605,2.02827668190002,"BIO4",TRUE,"univariate_novelty"
+"Moconoque, finca Monocoque.2",-70.94833333,8.73583333,0.616830050945282,-18.3751945495605,2.02827668190002,"BIO4",TRUE,"univariate_novelty"
+"Moconoque, finca Monocoque.3",-70.9484,8.736,0.616830050945282,-18.3751945495605,2.02827668190002,"BIO4",TRUE,"univariate_novelty"
+"La Toma, Los Muros de Tadeo",-70.89666667,8.7675,0.608130753040314,-18.619701385498,2.22517275810242,"BIO4",TRUE,"univariate_novelty"
+"La Musui, via aguas termales",-70.9575,8.75055556,0.558120667934418,-18.726749420166,2.45774173736572,"BIO4",TRUE,"univariate_novelty"
