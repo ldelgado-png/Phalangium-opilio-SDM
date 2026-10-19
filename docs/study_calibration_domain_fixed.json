@@ -1,0 +1,40 @@
+{
+  "$schema_note": "Research decision record. This file is descriptive and does not refit any models.",
+  "project": "Phalangium opilio South American climatic suitability transfer",
+  "decision_date": "2026-10-18",
+  "domain_id": "western_palaearctic_fixed_study_rectangle_v1",
+  "domain_role": "Fixed operational calibration/background domain for the present manuscript; NOT a biogeographically demonstrated accessible area M",
+  "geographic_crs": "EPSG:4326",
+  "longitude_west": -12,
+  "longitude_east": 60,
+  "latitude_south": 30,
+  "latitude_north": 72,
+  "wkt": "POLYGON((-12 30,60 30,60 72,-12 72,-12 30))",
+  "grid": "WorldClim 2.1, 5 arcminutes",
+  "predictors": [
+    "BIO1",
+    "BIO4",
+    "BIO12",
+    "BIO15"
+  ],
+  "existing_pilot": {
+    "screened_presence_cells": 10426,
+    "uniform_background_cells": 10000,
+    "validation": "4 latitudinal spatial folds",
+    "feature_classes": [
+      "L",
+      "LQ",
+      "LQH"
+    ],
+    "regularization_multipliers": [
+      1,
+      2
+    ],
+    "existing_visualization": "LQ RM2, cloglog with clamping; not selected by site agreement",
+    "model_freeze_status": "NOT YET LOCKED; background-bias and MOP/MESS review still outstanding"
+  },
+  "transfer_domain": "South America (from 17_worldclim_south_america_5m.tif)",
+  "held_out_venezuelan_records": "never use for M/domain, variable/background/model selection, novelty cutoff, clamping or thresholds; evaluation only after freeze",
+  "limitations": "Rectangular study region chosen for operational reproducibility; this is not direct evidence of historical dispersal/accessibility or complete native environmental coverage. East Eurasia excluded. Environmental comparison within this region still must be transparently described.",
+  "publication_status": "Methodological region fixed; archived results descriptive and reproducible; MESS/MOP outputs and independent external validation NOT yet reported"
+}
