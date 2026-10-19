@@ -89,7 +89,7 @@ if (any(!is.finite(actual_extent)) ||
     ". Do not modify the domain based on Venezuelan localities."
   )
 }
-cat("[R25] Fixed study calibration rectangle verified (not a proven M).\\n")
+cat("[R25] Fixed study calibration rectangle verified (not a proven M).\n")
 
 # A reproducible, bounded reference sample supports memory-constrained
 # computation; results depend on its finite environmental coverage.
