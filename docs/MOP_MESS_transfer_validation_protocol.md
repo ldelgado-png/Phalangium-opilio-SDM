@@ -2,11 +2,11 @@
 
 # Protocol: transfer novelty (MESS/MOP) and independent Venezuelan assessment
 
-**Status:** user-approved, FIXED OPERATIONAL STUDY DOMAIN (12°W–60°E, 30°–72°N); calculations **not executed** and fitted SDM **not yet frozen**. This fixed rectangle is a reproducible methodological boundary, **not a biogeographically demonstrated accessible area (M)**. The LQ/RM2 South America pilot remains exploratory. No environmental-novelty results should be claimed until R25 has been executed and checked. See [domain decision](fixed_calibration_domain_decision.md).
+**Current manuscript decision (19 October 2026):** The operational study domain (12°W–60°E, 30°–72°N), uniform-background calibration and LQ/RM2 clamped South American projection are fixed for the *Journal of Insect Science* manuscript. This rectangle is an operational calibration domain, not a demonstrated biogeographic accessible area (M). The authors have reported negative MESS at all three Venezuelan climatic cells; their underlying local execution files have not been deposited. The remaining sections preserve a historical proposed workflow and must not be mistaken for the current manuscript's executed analysis. See [current transfer results](manuscript_transfer_status_2026-10-19.md) and [domain decision](fixed_calibration_domain_decision.md).
 
 ## Scientific aim and manuscript figure
 
-The manuscript's **Figure 2** is a photographic plate depicting habitats in Mérida, Venezuela. Its existing **Figure 4**, not Figure 2, illustrates the exploratory climatic-suitability surface for South America. The additional environmental-novelty assessment should accompany **Figure 4** (e.g., a paired MOP/map panel or supplementary material); the figure legend must distinguish climatic suitability from transfer reliability.
+**Historical figure numbering only:** The current *Journal of Insect Science* manuscript uses Figure 1 for habitat, Figure 2 for distribution, Figure 3 for suitability and MESS, and Figure 4 for specimens. Earlier figure references in the staged protocol are superseded.
 
 ## Literature and provenance
 
@@ -60,7 +60,7 @@ The script requires locally installed `terra`, `predicts`, `mop`, and `FNN`, and
 - Discussion: clarify conditional reliability of suitability predictions in analogous versus non-analog environments and the limitations of locally clustered independent occurrences.
 - Figure 4 addendum or supplement: South American suitability raster alongside MOP novelty/strict-extrapolation map; clearly separate **relative suitability** from **extrapolation risk**.
 
-## Pending tasks (Spanish)
+## Historical workflow tasks (Spanish; superseded where manuscript decisions are fixed)
 
 - **Dominio acordado:** rectángulo paleártico occidental fijado operativamente para el manuscrito (12°O–60°E, 30°–72°N), sin afirmar que represente M biogeográficamente demostrada. **Pendiente 1:** mantener ese límite sin ajustes post hoc y reconocer sus limitaciones; cerrar el tratamiento del fondo de calibración (uniforme frente a alternativas de sensibilidad).
 - **Pendiente 2:** congelar el modelo, variables, clamping y umbrales antes de explorar las localidades venezolanas.
