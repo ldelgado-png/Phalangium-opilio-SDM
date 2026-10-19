@@ -1,5 +1,7 @@
 # Methodological framework
 
+**Manuscript decision (18 October 2026): operational study domain fixed.** The rectangle 12°W–60°E, 30°–72°N is now the **definitive geographical calibration/background domain for the submitted field-note analysis**; see [`fixed_calibration_domain_decision.md`](fixed_calibration_domain_decision.md) and [`study_calibration_domain_fixed.json`](study_calibration_domain_fixed.json). Fixing these coordinates is a reproducibility decision and does **not** prove that the rectangle constitutes the biogeographically accessible area M. Prior paragraphs that refer to an "exploratory" or "provisional" window describe the historical pilot phase, whose recorded results remain unchanged. The model's moderate, fold-dependent evaluation and uniform background assumptions continue to limit inference. The geographical limits must not be re-optimized to fit the withheld Venezuelan sites. Existing MOP/MESS scripts are unexecuted; no novelty percentages or post-freeze site-level suitability values can yet be reported.
+
 ## Study aim
 
 We examine the potential climatic suitability of *Phalangium opilio* in South America in the context of its confirmed occurrence in the Venezuelan Andes. Our inference concerns environmental suitability, not observed occupancy, introduction probability, propagule pressure, or direct ecological impact.
