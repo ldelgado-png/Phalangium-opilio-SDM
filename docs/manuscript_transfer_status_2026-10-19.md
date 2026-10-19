@@ -33,7 +33,7 @@ The public repository's `R/25_exploratory_MESS_MOP_south_america.R` computes cli
 
 ## Revised manuscript interpretation
 
-The model assigns nonzero relative suitability to the known Venezuelan records, but those sites fall outside the sampled western calibration climate for BIO4 and have negative MESS. Under clamping, agreement between the mapped prediction and occurrence positions cannot establish independent geographic discrimination, climatic niche conservatism or adaptation. The transfer is **hypothesis-generating**: candidate areas warranting targeted surveys, with dispersal, habitat and anthropogenic transport evaluated separately.
+The model assigns nonzero relative suitability to the known Venezuelan records, but those sites fall outside the sampled western calibration climate for BIO4 and have negative MESS. Under clamping, agreement between the mapped prediction and occurrence positions cannot establish independent geographic discrimination, climatic niche conservatism or adaptation. The transfer identifies candidate areas warranting targeted surveys, with dispersal, habitat and anthropogenic transport evaluated separately.
 
 ## Current Figure 3
 
@@ -46,7 +46,7 @@ The model assigns nonzero relative suitability to the known Venezuelan records, 
 
 > **Figure 3.** Predicted climatic suitability and environmental novelty for *Phalangium opilio* in South America, based on a western Palaearctic-calibrated model. **(A)** Climatic suitability (cloglog, 0–1) predicted using maxnet (LQ features, regularization multiplier 2) and WorldClim 2.1 BIO1, BIO4, BIO12, and BIO15 at 5-arcminute resolution, with clamping enabled. **(B)** Environmental novelty (MESS): red indicates MESS < 0 and green indicates MESS ≥ 0. The white circle marks the Venezuelan study area; the inset shows three climatic cells containing seven collection records. All three cells had negative MESS, with BIO4 below the sampled calibration range.
 
-## Reproducibility and submission checks (pendientes)
+## Reproducibility record: evidence still required (pendientes técnicos)
 
 - **Pendiente:** depositar y verificar el script exacto, registros de ejecución, versiones de paquetes y rásteres de los que procede la figura combinada y los valores locales.
 - **Pendiente:** documentar si el MESS de los sitios se calculó frente a toda la referencia o a una muestra de 5.000 celdas, con su semilla y unidades de BIO4; mantener consistencia entre métodos y leyenda.
