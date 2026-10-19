@@ -22,6 +22,18 @@ The manuscript's **Figure 2** is a photographic plate depicting habitats in Mér
 
 The prior `R/07_full_grid_transfer_range_audit.R` calculated a predictor-wise range-exceedance map; it is **not** equivalent to a formal MESS or MOP analysis.
 
+## Executable Stage-A exploratory implementation (prepared, NOT executed)
+
+`R/25_exploratory_MESS_MOP_south_america.R` is now available to run in the researcher's local RStudio using only the two archived climate stacks (WorldClim 2.1, BIO1/BIO4/BIO12/BIO15, 5 arcminutes). It does **not** read the Venezuelan occurrences, any model object or any pilot suitability prediction.
+
+- A reproducible sample of up to **5,000** complete environmental cells is drawn from the **original western Palaearctic rectangle**, seed `251018`. This is **not** M, and the sample does not claim exhaustive coverage of the reference's extrema. Sample means and standard deviations define Euclidean distance scaling *without using the transfer domain*.
+- `predicts::mess` calculates **raster-wide MESS** plus per-variable scores. Negative MESS indicates at least one out-of-range predictor relative to the **sampled** western-reference climate; the script writes a strict-extrapolation flag and a limiting-variable raster.
+- MOP distance is defined as the mean **standardized Euclidean environmental distance to the closest 1%** (at least one, rounded upward) of reference cells, computed for the **complete South American predictor raster**. The R implementation uses `FNN::get.knnx` to search exact kd-tree neighbours within small, disk-backed `terra::app` chunks and cross-checks a small, independent sample of transfer climate cells against `mop::mop_distance`. The metric is continuous; it must **not** be interpreted as an established numeric cutoff for safely analogous transfer. Large within-range MOP distances can indicate novel multivariate combinations missed by strict single-variable tests.
+- Outputs are stored locally under `04_resultados_modelo/pilot_western_palaearctic/transfer_novelty_EXPLORATORY_NOT_FINAL/`, with GeoTIFFs, PNG preview, sampled-reference statistics, version numbers, provenance and a simple count of extrapolative land cells. These **cell percentages are not area-corrected** because geographic rasters have unequal cell areas by latitude.
+- All run outputs are **pending**; nothing in this protocol implies that the user's RStudio executed it. No calibration or model-selection change has occurred.
+
+The script requires locally installed `terra`, `predicts`, `mop`, and `FNN`, and checks them before doing any work. In a later sensitivity assessment, repeat with several reference sample sizes/seeds and finally with a defended M; keep all map legends explicitly labelled **EXPLORATORY**.
+
 ## Stage A — environmental transfer diagnostics (without Venezuelan sites)
 
 1. Defend and freeze the calibration area **M** using biogeographical evidence and accessible-area sensitivity analysis, **never referencing Venezuelan sites**. If preliminary diagnostics are performed using the current rectangle, label all maps `EXPLORATORY / NOT M`.
