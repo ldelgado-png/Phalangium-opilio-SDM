@@ -1,5 +1,8 @@
 # ODMAP reporting framework for *Phalangium opilio* in South America
 
+**Manuscript decision (18 October 2026): operational study domain fixed.** The rectangle 12°W–60°E, 30°–72°N is now the **definitive geographical calibration/background domain for the submitted field-note analysis**; see [`fixed_calibration_domain_decision.md`](fixed_calibration_domain_decision.md) and [`study_calibration_domain_fixed.json`](study_calibration_domain_fixed.json). Fixing these coordinates is a reproducibility decision and does **not** prove that the rectangle constitutes the biogeographically accessible area M. Prior paragraphs that refer to an "exploratory" or "provisional" window describe the historical pilot phase, whose recorded results remain unchanged. The model's moderate, fold-dependent evaluation and uniform background assumptions continue to limit inference. The geographical limits must not be re-optimized to fit the withheld Venezuelan sites. Existing MOP/MESS scripts are unexecuted; no novelty percentages or post-freeze site-level suitability values can yet be reported.
+
+
 The study documentation follows the five-component **ODMAP** reporting protocol (Overview, Data, Model, Assessment and Prediction) of Zurell et al. (2020). This framework separates completed exploratory model evidence from requirements for definitive inference and provides a traceable description of the study's objectives, assumptions, data, algorithms, evaluation design and transfer.
 
 ## Overview
