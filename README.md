@@ -2,6 +2,8 @@
 
 **Species distribution modelling | Opiliones: Phalangiidae | South America**
 
+**Fixed operational calibration domain (author decision, 18 October 2026):** 12°W–60°E, 30°–72°N (western Palaearctic rectangle; WorldClim 2.1, 5′; BIO1/BIO4/BIO12/BIO15). This is the **definitive geographical domain for this manuscript**, documented in [`docs/fixed_calibration_domain_decision.md`](docs/fixed_calibration_domain_decision.md) and [`docs/study_calibration_domain_fixed.json`](docs/study_calibration_domain_fixed.json). The geographical limits are now fixed, but **the study has not demonstrated that they coincide with the species' accessible area M**. The existing 10,426 presence cells, 10,000 uniform background cells, six pilot fits and four-fold evaluations are completed *within this very domain*. The existing clamped LQ/RM2 transfer figure remains **descriptive/hypothesis-generating**, with heterogeneous spatial-fold discrimination. **MOP/MESS results and independent Venezuelan validation have not yet been generated.** The SDM is a secondary element of the field note rather than proof of occupied habitat or invasion spread.
+
 ## Study overview
 
 *Phalangium opilio* (Linnaeus, 1758) is a Palaearctic harvestman with established populations beyond its native range. Recent collections from the Venezuelan Andes document its presence in South America and provide a basis for investigating environmental suitability across the continent. We use occurrence records and climatic predictors to develop a reproducible framework for examining the potential geographical extent of suitable conditions in South America.
