@@ -6,7 +6,8 @@
 #
 # NO Venezuelan field occurrences, localities, or their coordinates are read.
 # No model object or prior prediction is accessed or re-fitted.
-# The 12W–60E / 30N–72N reference is a RECTANGLE, NOT a justified M.
+# The 12W–60E / 30N–72N rectangle is the FIXED OPERATIONAL DOMAIN for
+# this manuscript, but NOT a biogeographically demonstrated accessible M.
 # This script reports climate analogy and novelty relative to that rectangle
 # only. It cannot externally validate any species distribution model.
 #
@@ -71,6 +72,24 @@ if (!isTRUE(terra::is.lonlat(west)) ||
   stop("WorldClim reference and transfer rasters differ in CRS ",
        "or cell resolution. Do not resample silently.")
 }
+
+# Decision lock: the study domain has been fixed for the manuscript.
+# It must not silently change between the archived pilot and these maps.
+expected_extent <- c(-12, 60, 30, 72)
+actual_extent <- c(
+  terra::xmin(west), terra::xmax(west),
+  terra::ymin(west), terra::ymax(west)
+)
+if (any(!is.finite(actual_extent)) ||
+    any(abs(actual_extent - expected_extent) > 1e-5)) {
+  stop(
+    "Reference climate raster does not match the fixed study domain ",
+    "(-12, 60, 30, 72). Got: ",
+    paste(actual_extent, collapse = ", "),
+    ". Do not modify the domain based on Venezuelan localities."
+  )
+}
+cat("[R25] Fixed study calibration rectangle verified (not a proven M).\\n")
 
 # A reproducible, bounded reference sample supports memory-constrained
 # computation; results depend on its finite environmental coverage.
