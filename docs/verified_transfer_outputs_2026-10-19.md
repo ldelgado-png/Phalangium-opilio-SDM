@@ -10,4 +10,4 @@ The original source files retain historical labels such as `EXPLORATORY` and `NO
 
 ## Reproducibility boundary
 
-The source archive and figures are available in the author's local project; the full raster binaries and exact R26/R27 source scripts have **not** yet been deposited in this public repository. Private coordinate-bearing site tables are deliberately excluded from the public summary. The model configuration and quantitative results are fixed for the manuscript; complete public regeneration of Figure 3 requires deposition of the source rasters and plotting scripts, after checking for unpublished coordinates and file size constraints.
+The source suitability, MESS, MOP and limiting-variable GeoTIFFs, the exact R26/R27 scripts, and Figure 3 exports (PNG, PDF and 600-dpi TIFF) are deposited in this repository. Private coordinate-bearing site tables are deliberately excluded. The fixed manuscript model and transfer diagnostics can be inspected from the published files; reproducing the site overlay from scratch requires access to the withheld coordinate-bearing input. Independent end-to-end execution has not been verified.
