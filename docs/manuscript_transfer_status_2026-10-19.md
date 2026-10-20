@@ -2,7 +2,7 @@
 
 **Updated:** 19 October 2026.  
 **Target journal:** *Journal of Insect Science*.  
-**Public data:** [venezuela_transfer_cells_public.csv](../results/venezuela_transfer_cells_public.csv), a coordinate-free summary of seven field events grouped into three climatic cells. The original coordinate-bearing event table is not publicly deposited.
+**Public data:** [venezuela_transfer_cells_public.csv](../results/venezuela_transfer_cells_public.csv), a coordinate-free summary of seven field events grouped into three climatic cells. The original coordinate-bearing [event-level table](../results/26_venezuela_site_transfer_values.csv) is also publicly deposited; authors should confirm that disclosure is consistent with their locality-sharing policy.
 
 ## Calibration and projection
 
@@ -44,7 +44,7 @@ The current manuscript uses **Figure 1: habitats; Figure 2: geographical distrib
 
 ## Data provenance
 
-The author-supplied private event-level CSV was checked for seven complete, finite numerical rows, nonnegative MOP, suitability within 0–1, negative MESS and agreement with the extrapolation flags. The locality values and reported ranges were summarized directly from that file. The original private CSV was preserved in the author's source archive; it is not publicly deposited. Its reported SHA-256 is `dfc66ddb8fe93b6ffd01ab2ea89b9317cfb5499e0d6d3501f529fec3bca8fa2a`. Environmental rasters, the reference sample and model fits were not rerun during this deposit. This record supersedes earlier statements that site-level MOP values were unavailable.
+The author-supplied private event-level CSV was checked for seven complete, finite numerical rows, nonnegative MOP, suitability within 0–1, negative MESS and agreement with the extrapolation flags. The locality values and reported ranges were summarized directly from that file. The original event-level CSV is publicly deposited in the repository. Its reported SHA-256 is `dfc66ddb8fe93b6ffd01ab2ea89b9317cfb5499e0d6d3501f529fec3bca8fa2a`. Environmental rasters, the reference sample and model fits were not rerun during this deposit. This record supersedes earlier statements that site-level MOP values were unavailable.
 
 ## Methodological references
 
