@@ -9,7 +9,7 @@ The study documentation follows the five-component **ODMAP** reporting protocol 
 
 **Objective.** We evaluate the climatic conditions potentially suitable for *Phalangium opilio* in South America in relation to documented records from the Venezuelan Andes. Inference concerns **relative climatic suitability** and does not estimate establishment probability, dispersal rate, propagule pressure, or realized future spread.
 
-**Conceptual model.** We distinguish the calibration domain, a biologically justified accessible area (M), from the South American projection extent. We also distinguish local environment, observation process, and the known distribution of the species. The range of origin offers a basis for transfer, while observations from Venezuela provide a geographically independent check once modelling decisions have been fixed.
+**Conceptual model.** We distinguish the operational calibration rectangle, the concept of a biogeographically justified accessible area (*M*), and the South American projection extent. We also distinguish local environment, observation process, and the known distribution of the species. The range of origin offers a basis for transfer, while observations from Venezuela provide a geographically independent check once modelling decisions have been fixed.
 
 **Spatial and temporal resolution.** Predictors comprise WorldClim v2.1 BIO1, BIO4, BIO12 and BIO15 at 5-arcminute resolution, representing the 1970–2000 climate baseline. Presence records come from a reproducible GBIF occurrence download (https://doi.org/10.15468/dl.9gn3qv).
 
@@ -21,13 +21,13 @@ The study documentation follows the five-component **ODMAP** reporting protocol 
 
 **Taxonomy and coordinate screening.** We audit occurrence status, taxonomic assignments, coordinate precision, spatial uncertainty and the test-specific `CoordinateCleaner` flags. Coordinate alerts near cities, institutions or coastlines are not assumed to prove location error. We separate one-per-climate-cell thinning from correction of sampling bias.
 
-**Environmental data.** WorldClim v2.1 offers four initial bioclimatic predictors. Environmental correlation and multivariate redundancy are assessed relative to the calibration area. The Western Palaearctic rectangular extent was an initial exploratory domain, not a biologically established accessible area.
+**Environmental data.** WorldClim v2.1 offers four initial bioclimatic predictors. Environmental correlation and multivariate redundancy are assessed relative to the calibration area. The western Palaearctic rectangle is the fixed operational calibration domain, not a biologically established accessible area.
 
 **Observation process.** We consider the taxon-stratified GBIF sampling-effort products of El-Gabbas (2026), preferably cumulative `Opiliones` observation counts (`n_obs`) and with careful treatment of taxonomy, date, projection geometry and potential inclusion of the target species in the effort proxy. Uniform, effort-weighted and appropriately constructed target-group backgrounds are distinct analytical alternatives. The effort layer is not treated as ecological absence.
 
 ## Model
 
-**Computational pilot.** The first completed benchmark evaluated six feature/regularization combinations (L, LQ and LQH; RM 1 and 2), with 10,426 presence cells, 10,000 uniform background cells and four spatial validation blocks in the Western Palaearctic exploratory rectangle. The run was completed with `ENMeval` 2.0.5 and `maxnet` 0.1.4.
+**Model comparison.** The completed evaluation evaluated six feature/regularization combinations (L, LQ and LQH; RM 1 and 2), with 10,426 presence cells, 10,000 uniform background cells and four spatial validation blocks in the fixed western Palaearctic operational rectangle. The run was completed with `ENMeval` 2.0.5 and `maxnet` 0.1.4.
 
 **Accessible area and background.** For the fixed manuscript configuration, calibration background comprises 10,000 uniformly sampled climate-valid cells within the operational western Palaearctic rectangle. This rectangle is not claimed to represent a biogeographically demonstrated accessible area (M). Background weighting is analyzed separately from accessible-area delineation; any comparisons specify the sampling algorithm, random seed, transformation of effort counts and effective sample size.
 
@@ -37,7 +37,7 @@ The study documentation follows the five-component **ODMAP** reporting protocol 
 
 **Internal validation.** Our first latitudinal four-block analysis showed a pronounced fold-specific contrast: mean validation AUC across the six model settings ranged from approximately 0.622 to 0.661, with consistently weaker discrimination in the two central latitude bands. The number and environmental distribution of validation background cells varied substantially across folds. We interpret these as diagnostics of spatially heterogeneous discrimination, not a definitive identification of overfitting.
 
-**Extrapolation.** Full-grid comparison against the initial Western Palaearctic environmental rectangle found 34,549 of 223,558 South American climate-valid land cells (15.454%) outside at least one univariate environmental range. This is a descriptive warning, not a formal multivariate environmental similarity statistic or a claim of environmental unsuitability.
+**Extrapolation.** An earlier full-grid minimum–maximum comparison identified 34,549 of 223,558 valid South American cells (15.454%) outside at least one range of the complete reference raster. The deposited sampled-reference MESS analysis instead identifies 158,611 negative-MESS cells among 223,558 valid cells (70.9485%). These are different diagnostics with different environmental references, not interchangeable estimates. Neither proportion is corrected for geographic cell area or indicates biological absence.
 
 **Independent field evidence.** Seven events from the Venezuelan Andes correspond to six geographic coordinate pairs and three confirmed 5-arcminute climatic cells. These are not used to calibrate, tune, choose thresholds or rank models. Any later field-based assessment is limited by the geographic clustering and low number of independent climatic cells. Their records and unpublished metadata are not distributed through this public repository.
 
@@ -47,7 +47,7 @@ The study documentation follows the five-component **ODMAP** reporting protocol 
 
 **Transfer uncertainty.** Reporting distinguishes within-range transfer and extrapolation, clamp settings, alternative model and background configurations, resolution and data uncertainty. Suitability does not imply arrival, survival, reproduction, or demonstrated introduction.
 
-**Reproducibility.** Code, model metrics, package versions, download DOI and explicit methodological choices are published in this repository. The raw source download and the field occurrences remain separately managed. Model artefacts are reported as completed results only when the analyses have actually run.
+**Reproducibility.** Code, model metrics, package versions, download DOI and explicit methodological choices are published in this repository. The raw source download and coordinate-bearing Venezuelan field occurrences remain separately managed. The source rasters and Figure 3 are deposited; independent end-to-end reproduction has not been verified. Model artefacts are reported as completed results only when the analyses have actually run.
 
 ## References
 
