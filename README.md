@@ -52,6 +52,10 @@ Historical script and raster filenames containing `pilot`, `EXPLORATORY`, `NOT_F
 
 Code: MIT (`LICENSE`). Cite the software via `CITATION.cff` (a Zenodo DOI for the tagged release should be added before submission), and the GBIF download as below.
 
+## Additional workflows
+
+The repository also includes [run_all.R](run_all.R), [R28 reporting exports](R/28_export_reproducibility_tables.R), and [R29 BIO4/clamping sensitivity](R/29_sensitivity_BIO4_clamping.R). These additions do not alter the fixed manuscript model or establish new sensitivity results without successful execution. The driver continues after individual step failures; review its log and all generated outputs before claiming full reproduction.
+
 ## Citation and scientific interpretation
 
 When reusing the occurrence data, cite [GBIF.org (2026), DOI:10.15468/dl.9gn3qv](https://doi.org/10.15468/dl.9gn3qv), alongside the manuscript and any relevant software or environmental-data sources. The distinction between modelled climatic suitability and observed occurrence, and between operational calibration geography and biogeographical accessibility, should be preserved in derivative analyses.
