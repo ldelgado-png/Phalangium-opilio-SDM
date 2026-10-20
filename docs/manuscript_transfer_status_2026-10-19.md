@@ -2,7 +2,7 @@
 
 **Updated:** 19 October 2026.  
 **Target journal:** *Journal of Insect Science*.  
-**Source:** [26_venezuela_site_transfer_values.csv](../results/26_venezuela_site_transfer_values.csv), deposited as supplied by the author, with seven rows and the original numerical precision.
+**Public data:** [venezuela_transfer_cells_public.csv](../results/venezuela_transfer_cells_public.csv), a coordinate-free summary of seven field events grouped into three climatic cells. The original coordinate-bearing event table is not publicly deposited.
 
 ## Calibration and projection
 
