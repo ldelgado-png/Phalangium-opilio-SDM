@@ -9,11 +9,7 @@ authors:
     affiliation: "Grupo de Investigación Ecdysis, Programa de Biología, Universidad del Quindío, Colombia"
 repository-code: "https://github.com/ldelgado-png/Phalangium-opilio-SDM"
 license: MIT
-# TODO before submission: create a GitHub release (e.g. v1.0.0), archive it in Zenodo,
-# then fill in version, date-released and doi below with the Zenodo values.
-version: "TODO-v1.0.0"
-date-released: "TODO-YYYY-MM-DD"
-# doi: "10.5281/zenodo.TODO"
+# A version, release date and archive DOI can be added when an actual release is published.
 keywords:
   - Opiliones
   - Phalangium opilio
