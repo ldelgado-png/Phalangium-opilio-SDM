@@ -3,7 +3,9 @@
 # RStudio:
 # source("https://raw.githubusercontent.com/ldelgado-png/Phalangium-opilio-SDM/main/R/11_pilot_ENMeval_maxnet.R")
 #
-# This is an INITIAL, exploratory calibration using the Western Palaearctic
+# STATUS NOTE (2026-10-19): this script produced the model used in the manuscript (fixed LQ, RM=2).
+# The 'pilot'/'exploratory' wording below is historical and kept for provenance.
+# This is an INITIAL calibration using the Western Palaearctic
 # climate window. The rectangular window is NOT a biogeographically justified
 # accessible area M. Its background is NOT the final background design.
 #
@@ -287,7 +289,7 @@ writeLines(c(
   "Feature classes L, LQ, LQH; regularization multipliers 1 and 2.",
   "Baseline visualization is a priori LQ, RM=2, not the optimal model.",
   "Venezuelan field occurrences NOT read, tuned against, or evaluated.",
-  "Outputs are exploratory and NOT publication-ready SDM results."
+  "Historical note: outputs of this script are the manuscript model (fixed LQ/RM2); see README."
 ), file.path(out, "11_pilot_execution_metadata.txt"))
 
 cat("\nPHALANGIUM OPILIO | FIRST ENMEVAL / MAXNET FIT COMPLETED\n")

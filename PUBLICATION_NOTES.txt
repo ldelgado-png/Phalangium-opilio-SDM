@@ -1,1 +1,11 @@
-Files prepared for the Phalangium-opilio-SDM repository. Historical filenames retained where R scripts depend on them. Figure is numbered 3 for current manuscript; script source is named figura2 historically. Private site-level coordinates excluded. Site CSV is not included; R27 requires the private input for re-running. Do not claim fully independent end-to-end reproduction without this input or a privacy-safe derived cell-level equivalent.
+Phalangium-opilio-SDM: publication notes.
+
+- Historical filenames containing "pilot", "EXPLORATORY", "NOT_FINAL" or "figura2" are kept for path
+  compatibility with the R scripts. They do not denote a different or pending model.
+- The deposited rasters and figures were force-added to Git although .gitignore lists *.tif and *.pdf.
+- Venezuelan site coordinates are public: results/26_venezuela_site_transfer_values.csv (and Table 1
+  of the manuscript). With the deposited rasters, R/26 and the site overlay of R/27 can be re-run.
+- Raw GBIF download and WorldClim rasters are not redistributed: obtain the GBIF archive by DOI
+  (SHA-256 in data/README.md) and WorldClim 2.1 from worldclim.org. See run_all.R for the order.
+- Statements of end-to-end reproduction should be made only after run_all.R has been executed on a clean
+  checkout and its session log (results/sessionInfo.txt) has been committed.

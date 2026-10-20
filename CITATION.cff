@@ -1,0 +1,48 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite the software release and the associated manuscript."
+title: "Phalangium-opilio-SDM: reproducible data provenance and R workflows for climatic suitability modeling"
+type: software
+authors:
+  - family-names: "Delgado-Santa"
+    given-names: "Leonardo"
+    orcid: "https://orcid.org/0000-0002-9714-6924"
+    affiliation: "Grupo de Investigación Ecdysis, Programa de Biología, Universidad del Quindío, Colombia"
+repository-code: "https://github.com/ldelgado-png/Phalangium-opilio-SDM"
+license: MIT
+# TODO before submission: create a GitHub release (e.g. v1.0.0), archive it in Zenodo,
+# then fill in version, date-released and doi below with the Zenodo values.
+version: "TODO-v1.0.0"
+date-released: "TODO-YYYY-MM-DD"
+# doi: "10.5281/zenodo.TODO"
+keywords:
+  - Opiliones
+  - Phalangium opilio
+  - species distribution model
+  - MESS
+  - MOP
+  - maxnet
+references:
+  - type: data
+    title: "GBIF Occurrence Download"
+    authors:
+      - name: "GBIF.org"
+    year: 2026
+    doi: "10.15468/dl.9gn3qv"
+preferred-citation:
+  type: article
+  title: "A Palaearctic harvestman reaches the Neotropics: first record of Phalangium opilio from the Venezuelan Andes, with notes on its segregation from native harvestmen"
+  authors:
+    - family-names: "Sánchez-Guillén"
+      given-names: "Nestor"
+    - family-names: "Villarreal"
+      given-names: "Osvaldo"
+    - family-names: "La Marca"
+      given-names: "Enrique"
+    - family-names: "De Ascenção"
+      given-names: "Antonio"
+    - family-names: "Martínez"
+      given-names: "Reinhold"
+    - family-names: "Delgado-Santa"
+      given-names: "Leonardo"
+  year: 2026
+  notes: "Manuscript in preparation; update journal, volume and DOI when published."

@@ -31,10 +31,10 @@
       2
     ],
     "existing_visualization": "LQ RM2, cloglog with clamping; not selected by site agreement",
-    "model_freeze_status": "NOT YET LOCKED; background-bias and MOP/MESS review still outstanding"
+    "model_freeze_status": "LOCKED for the manuscript: fixed LQ/RM2 (cloglog, clamping) as declared a priori in R/11 (commit 0fb3b69, 2026-10-17); Venezuelan records first appear in the repository on 2026-10-19 (commit e68f867). Historical status on 2026-10-18 was 'not yet locked'."
   },
   "transfer_domain": "South America (from 17_worldclim_south_america_5m.tif)",
   "held_out_venezuelan_records": "never use for M/domain, variable/background/model selection, novelty cutoff, clamping or thresholds; evaluation only after freeze",
   "limitations": "Rectangular study region chosen for operational reproducibility; this is not direct evidence of historical dispersal/accessibility or complete native environmental coverage. East Eurasia excluded. Environmental comparison within this region still must be transparently described.",
-  "publication_status": "Methodological region fixed; archived results descriptive and reproducible; MESS/MOP outputs and independent external validation NOT yet reported"
+  "publication_status": "Methodological region fixed; MESS/MOP outputs for the Venezuelan sites are archived (results/); they are descriptive transfer diagnostics, not external validation"
 }
