@@ -1,11 +1,8 @@
-Phalangium-opilio-SDM: publication notes.
+Phalangium-opilio-SDM: repository and reproducibility notes.
 
-- Historical filenames containing "pilot", "EXPLORATORY", "NOT_FINAL" or "figura2" are kept for path
-  compatibility with the R scripts. They do not denote a different or pending model.
-- The deposited rasters and figures were force-added to Git although .gitignore lists *.tif and *.pdf.
-- Venezuelan site coordinates are public: results/26_venezuela_site_transfer_values.csv (and Table 1
-  of the manuscript). With the deposited rasters, R/26 and the site overlay of R/27 can be re-run.
-- Raw GBIF download and WorldClim rasters are not redistributed: obtain the GBIF archive by DOI
-  (SHA-256 in data/README.md) and WorldClim 2.1 from worldclim.org. See run_all.R for the order.
-- Statements of end-to-end reproduction should be made only after run_all.R has been executed on a clean
-  checkout and its session log (results/sessionInfo.txt) has been committed.
+- The manuscript uses the fixed western Palaearctic operational calibration rectangle, the LQ/RM2 model, and the clamped South American projection.
+- Historical filenames containing "pilot", "EXPLORATORY", "NOT_FINAL" or "figura2" are retained for provenance and path compatibility; the manuscript figure is Figure 3.
+- The published repository now includes the seven-event coordinate-bearing Venezuelan transfer table at results/26_venezuela_site_transfer_values.csv, in addition to the three-cell coordinate-free summary. These field coordinates should be considered publicly disclosed; confirm that their release is consistent with the authors' specimen-data and locality-sharing policy.
+- Source rasters, final figure exports, model-evaluation summaries and R26/R27 are deposited. The additional R28 and R29 scripts are provided as supplementary workflows; their existence does not establish that they have been executed or that their outputs support new manuscript claims.
+- Raw GBIF and WorldClim source archives are retrieved separately using their documented sources and checksums.
+- run_all.R is an unverified convenience driver, not a demonstrated clean-checkout reproduction test. It continues after individual step failures; inspect results/run_all_log.csv and confirm all required stages succeeded before asserting end-to-end reproducibility.
