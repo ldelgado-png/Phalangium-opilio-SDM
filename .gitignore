@@ -25,3 +25,11 @@ __pycache__/
 
 # Published source rasters and locally generated sampling-effort summaries
 01_datos/sampling_effort/
+
+# Local review logs, recalculations and separately supplied field inputs
+local_review/
+private/
+**/*venezuela_site_transfer_values.csv
+**/*Venezuela_cell_keys.csv
+data/calibration_presence_cells.csv
+data/calibration_background_xy.csv

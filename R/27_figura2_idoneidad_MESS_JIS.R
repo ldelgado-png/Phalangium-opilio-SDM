@@ -1,4 +1,5 @@
-# Phalangium opilio | Figure 2 for Journal of Insect Science
+# Phalangium opilio | Suitability/MESS figure accompanying the Biotropica submission
+# Historical filenames and export identifiers are retained for compatibility.
 # R27 | 19 October 2026
 # Two panels: (A) original LQ/RM2 climatic suitability, (B) MESS sign.
 # A small inset shows THREE independent WorldClim grid cells in Venezuela.
@@ -24,10 +25,11 @@ site_dir <- file.path(pilot, "26_venezuela_transfer_DIAGNOSTIC_NOT_FINAL")
 suit_file <- file.path(pilot,
   "09_pilot_south_america_LQ_rm2_cloglog_NOT_FINAL.tif")
 mess_file <- file.path(novelty, "27_sa_MESS_5m_EXPLORATORY.tif")
-site_file <- file.path(site_dir, "26_venezuela_site_transfer_values.csv")
+site_file <- getOption("phalangium.venezuela_extraction_csv",
+                      file.path(site_dir, "26_venezuela_site_transfer_values.csv"))
 inputs <- c(suit_file, mess_file, site_file)
 if (!all(file.exists(inputs))) {
-  stop("Required file(s) missing. Run R11, R25 and R26-v3 first.\n",
+  stop("Required file(s) missing. Supply the private R26 field extraction; see docs/REVIEWER_GUIDE.md.\n",
        paste(inputs[!file.exists(inputs)], collapse = "\n"))
 }
 
@@ -262,7 +264,7 @@ utils::write.csv(pts, file.path(out, "Figure_2_Venezuela_cell_keys.csv"),
 mess_count <- terra::global(!is.na(mess), "sum", na.rm = TRUE)[1,1]
 negative_count <- terra::global(mess < 0, "sum", na.rm = TRUE)[1,1]
 source_desc <- c(
-  "Figure 2, Phalangium opilio. Journal of Insect Science Short Communication.",
+  "Phalangium opilio suitability/MESS figure, Biotropica submission; historical export filenames retained.",
   "A: ORIGINAL LQ/RM2 pilot cloglog GeoTIFF, clamping enabled.",
   "B: sign of the overall MESS (5th layer from R25); not a MOP map.",
   "MESS < 0 = at least one predictor outside the sampled reference ranges.",
@@ -275,7 +277,7 @@ source_desc <- c(
   paste0("Total MESS-valid South American cells: ", mess_count),
   paste0("MESS-negative cells: ", negative_count),
   "Rasters were not resampled, modified, interpolated or refitted.",
-  "This is an exploratory visualization, not validated habitat suitability.",
+  "Conditional climatic suitability; field correspondence is descriptive transfer evidence.",
   paste("Suitability source:", normalizePath(suit_file, winslash="/")),
   paste("MESS source:", normalizePath(mess_file, winslash="/")),
   paste("Sites source:", normalizePath(site_file, winslash="/")),

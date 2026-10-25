@@ -28,6 +28,7 @@ candidate_file <- file.path(
   "02_all_candidates_with_CC_flags.csv"
 )
 if (!file.exists(candidate_file)) {
+  if (!interactive()) stop("Required corrected candidate file missing: ", candidate_file, ". Run R01 and R03 first.")
   message("Select the corrected file '02_all_candidates_with_CC_flags.csv'.")
   candidate_file <- file.choose()
   if (basename(candidate_file) != "02_all_candidates_with_CC_flags.csv") {

@@ -1,8 +1,13 @@
-Phalangium-opilio-SDM: repository and reproducibility notes.
+Phalangium-opilio-SDM: peer-review archive, 25 October 2026.
 
-- The manuscript uses the fixed western Palaearctic operational calibration rectangle, the LQ/RM2 model, and the clamped South American projection.
-- Historical filenames containing "pilot", "EXPLORATORY", "NOT_FINAL" or "figura2" are retained for provenance and path compatibility; the manuscript figure is Figure 3.
-- The published repository now includes the seven-event coordinate-bearing Venezuelan transfer table at results/26_venezuela_site_transfer_values.csv, in addition to the three-cell coordinate-free summary. These field coordinates should be considered publicly disclosed; confirm that their release is consistent with the authors' specimen-data and locality-sharing policy.
-- Source rasters, final figure exports, model-evaluation summaries and R26/R27 are deposited. The additional R28 and R29 scripts are provided as supplementary workflows; their existence does not establish that they have been executed or that their outputs support new manuscript claims.
-- Raw GBIF and WorldClim source archives are retrieved separately using their documented sources and checksums.
-- run_all.R is an unverified convenience driver, not a demonstrated clean-checkout reproduction test. It continues after individual step failures; inspect results/run_all_log.csv and confirm all required stages succeeded before asserting end-to-end reproducibility.
+Journal: Biotropica. The submitted manuscript title is recorded in README.md and CITATION.cff.
+
+The manuscript analysis uses the fixed western Palaearctic operational rectangle, LQ/RM2, cloglog output and clamping. The archived scientific rasters and figure exports are unchanged; data/review_artifact_manifest.csv records their Git blob identifiers and sizes.
+
+Public review starts with docs/REVIEWER_GUIDE.md and Rscript run_all.R. Rscript run_all.R --with-rasters regenerates the derived tables from public inputs. The driver stops on failure and writes a local execution log.
+
+Coordinate-bearing Venezuelan event files are excluded from the current branch. R26/R27 location extraction and overlays require the separately supplied field input. The public three-cell summary supports review without those coordinates. Local outputs are ignored by Git.
+
+Rebuilding the fitted model requires the separately obtained GBIF archive and WorldClim predictors. A successful archive check does not certify full model refitting. R29 is an optional sensitivity workflow, not a deposited new result.
+
+Historical filenames are retained for input compatibility. They do not denote another model, a change in journal, or outstanding model selection.

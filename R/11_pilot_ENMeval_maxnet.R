@@ -1,20 +1,18 @@
-# Phalangium opilio | Initial maxnet / ENMeval modelling run
+# Phalangium opilio | Fixed manuscript maxnet / ENMeval analysis
 #
 # RStudio:
 # source("https://raw.githubusercontent.com/ldelgado-png/Phalangium-opilio-SDM/main/R/11_pilot_ENMeval_maxnet.R")
 #
-# STATUS NOTE (2026-10-19): this script produced the model used in the manuscript (fixed LQ, RM=2).
-# The 'pilot'/'exploratory' wording below is historical and kept for provenance.
-# This is an INITIAL calibration using the Western Palaearctic
-# climate window. The rectangular window is NOT a biogeographically justified
-# accessible area M. Its background is NOT the final background design.
+# This script produced the fixed LQ/RM2 manuscript projection.
+# Historical output filenames are retained for input compatibility.
+# The western Palaearctic rectangle defines the operational calibration and
+# uniform-background domain; it is not a demonstrated accessible area M.
 #
 # Venezuelan field records are STRICTLY HELD OUT: they are never loaded here,
 # and are not used for tuning, evaluation, thresholds, or model selection.
 #
-# The script fits 6 candidate models and saves spatial cross-validation
-# results. A fixed-a-priori LQ, RM=2 prediction can be made for visual inspection
-# only; it must not be called the final model or external validation.
+# Six configurations are evaluated by spatial cross-validation. The prespecified
+# LQ/RM2 projection provides conditional climatic context for the field record.
 
 required_packages <- c("terra", "ENMeval", "maxnet")
 unavailable <- required_packages[!vapply(required_packages,
@@ -305,4 +303,4 @@ print(res[, available_metrics, drop = FALSE], row.names = FALSE)
 cat("\nGenerated files:\n",
     normalizePath(out, winslash = "/", mustWork = TRUE), "\n")
 cat("The Venezuelan field records were not accessed.\n")
-cat("The pilot model and projection are NOT final.\n")
+cat("Fixed manuscript projection: LQ/RM2, cloglog, clamping.\n")

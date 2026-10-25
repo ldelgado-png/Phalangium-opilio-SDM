@@ -1,6 +1,6 @@
 # ODMAP reporting framework for *Phalangium opilio* in South America
 
-**Manuscript decision (18 October 2026): operational study domain fixed.** The rectangle 12°W–60°E, 30°–72°N is now the **definitive geographical calibration/background domain for the submitted field-note analysis**; see [`fixed_calibration_domain_decision.md`](fixed_calibration_domain_decision.md) and [`study_calibration_domain_fixed.json`](study_calibration_domain_fixed.json). Fixing these coordinates is a reproducibility decision and does **not** prove that the rectangle constitutes the biogeographically accessible area M. Prior paragraphs that refer to an "exploratory" or "provisional" window describe the historical pilot phase, whose recorded results remain unchanged. The model's moderate, fold-dependent evaluation and uniform background assumptions continue to limit inference. The geographical limits must not be re-optimized to fit the withheld Venezuelan sites. The deposited coordinate-free summary reports negative MESS at three Venezuelan climatic cells, cloglog predictions of 0.558–0.617, and continuous MOP distances of 2.028–2.458. Source GeoTIFFs and R26/R27 scripts are archived; independent end-to-end execution has not been verified.
+**Manuscript decision (18 October 2026): operational study domain fixed.** The rectangle 12°W–60°E, 30°–72°N is now the **definitive geographical calibration/background domain for the submitted manuscript analysis**; see [`fixed_calibration_domain_decision.md`](fixed_calibration_domain_decision.md) and [`study_calibration_domain_fixed.json`](study_calibration_domain_fixed.json). Fixing these coordinates is a reproducibility decision and does **not** prove that the rectangle constitutes the biogeographically accessible area M. Prior paragraphs that refer to an "exploratory" or "provisional" window describe the historical pilot phase, whose recorded results remain unchanged. The model's moderate, fold-dependent evaluation and uniform background assumptions continue to limit inference. The geographical limits must not be re-optimized to fit the withheld Venezuelan sites. The deposited coordinate-free summary reports negative MESS at three Venezuelan climatic cells, cloglog predictions of 0.558–0.617, and continuous MOP distances of 2.028–2.458. Source GeoTIFFs and R26/R27 scripts are archived; independent end-to-end execution has not been verified.
 
 
 The study documentation follows the five-component **ODMAP** reporting protocol (Overview, Data, Model, Assessment and Prediction) of Zurell et al. (2020). This framework separates completed model evidence from limitations on inference and provides a traceable description of the study's objectives, assumptions, data, algorithms, evaluation design and transfer.
@@ -17,7 +17,7 @@ The study documentation follows the five-component **ODMAP** reporting protocol 
 
 ## Data
 
-**Occurrence provenance.** The documented GBIF snapshot contains 63,407 records. Initial filtering retained 56,524 candidates, with 50,403 passing the selected `CoordinateCleaner` geographic checks; 10,426 distinct 5-arcminute climatic cells were used in the first Western Palaearctic pilot. The original source archive is stored and identified by a checksum, download DOI and source-row links.
+**Occurrence provenance.** The documented GBIF snapshot contains 63,407 records. Initial filtering retained 56,524 candidates, with 50,403 passing the selected `CoordinateCleaner` geographic checks; 10,426 distinct 5-arcminute climatic cells were used in the first Western Palaearctic pilot. The original source archive is identified by a checksum, download DOI and source-row links; it is obtained separately rather than bundled in this repository.
 
 **Taxonomy and coordinate screening.** We audit occurrence status, taxonomic assignments, coordinate precision, spatial uncertainty and the test-specific `CoordinateCleaner` flags. Coordinate alerts near cities, institutions or coastlines are not assumed to prove location error. We separate one-per-climate-cell thinning from correction of sampling bias.
 
@@ -39,7 +39,7 @@ The study documentation follows the five-component **ODMAP** reporting protocol 
 
 **Extrapolation.** An earlier full-grid minimum–maximum comparison identified 34,549 of 223,558 valid South American cells (15.454%) outside at least one range of the complete reference raster. The deposited sampled-reference MESS analysis instead identifies 158,611 negative-MESS cells among 223,558 valid cells (70.9485%). These are different diagnostics with different environmental references, not interchangeable estimates. Neither proportion is corrected for geographic cell area or indicates biological absence.
 
-**Independent field evidence.** Seven events from the Venezuelan Andes correspond to six geographic coordinate pairs and three confirmed 5-arcminute climatic cells. These are not used to calibrate, tune, choose thresholds or rank models. Any later field-based assessment is limited by the geographic clustering and low number of independent climatic cells. Their records and unpublished metadata are not distributed through this public repository.
+**Independent field evidence.** Seven events from the Venezuelan Andes correspond to six geographic coordinate pairs and three confirmed 5-arcminute climatic cells. These are not used to calibrate, tune, choose thresholds or rank models. Any later field-based assessment is limited by the geographic clustering and low number of independent climatic cells. The public deposit summarizes the three climatic cells; coordinate-bearing event records are excluded from the current branch.
 
 ## Prediction
 
@@ -47,7 +47,7 @@ The study documentation follows the five-component **ODMAP** reporting protocol 
 
 **Transfer uncertainty.** Reporting distinguishes within-range transfer and extrapolation, clamp settings, alternative model and background configurations, resolution and data uncertainty. Suitability does not imply arrival, survival, reproduction, or demonstrated introduction.
 
-**Reproducibility.** Code, model metrics, package versions, download DOI and explicit methodological choices are published in this repository. The raw source download and coordinate-bearing Venezuelan field occurrences remain separately managed. The source rasters and Figure 3 are deposited; independent end-to-end reproduction has not been verified. Model artefacts are reported as completed results only when the analyses have actually run.
+**Reproducibility.** Code, model metrics, package versions, download DOI and explicit methodological choices are published in this repository. The raw source download and coordinate-bearing Venezuelan field occurrences remain separately managed. The source rasters and suitability/MESS figure are deposited; independent end-to-end reproduction has not been verified. Model artefacts are reported as completed results only when the analyses have actually run.
 
 ## References
 

@@ -1,61 +1,83 @@
-# *Phalangium opilio* in South America: climatic suitability and environmental transfer
+# *Phalangium opilio*: climatic suitability and environmental transfer
 
-Reproducible data, code, model diagnostics and figures supporting the manuscript on the first documented Venezuelan records of *Phalangium opilio* (Opiliones: Phalangiidae), prepared for *Journal of Insect Science*.
+Data, R scripts, model evaluations and figure exports supporting the manuscript submitted to **Biotropica**:
 
-## Study scope
+> A Palaearctic harvestman in the Venezuelan Andes: first Neotropical record and climatic suitability modeling of Phalangium opilio (Opiliones: Phalangiidae)
 
-The occurrence records from the Venezuelan Andes document the species' presence in South America. Climatic modelling provides complementary environmental context; it does not independently demonstrate establishment, predict dispersal or quantify invasion risk. The Venezuelan observations were excluded from model calibration, tuning and model selection.
+The repository documents the climatic analysis accompanying the Venezuelan natural-history records. The fixed manuscript model and its archived raster values are preserved. Venezuelan observations were excluded from calibration, tuning and model selection.
 
-## Occurrence data and environmental predictors
+## For reviewers
 
-The GBIF source download comprises 63,407 records from 506 publishing datasets: [GBIF occurrence download, DOI:10.15468/dl.9gn3qv](https://doi.org/10.15468/dl.9gn3qv). Record-level taxonomic, occurrence-status, coordinate and uncertainty screening is implemented in the archived R workflows. CoordinateCleaner flags are treated as indications for review, not automatic proof of erroneous georeferencing. One presence per climate cell was retained for calibration.
+Start with the [reviewer guide](docs/REVIEWER_GUIDE.md). A fresh checkout contains the model-evaluation tables, a coordinate-free three-cell transfer summary, four source GeoTIFFs and the suitability/MESS figure in PNG, PDF and 600-dpi TIFF formats.
 
-Environmental predictors are WorldClim 2.1 BIO1, BIO4, BIO12 and BIO15 at 5-arcminute resolution, representing the 1970–2000 baseline. The fixed **operational calibration domain** is 12°W–60°E, 30°–72°N in the western Palaearctic. This geographic rectangle is not claimed to represent a biogeographically demonstrated accessible area (*M*). The projection region is South America.
+```bash
+git clone https://github.com/ldelgado-png/Phalangium-opilio-SDM.git
+cd Phalangium-opilio-SDM
+Rscript run_all.R
+```
 
-## Model calibration and assessment
+The default command checks the public archive with base R. To regenerate and compare the derived evaluation and raster-context tables, install `terra` and run:
 
-The completed analysis used 10,426 calibration presence cells and 10,000 uniformly sampled background cells. Six `maxnet` configurations (L, LQ and LQH feature classes, each with regularization multipliers 1 and 2) were evaluated using four spatial blocks in `ENMeval`. Mean validation AUC ranged from 0.622 to 0.661 across configurations, with substantial between-fold variation. The manuscript uses the **fixed LQ/RM2** model, projected with **clamping** and **cloglog** output. This configuration was not selected using the Venezuelan observations.
+```bash
+Rscript run_all.R --with-rasters
+```
 
-The use of a uniform background, the operational calibration rectangle and the spatial heterogeneity of validation results limit inference. Alternative background and effort diagnostics are retained as sensitivity documentation; they do not replace the fixed manuscript model.
+Checks and regenerated tables are written to the ignored `local_review/` directory. These commands inspect archived outputs; they do not refit the model. Rebuilding from GBIF and WorldClim is documented separately in the [reviewer guide](docs/REVIEWER_GUIDE.md).
 
-## Environmental transfer: MESS and MOP
+## Analysis reported in the manuscript
 
-The MESS/MOP reference comprises 5,000 sampled climate-valid cells from the operational calibration rectangle (random seed 251018). MESS identifies univariate environmental departures from the sampled reference. Continuous MOP measures mean standardized Euclidean distance to the nearest 1% (50 cells) of reference climates; it is not a calibrated transfer threshold.
-
-Seven Venezuelan collection events correspond to three climatic cells. The [coordinate-free results](results/venezuela_transfer_cells_public.csv) report cloglog suitability of 0.558–0.617, MESS of −18.727 to −18.375, and continuous MOP distances of 2.028–2.458; BIO4 is the limiting MESS predictor at all three cells. The full-area diagnostic reports 158,611 MESS-negative cells among 223,558 valid South American raster cells (70.9485% of cells, not equal-area land). Negative MESS indicates extrapolation, so predicted suitability at these sites must be interpreted cautiously.
-
-The Venezuelan records provide geographically separate, spatially clustered descriptive evidence; three climate cells do not support a representative area-wide model-validation claim.
-
-## Reproducibility and repository contents
-
-| Material | Repository location |
+| Component | Specification |
 | --- | --- |
-| Coordinate-quality entry point | [R/00_start_coordinatecleaner.R](R/00_start_coordinatecleaner.R) |
-| Model calibration and evaluation | [R/11_pilot_ENMeval_maxnet.R](R/11_pilot_ENMeval_maxnet.R), [evaluation table](results/initial_spatial_block_ENMeval.csv) |
-| Environmental novelty analysis | [R/25_exploratory_MESS_MOP_south_america.R](R/25_exploratory_MESS_MOP_south_america.R) |
-| Venezuelan site extraction | [R/26_venezuela_transfer_diagnostics_v3.R](R/26_venezuela_transfer_diagnostics_v3.R) |
-| Two-panel figure generation | [R/27_figura2_idoneidad_MESS_JIS.R](R/27_figura2_idoneidad_MESS_JIS.R) |
-| Public transfer results | [Three-cell CSV](results/venezuela_transfer_cells_public.csv), [reference parameters](results/26_reference_environment_parameters.csv), [summary](results/27_venezuela_transfer_summary.csv) |
-| Source GeoTIFFs | [Suitability](04_resultados_modelo/pilot_western_palaearctic/09_pilot_south_america_LQ_rm2_cloglog_NOT_FINAL.tif), [MESS](04_resultados_modelo/pilot_western_palaearctic/transfer_novelty_EXPLORATORY_NOT_FINAL/27_sa_MESS_5m_EXPLORATORY.tif), [limiting predictor](04_resultados_modelo/pilot_western_palaearctic/transfer_novelty_EXPLORATORY_NOT_FINAL/28_sa_MESS_limiting_variable_5m_EXPLORATORY.tif), [MOP](04_resultados_modelo/pilot_western_palaearctic/transfer_novelty_EXPLORATORY_NOT_FINAL/29_sa_MOP_nearest1pct_distance_5m_EXPLORATORY.tif) |
-| Manuscript Figure 3 | [PNG](figures/Figure_3_Suitability_MESS_JIS.png), [PDF](figures/Figure_3_Suitability_MESS_JIS.pdf), [TIFF, 600 dpi](figures/Figure_3_Suitability_MESS_JIS_600dpi.tif) |
-| Methods and reporting | [Transfer diagnostics](docs/MOP_MESS_transfer_validation_protocol.md), [numerical results](docs/manuscript_transfer_status_2026-10-19.md), [ODMAP](docs/ODMAP_reporting_framework.md) |
+| Occurrence source | [GBIF.org (2026), DOI:10.15468/dl.9gn3qv](https://doi.org/10.15468/dl.9gn3qv); 63,407 records from 506 datasets |
+| Calibration region | Western Palaearctic operational rectangle: 12°W–60°E, 30°–72°N |
+| Climatic predictors | WorldClim 2.1 BIO1, BIO4, BIO12 and BIO15; 5 arcminutes; 1970–2000 baseline |
+| Calibration samples | 10,426 presence cells; 10,000 uniformly sampled background cells |
+| Assessment | Four latitudinal spatial blocks; L, LQ and LQH features × regularization multipliers 1 and 2 |
+| Manuscript projection | Prespecified LQ/RM2; cloglog output; clamping enabled; South America |
+| Environmental reference | 5,000 sampled climate-valid cells; seed 251018 |
+| Continuous MOP | Mean Euclidean distance to the nearest 1% (50) of reference climates, standardized using reference means and sample standard deviations |
 
-The manuscript figure sequence is **Figure 1: habitats; Figure 2: geographical distribution; Figure 3: climatic suitability (A) and MESS sign (B); Figure 4: specimens**. MOP is reported in the text and tabular results, not as a panel in Figure 3.
+The rectangle is a fixed operational reference, not a demonstrated historically accessible area (*M*). Mean validation AUC ranges from 0.622 to 0.661 across the six configurations, with substantial variation among folds. Background-extent and sampling-effort diagnostics document assumptions; they did not replace the fixed model.
 
-Historical script and raster filenames containing `pilot`, `EXPLORATORY`, `NOT_FINAL` or `figura2` are retained for provenance and path compatibility. They do not imply a different selected model or a pending analysis.
+## Venezuelan transfer results
 
-**Reproducibility.** The Venezuelan site coordinates are public (`results/26_venezuela_site_transfer_values.csv`; they are also printed in Table 1 of the manuscript). Together with the deposited rasters, they allow R26 and the site overlay of R27 to be re-run. On 19 October 2026 the site values were re-extracted from the deposited GeoTIFFs and matched the CSV (max. absolute difference < 1e-14), and the three-cell grouping and the 158,611 / 223,558 MESS-negative count were confirmed. The upstream steps (GBIF screening, climate preparation, ENMeval/maxnet fitting) require the GBIF archive (DOI, SHA-256 in `data/README.md`) and WorldClim 2.1, which are not redistributed; run them with `run_all.R`. Full end-to-end re-execution should be claimed only once `run_all.R` has been run on a clean checkout and `results/sessionInfo.txt` committed.
+The [public table](results/venezuela_transfer_cells_public.csv) groups seven collection events into three climatic cells. Its `cell_id` values are anonymized labels, not raster cell numbers or coordinates.
 
-**Model evaluation summary.** `results/model_evaluation_summary.csv` adds the training-minus-validation AUC gap and the Boyce index to the AUC range reported in the manuscript; `results/venezuela_suitability_percentiles.csv` places the Venezuelan values within the South American distributions of suitability, MESS and MOP. Both are regenerated by `R/28_export_reproducibility_tables.R`. `R/29_sensitivity_BIO4_clamping.R` tests how the Venezuelan predictions change without BIO4 and without clamping.
+| Cell label | Events | Cloglog suitability | MESS | Continuous MOP | Limiting predictor |
+| --- | ---: | ---: | ---: | ---: | --- |
+| 1 | 5 | 0.616830 | −18.375195 | 2.028277 | BIO4 |
+| 2 | 1 | 0.608131 | −18.619701 | 2.225173 | BIO4 |
+| 3 | 1 | 0.558121 | −18.726749 | 2.457742 | BIO4 |
 
-## Licence and citation
+All three cells have negative MESS, with BIO4 below the sampled reference range. Suitability values therefore describe clamped transfer under non-analog conditions. MOP expresses continuous climatic dissimilarity and supplies no universal reliability threshold. These geographically clustered observations provide descriptive transfer evidence, not a representative continent-wide validation or an estimate of invasion risk.
 
-Code: MIT (`LICENSE`). Cite the software via `CITATION.cff` (a Zenodo DOI for the tagged release should be added before submission), and the GBIF download as below.
+The archived MESS raster contains 158,611 negative cells among 223,558 valid South American cells (70.9485% of cells, not equal-area land).
 
-## Additional workflows
+## Repository contents
 
-The repository also includes [run_all.R](run_all.R), [R28 reporting exports](R/28_export_reproducibility_tables.R), and [R29 BIO4/clamping sensitivity](R/29_sensitivity_BIO4_clamping.R). These additions do not alter the fixed manuscript model or establish new sensitivity results without successful execution. The driver continues after individual step failures; review its log and all generated outputs before claiming full reproduction.
+| Material | Location |
+| --- | --- |
+| Reproduction instructions and input availability | [Reviewer guide](docs/REVIEWER_GUIDE.md), [data provenance](data/README.md) |
+| Quality screening and source-record provenance | [R01](R/01_coordinate_quality_GBIF.R), [R03](R/03_restore_GBIF_record_provenance.R) |
+| Predictor preparation and model fitting | [R06](R/06_prepare_climate_and_transfer_diagnostics.R), [R11](R/11_pilot_ENMeval_maxnet.R) |
+| Model assessment | [Raw ENMeval table](results/initial_spatial_block_ENMeval.csv), [derived summary](results/model_evaluation_summary.csv) |
+| MESS/MOP methods and results | [Protocol](docs/MOP_MESS_transfer_validation_protocol.md), [R25](R/25_exploratory_MESS_MOP_south_america.R), [numerical results](docs/manuscript_transfer_status_2026-10-19.md) |
+| Public field diagnostics | [Three-cell summary](results/venezuela_transfer_cells_public.csv), [reference scaling](results/26_reference_environment_parameters.csv), [event summary](results/27_venezuela_transfer_summary.csv), [continental context](results/venezuela_suitability_percentiles.csv) |
+| Source GeoTIFFs and figure exports | [Artifact manifest](data/review_artifact_manifest.csv), [model outputs](04_resultados_modelo/pilot_western_palaearctic), [figure exports](figures) |
+| Local field extraction and plotting | [R26](R/26_venezuela_transfer_diagnostics_v3.R), [R27](R/27_figura2_idoneidad_MESS_JIS.R); require the private field input |
+| Public checks and derived tables | [R30](R/30_check_repository.R), [R28](R/28_export_reproducibility_tables.R), [integrity/link checks](scripts/check_repository.py) |
+| Reporting framework | [ODMAP](docs/ODMAP_reporting_framework.md), [fixed domain](docs/fixed_calibration_domain_decision.md) |
 
-## Citation and scientific interpretation
+The two-panel map shows **(A) climatic suitability and (B) MESS sign**. MOP is reported in tables and text. Historical filenames containing `pilot`, `EXPLORATORY`, `NOT_FINAL`, `JIS` or figure numbers remain unchanged for provenance and path compatibility; they identify these same archived outputs. Figure numbering should follow the submitted manuscript.
 
-When reusing the occurrence data, cite [GBIF.org (2026), DOI:10.15468/dl.9gn3qv](https://doi.org/10.15468/dl.9gn3qv), alongside the manuscript and any relevant software or environmental-data sources. The distinction between modelled climatic suitability and observed occurrence, and between operational calibration geography and biogeographical accessibility, should be preserved in derivative analyses.
+## Input availability
+
+The current branch excludes coordinate-bearing Venezuelan event tables. Exact localities remain under the authors' publication policy; event-level re-extraction and the figure's location overlay require the field input supplied with the manuscript or obtained from the corresponding author. No coordinates are needed for the public archive checks, numerical summaries or continental raster-context calculations.
+
+The GBIF source archive and WorldClim predictor stacks are obtained separately from the sources and checksum documented in [data/README.md](data/README.md). The fitted model objects, calibration samples and complete original R session are not included in this archive. Full refitting is distinct from checking the deposited products and is not certified by a successful public archive check. R29 provides an optional BIO4/clamping sensitivity workflow; no new sensitivity result is claimed from its presence in the repository.
+
+## Citation and licence
+
+Cite the software using [CITATION.cff](CITATION.cff), identifying the commit used, and cite the GBIF download separately: GBIF.org (2026), https://doi.org/10.15468/dl.9gn3qv. The associated manuscript is submitted to *Biotropica* and has no publication DOI assigned here.
+
+The R and Python code is distributed under the [MIT licence](LICENSE). GBIF records, WorldClim and other source data retain their respective source terms; the code licence does not replace those terms.

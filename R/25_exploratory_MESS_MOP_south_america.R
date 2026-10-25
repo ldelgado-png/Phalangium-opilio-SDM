@@ -1,5 +1,5 @@
-# Phalangium opilio | Environmental novelty: exploratory MESS and MOP
-# VERSION: 2026-10-18; diagnostic ONLY; must be executed in RStudio.
+# Phalangium opilio | Manuscript environmental novelty: MESS and continuous MOP
+# Source analysis: 2026-10-18. Run from the repository root, including via run_all.R.
 #
 # RStudio (with project as working directory):
 # source("https://raw.githubusercontent.com/ldelgado-png/Phalangium-opilio-SDM/main/R/25_exploratory_MESS_MOP_south_america.R")

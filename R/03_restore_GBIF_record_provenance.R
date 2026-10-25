@@ -15,6 +15,7 @@ candidates_path <- file.path(audit_dir, "02_all_candidates_with_CC_flags.csv")
 summary_path <- file.path(audit_dir, "06_coordinate_quality_summary.csv")
 
 if (!file.exists(candidates_path)) {
+  if (!interactive()) stop("Required screened candidate file missing: ", candidates_path, ". Run R01 first.")
   message("Locate '02_all_candidates_with_CC_flags.csv' in your audit folder.")
   candidates_path <- file.choose()
   if (basename(candidates_path) != "02_all_candidates_with_CC_flags.csv") {

@@ -1,6 +1,6 @@
 # Environmental transfer diagnostics: MESS and MOP
 
-This document describes the fixed environmental-transfer assessment accompanying the *Phalangium opilio* manuscript prepared for *Journal of Insect Science*. Earlier development-stage instructions are retained in the Git commit history, not as outstanding manuscript tasks.
+This document describes the fixed environmental-transfer assessment accompanying the *Phalangium opilio* manuscript submitted to *Biotropica*. Earlier development-stage instructions are retained in the Git commit history, not as outstanding manuscript tasks.
 
 ## Calibration and projection
 
@@ -18,7 +18,7 @@ The South American MESS summary reports 158,611 negative-MESS cells among 223,55
 
 Seven collection events occupy three distinct 5-arcminute climatic cells. The [public coordinate-free summary](../results/venezuela_transfer_cells_public.csv) reports cloglog suitability of 0.558–0.617, MESS of −18.727 to −18.375, and continuous MOP distances of 2.028–2.458. BIO4 is the limiting MESS variable in all three cells. These observations provide geographically separate descriptive transfer evidence but do not constitute an unbiased area-wide validation of predictive performance.
 
-The [R26 script](../R/26_venezuela_transfer_diagnostics_v3.R) extracts raster values at the author's withheld Venezuelan site coordinates without raster resampling. The coordinate-bearing [event-level extraction table](../results/26_venezuela_site_transfer_values.csv) is now deposited. Authors should confirm that publication of those locality coordinates is appropriate. The archived [R27 plotting script](../R/27_figura2_idoneidad_MESS_JIS.R) retains a historical Figure 2 filename and local input conventions. Re-running its complete site overlay requires placing the deposited event-level table at the script's expected local input path, or adjusting that path explicitly. Independent end-to-end re-execution has not been verified.
+The [R26 script](../R/26_venezuela_transfer_diagnostics_v3.R) extracts values at the independent Venezuelan coordinates without resampling. Its coordinate-bearing input is separately managed and must be supplied explicitly through `options(phalangium.venezuela_sites_csv = "/absolute/path/to/private_field_records.csv")`. The [R27 plotting script](../R/27_figura2_idoneidad_MESS_JIS.R) reads the resulting local extraction for its location overlay. Both use ignored local work directories for coordinate-bearing outputs. The [reviewer guide](REVIEWER_GUIDE.md) distinguishes field re-extraction from the public checks and raster-context calculations, which require no field coordinates.
 
 ## Published outputs and manuscript figure
 
@@ -26,9 +26,9 @@ The [R26 script](../R/26_venezuela_transfer_diagnostics_v3.R) extracts raster va
 - [MESS GeoTIFF](../04_resultados_modelo/pilot_western_palaearctic/transfer_novelty_EXPLORATORY_NOT_FINAL/27_sa_MESS_5m_EXPLORATORY.tif)
 - [MESS limiting-variable GeoTIFF](../04_resultados_modelo/pilot_western_palaearctic/transfer_novelty_EXPLORATORY_NOT_FINAL/28_sa_MESS_limiting_variable_5m_EXPLORATORY.tif)
 - [MOP GeoTIFF](../04_resultados_modelo/pilot_western_palaearctic/transfer_novelty_EXPLORATORY_NOT_FINAL/29_sa_MOP_nearest1pct_distance_5m_EXPLORATORY.tif)
-- [Manuscript Figure 3 (PNG)](../figures/Figure_3_Suitability_MESS_JIS.png), [PDF](../figures/Figure_3_Suitability_MESS_JIS.pdf), [600-dpi TIFF](../figures/Figure_3_Suitability_MESS_JIS_600dpi.tif)
+- [Archived suitability/MESS figure (PNG)](../figures/Figure_3_Suitability_MESS_JIS.png), [PDF](../figures/Figure_3_Suitability_MESS_JIS.pdf), [600-dpi TIFF](../figures/Figure_3_Suitability_MESS_JIS_600dpi.tif)
 
-Figure 3A presents relative climatic suitability and Figure 3B presents MESS sign. MOP is reported numerically, not mapped in Figure 3. Historical filenames containing `pilot`, `EXPLORATORY`, `NOT_FINAL` or `figura2` are preserved to maintain file provenance and existing script references; they do not denote a second manuscript model.
+Panel A presents relative climatic suitability and panel B presents MESS sign. MOP is reported numerically. Historical filenames containing `pilot`, `EXPLORATORY`, `NOT_FINAL` or `figura2` are preserved to maintain file provenance and existing script references; they do not denote a second manuscript model.
 
 ## Interpretation and limitations
 

@@ -25,7 +25,10 @@ pa  <- c(rep(1, nrow(occ_xy)), rep(0, nrow(bg_xy)))
 ok  <- complete.cases(env); env <- env[ok, ]; pa <- pa[ok]
 stopifnot(sum(pa) > 10000)   # expected ~10,426 presences
 
-sites <- read.csv(file.path(root, "results", "26_venezuela_site_transfer_values.csv"))
+site_file <- getOption("phalangium.venezuela_extraction_csv", file.path(mod_dir,
+  "26_venezuela_transfer_DIAGNOSTIC_NOT_FINAL", "26_venezuela_site_transfer_values.csv"))
+if (!file.exists(site_file)) stop("Private field extraction missing. Run R26 with the separately supplied field input; see docs/REVIEWER_GUIDE.md.")
+sites <- read.csv(site_file)
 sv <- terra::extract(bio_s, as.matrix(sites[, c("longitude", "latitude")]))[, vars_all]
 cells <- !duplicated(round(sv, 6)); sv <- sv[cells, ]; ids <- sites$site_id[cells]
 
@@ -44,7 +47,9 @@ out <- do.call(rbind, lapply(names(sets), function(n) {
              cloglog_clamp = pred(m, sets[[n]], TRUE),
              cloglog_noclamp = pred(m, sets[[n]], FALSE))
 }))
-write.csv(out, file.path(root, "results", "sensitivity_BIO4_clamping.csv"), row.names = FALSE)
+output_dir <- file.path(root, "local_review", "sensitivity")
+dir.create(output_dir, recursive = TRUE, showWarnings = FALSE)
+write.csv(out, file.path(output_dir, "sensitivity_BIO4_clamping.csv"), row.names = FALSE)
 print(out, digits = 3)
 message("Interpretation guide: if 'all4' clamp differs strongly from 'all4' noclamp or from 'no_BIO4', ",
         "the 0.558-0.617 values depend on BIO4 extrapolation and should be reported with that caveat.")

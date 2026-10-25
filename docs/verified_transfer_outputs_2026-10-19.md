@@ -6,8 +6,12 @@ The public, coordinate-free aggregation is [venezuela_transfer_cells_public.csv]
 
 The supplied full-area diagnostic summary reports 158,611 MESS-negative cells among 223,558 valid South American transfer cells (70.9485% **of cells, not land area**). MESS used 5,000 sampled reference cells, seed 251018, WorldClim 2.1 BIO1, BIO4, BIO12 and BIO15; MOP used the mean standardized Euclidean distance to the nearest 1% (50) reference samples, cross-checked with maximum absolute difference 0 in the reported local audit. The calibration rectangle (12°W–60°E, 30°–72°N) is an operational domain, **not a demonstrated accessible area M**.
 
-The original source files retain historical labels such as `EXPLORATORY` and `NOT_FINAL`. These labels describe the filenames and historical workflow, not an alternative model selected after inspection of the Venezuelan records. The current manuscript uses Figure 3 for the combined suitability/MESS panel, even though the supplied source figure is named `Figure_2_Suitability_MESS_JIS`.
+The original source files retain historical labels such as `EXPLORATORY` and `NOT_FINAL`. These labels describe the filenames and historical workflow, not an alternative model selected after inspection of the Venezuelan records. The archived combined suitability/MESS exports retain historical figure numbers; manuscript numbering follows the submitted version.
 
 ## Reproducibility boundary
 
-The source suitability, MESS, MOP and limiting-variable GeoTIFFs, the exact R26/R27 scripts, and Figure 3 exports (PNG, PDF and 600-dpi TIFF) are deposited in this repository. Private coordinate-bearing site tables are deliberately excluded. The fixed manuscript model and transfer diagnostics can be inspected from the published files; reproducing the site overlay from scratch requires access to the withheld coordinate-bearing input. Independent end-to-end execution has not been verified.
+The source suitability, MESS, MOP and limiting-variable GeoTIFFs, the exact R26/R27 scripts, and the suitability/MESS exports (PNG, PDF and 600-dpi TIFF) are deposited in this repository. Private coordinate-bearing site tables are deliberately excluded. The fixed manuscript model and transfer diagnostics can be inspected from the published files; reproducing the site overlay from scratch requires access to the withheld coordinate-bearing input. Independent end-to-end execution has not been verified.
+
+## Peer-review update — 25 October 2026
+
+The numerical outputs and original raster/figure bytes are preserved. Current documentation identifies the Biotropica submission and the coordinate-free public review route. [R28](../R/28_export_reproducibility_tables.R) now reads the public three-cell summary, and [run_all.R](../run_all.R) separates archive checks from explicit model rebuilding and stops on an unsuccessful step. These checks do not certify a complete refit from raw occurrences.

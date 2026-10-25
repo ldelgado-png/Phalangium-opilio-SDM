@@ -1,33 +1,28 @@
-> **Journal/figure amendment (19 October 2026).** The operational rectangle fixed in this dated decision **remains unchanged**, but the present submission target is ***Journal of Insect Science***, not *Biotropica*. The current draft presents suitability plus MESS as **Figure 3** (rather than the historical Figure 4). Later author-reported local MESS/cloglog results, provenance qualifications and remaining tasks are documented in [manuscript transfer status](manuscript_transfer_status_2026-10-19.md). Neither this annotation nor those results establish that the rectangle is biogeographically demonstrated *M*.
+# Fixed operational calibration domain
 
-# Fixed operational calibration domain — manuscript decision (18 October 2026)
+The manuscript submitted to **Biotropica** uses the western Palaearctic rectangle **12°W–60°E, 30°–72°N** as its fixed calibration and background domain. The recorded geographical decision dates to 18 October 2026. Boundary geometry and model settings are recorded in [study_calibration_domain_fixed.json](study_calibration_domain_fixed.json).
 
-**Scope of the decision.** The authors choose to **fix** the historical **Western Palaearctic geographic rectangle (12°W–60°E, 30°–72°N)** as the **operational calibration and background domain** for the current *Biotropica* Natural History Field Note. It is held constant for reported pilot results and future MESS/MOP novelty maps. This is a pragmatic, transparent, reproducible **study-design decision**, not a claim that the rectangle has been demonstrated to equal the species' historically accessible area (*M*). The analysis must not use the phrase "biogeographically proven M" or imply that all of the native range or accessible environments are covered.
+This operational environmental reference is distinct from a historically demonstrated accessible area (*M*). It omits eastern Eurasia and may include climates or regions not historically accessible to the species. Its limits were not optimized against the withheld Venezuelan observations.
 
-The frozen boundary geometry is `POLYGON((-12 30,60 30,60 72,-12 72,-12 30))` (EPSG:4326). Its coordinates are reproducible in [`docs/study_calibration_domain_fixed.json`](study_calibration_domain_fixed.json). Because this broad rectangle may include environmentally suitable but historically inaccessible regions and omits parts of eastern Eurasia, domain dependence remains an explicitly acknowledged limitation. The decision should be reported *a priori relative to inspection of the held-out Venezuelan field localities*, not falsely presented as a historical proof of accessibility.
+## Fixed analysis
 
-## Archived analyses already supported within the chosen domain
+- 10,426 screened presence cells and 10,000 uniformly sampled background cells.
+- WorldClim 2.1 BIO1, BIO4, BIO12 and BIO15, at 5 arcminutes.
+- Six maxnet configurations: L, LQ and LQH features with regularization multipliers 1 and 2.
+- Four latitudinal validation blocks, with fold-specific background partitions.
+- Prespecified LQ/RM2 South American projection, cloglog output and clamping.
+- MESS/MOP reference: 5,000 sampled complete climates, seed 251018; nearest 1% for continuous MOP.
 
-- 10,426 screened, unique 5-arcminute *P. opilio* presence cells.
-- 10,000 uniformly sampled background cells (not bias-corrected) from the same climatic study window.
-- WorldClim 2.1, 5 arcminutes: BIO1, BIO4, BIO12 and BIO15.
-- Six `maxnet` feature/regularization combinations (L, LQ, LQH × regularization multipliers 1, 2), evaluated with four spatially structured latitudinal folds.
-- Observed mean validation AUC range **0.622–0.661**, with high fold-to-fold variability. Existing fold-specific results and maps remain unchanged. The LQ/RM2 cloglog/clamped South American prediction was chosen before consulting field site data as the **prespecified descriptive transfer illustration**, not the top-AICc or universally best model.
+The six configurations have mean validation AUC 0.622–0.661. LQ/RM2 is the fixed projection configuration; it is not the minimum-AICc configuration. The [raw evaluation table](../results/initial_spatial_block_ENMeval.csv) preserves all six settings.
 
-**Decision explicitly does not imply a completed fit, new evaluation, effective observer-bias correction, or an independent Venezuelan test.** The prior comparative buffer and effort-bias analyses remain exploratory *sensitivity* results, not selected alternative domains for this manuscript. The alternative GBIF target-group background download has not yet been curated; do not present it as a completed fit or an input to the archived baseline.
+## Transfer assessment
 
-## Publication positioning
+Seven Venezuelan collection events correspond to three climatic cells. The [public three-cell results](../results/venezuela_transfer_cells_public.csv) give cloglog suitability 0.558–0.617, MESS −18.727 to −18.375 and continuous MOP distance 2.028–2.458. BIO4 is the limiting predictor below the sampled reference range. These are descriptive transfer diagnostics under non-analog conditions.
 
-The central result of the **Natural History Field Note** is the independently observed first record and natural-history evidence of *P. opilio* in the Venezuelan Andes. The climatic model is a clearly labelled **secondary, hypothesis-generating illustration**, not the principal basis for the record, and its published assessment must acknowledge moderate/variable spatial discrimination and possible bias from background sampling. A fixed geographical domain improves documentation and reproducibility; it does **not** make this moderate-performing model more accurate or validated.
+The combined map displays suitability (A) and MESS sign (B); MOP is reported numerically. Historical figure numbers in source filenames are identifiers of archived exports, not a prescribed manuscript sequence.
 
-- **Methods:** provide exact fixed-domain coordinates, presence and uniform background counts, 4 WorldClim variables, ENMeval settings, model-selection description, withheld-field-site protocol, and explicitly say the rectangle is not a demonstrated M.
-- **Results:** retain only executed quantitative results (including AUC range and the already produced LQ/RM2 map).
-- **Discussion/Figure 4:** describe South American suitability as *conditional on this operational rectangle* and on clamped transfer, not as occurrence, spread, or occupancy. Figure 2 documents habitat photographs; climatic suitability is Figure 4.
-- **Novelty assessment:** run `R/25_exploratory_MESS_MOP_south_america.R` with this **fixed operational domain**; do not invent novelty percentages or maps. If MOP/MESS values are executed and quality-checked, add a properly labelled Figure 4 companion panel or supplement. Until then, retain the disclaimer that non-analog climate exposure has not been quantified.
-- **External locality assessment:** the seven Venezuelan collection events are withheld from all model design, range definition and novelty decisions. **After final freeze only**, extract cloglog suitability and novelty measures by unique coordinates and distinct predictor-grid cells, reporting clustering and limited independent evidential weight. The existing manuscript records seven events, six coordinates and approximately three 5′ cells.
+## Supporting diagnostics
 
-## Remaining submission gates
+Background buffers and sampling-effort analyses document dependence on environmental availability and the observation process. They did not replace the fixed uniform-background fit. The target-group preparation scripts and optional BIO4/clamping refits do not establish new manuscript results without execution and assessment.
 
-The user has approved the **fixed geographical limits**, not retroactive fabrication of model-selection robustness or transfer validation. Minimal readiness checks are: successfully execute/check MESS/MOP if the manuscript will claim novelty results; decide whether to retain the secondary model as exploratory or conduct a clearly specified uniform-vs-effort background sensitivity refit (an uncurated target-group alternative cannot be claimed); verify figure/raster provenance and citations; confirm Biotropica limits. Do not reopen the geographic rectangle to optimize agreement with Venezuelan sites.
-
-**Decision adopted:** fixed operational domain. **M biogeographical equivalence:** not established. **New results:** none generated by documenting this decision.
+The natural-history evidence supports the occurrence record. Climatic projections provide conditional environmental context and survey hypotheses; they do not demonstrate niche conservatism, predict spread or establish ecological impacts. See the [reviewer guide](REVIEWER_GUIDE.md) for the public reproduction route and separately managed field inputs.

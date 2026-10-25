@@ -1,0 +1,24 @@
+name: Repository checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  public-archive:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Check artifact integrity, links and field-data exclusions
+        run: python3 scripts/check_repository.py
+      - name: Install R and terra for public archive checks
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends r-base-core r-cran-terra
+      - name: Check public tables and regenerate derived raster-context tables
+        run: Rscript run_all.R --with-rasters

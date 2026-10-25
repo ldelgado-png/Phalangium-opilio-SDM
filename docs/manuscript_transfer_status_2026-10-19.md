@@ -1,8 +1,8 @@
 # Venezuelan climatic transfer diagnostics
 
-**Updated:** 19 October 2026.  
-**Target journal:** *Journal of Insect Science*.  
-**Public data:** [venezuela_transfer_cells_public.csv](../results/venezuela_transfer_cells_public.csv), a coordinate-free summary of seven field events grouped into three climatic cells. The original coordinate-bearing [event-level table](../results/26_venezuela_site_transfer_values.csv) is also publicly deposited; authors should confirm that disclosure is consistent with their locality-sharing policy.
+**Updated:** 25 October 2026 (numerical results retained from 19 October).
+**Journal:** *Biotropica* (submitted manuscript).
+**Public data:** [venezuela_transfer_cells_public.csv](../results/venezuela_transfer_cells_public.csv), a coordinate-free summary of seven field events grouped into three climatic cells. Coordinate-bearing event tables are excluded from the current public branch; re-extraction requires the separately supplied field input.
 
 ## Calibration and projection
 
@@ -22,7 +22,7 @@ The fixed operational calibration rectangle is **12°W–60°E, 30°–72°N**. 
 | La Toma | 1 | 0.608131 | -18.619701 | 2.225173 | BIO4 |
 | La Musui | 1 | 0.558121 | -18.726749 | 2.457742 | BIO4 |
 
-The seven rows contain three distinct joint diagnostic profiles, consistent with the manuscript's report of **three** climatic cells. Native raster-cell identifiers are not included in the supplied CSV, so this deposit does not independently reconstruct cell geometry. Multiple collection events sharing the same environment are not independent environmental replicates.
+The seven source events are represented by three distinct joint diagnostic profiles in the public table, consistent with the manuscript's report of **three** climatic cells. The public `cell_id` values are anonymized labels rather than native raster-cell identifiers; they do not reconstruct cell geometry. Multiple collection events sharing the same environment are not independent environmental replicates.
 
 Across the events, **cloglog suitability is 0.558–0.617**, **MESS is −18.727 to −18.375**, and **MOP distance is 2.028–2.458**. Every MESS value is negative and BIO4 is the limiting variable in all seven rows. The manuscript identifies the departure as BIO4 below the sampled reference range. La Musui has the greatest MOP distance among the Venezuelan sites.
 
@@ -32,19 +32,19 @@ MOP describes relative multivariate climatic dissimilarity from the sampled refe
 
 ## Manuscript Results
 
-Climatic suitability modeling. Across the six evaluated model configurations, mean spatial-validation AUC ranged from 0.622 to 0.661, with considerable variation among spatial folds. The selected LQ/RM2 model identified areas of relatively high predicted climatic suitability in the southern cone of South America and along portions of the Andean cordillera (Fig. 3). At the Venezuelan collection localities, predicted cloglog suitability ranged from 0.558 to 0.617. The seven collection records corresponded to only three unique 5-arcminute climatic grid cells, all of which exhibited negative Multivariate Environmental Similarity Surface (MESS) values. Temperature seasonality (BIO4) was below the range represented in the western Palaearctic calibration region in all three cells. MESS scores ranged from −18.727 to −18.375. Continuous MOP distances were 2.028 at Escagüey and Moconoque, 2.225 at La Toma, and 2.458 at La Musui (range 2.028–2.458). Thus, although the model assigned moderate relative suitability to the Venezuelan localities, these predictions were obtained under clamping in environmentally non-analog conditions. Venezuelan occurrence records were excluded from model calibration, tuning and internal cross-validation; they were subsequently used only for descriptive transfer diagnostics. 
+Climatic suitability modeling. Across the six evaluated model configurations, mean spatial-validation AUC ranged from 0.622 to 0.661, with considerable variation among spatial folds. The selected LQ/RM2 model identified areas of relatively high predicted climatic suitability in the southern cone of South America and along portions of the Andean cordillera (suitability/MESS figure). At the Venezuelan collection localities, predicted cloglog suitability ranged from 0.558 to 0.617. The seven collection records corresponded to only three unique 5-arcminute climatic grid cells, all of which exhibited negative Multivariate Environmental Similarity Surface (MESS) values. Temperature seasonality (BIO4) was below the range represented in the western Palaearctic calibration region in all three cells. MESS scores ranged from −18.727 to −18.375. Continuous MOP distances were 2.028 at Escagüey and Moconoque, 2.225 at La Toma, and 2.458 at La Musui (range 2.028–2.458). Thus, although the model assigned moderate relative suitability to the Venezuelan localities, these predictions were obtained under clamping in environmentally non-analog conditions. Venezuelan occurrence records were excluded from model calibration, tuning and internal cross-validation; they were subsequently used only for descriptive transfer diagnostics.
 
 ## Manuscript Discussion addition
 
 The higher MOP distance at La Musui indicates greater multivariate climatic dissimilarity from the sampled reference than at the other Venezuelan localities. MOP therefore complements the negative MESS values by describing differences among sites, while its magnitude alone does not establish a threshold for reliable model transfer.
 
-## Figure numbering
+## Figure interpretation
 
-The current manuscript uses **Figure 1: habitats; Figure 2: geographical distribution; Figure 3: suitability and MESS; Figure 4: live specimens**. Figure 3A maps clamped LQ/RM2 relative suitability and Figure 3B maps MESS sign. MOP is reported numerically in Results and discussed in the text; this update does not change the two-panel figure or claim that it displays MOP.
+The combined map displays clamped LQ/RM2 relative suitability in panel A and MESS sign in panel B. MOP is reported in the numerical results and discussion. Historical figure numbers in filenames are retained for provenance; numbering follows the submitted manuscript.
 
 ## Data provenance
 
-The author-supplied private event-level CSV was checked for seven complete, finite numerical rows, nonnegative MOP, suitability within 0–1, negative MESS and agreement with the extrapolation flags. The locality values and reported ranges were summarized directly from that file. The original event-level CSV is publicly deposited in the repository. Its reported SHA-256 is `dfc66ddb8fe93b6ffd01ab2ea89b9317cfb5499e0d6d3501f529fec3bca8fa2a`. Environmental rasters, the reference sample and model fits were not rerun during this deposit. This record supersedes earlier statements that site-level MOP values were unavailable.
+The author-supplied private event-level CSV was checked for seven complete, finite numerical rows, nonnegative MOP, suitability within 0–1, negative MESS and agreement with the extrapolation flags. The locality values and reported ranges were summarized directly from that file. The coordinate-bearing source CSV is held separately and is not included in the current branch. Its reported SHA-256 is `dfc66ddb8fe93b6ffd01ab2ea89b9317cfb5499e0d6d3501f529fec3bca8fa2a`. Environmental rasters, the reference sample and model fits were not rerun during this deposit. This record supersedes earlier statements that site-level MOP values were unavailable.
 
 ## Methodological references
 
